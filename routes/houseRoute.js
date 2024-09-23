@@ -9,6 +9,6 @@ const roomPostFeeMiddleware = require("../middlewares/roomPostFeeMiddleware");
 houseRouter.post('/addroom',authMiddleware,roomPostFeeMiddleware, addRoom);
 
 // get all houses route
-// houseRouter.get('/get-all-houses', getHouses);
+houseRouter.get('/allroom', getHouses);
 
 module.exports=houseRouter;
