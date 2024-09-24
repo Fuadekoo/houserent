@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
     Card,
     CardHeader,
@@ -33,7 +34,12 @@ const HouseCard = ({ house }) => {
                 </Typography>
             </CardBody>
             <CardFooter className="pt-0">
-                <Button color="red">Book</Button>
+                <Button 
+                    color="blue" 
+                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-blue-700"
+                >
+                    <Link to={`/booking/${house._id}`}>More Info</Link>
+                </Button>
             </CardFooter>
         </Card>
     );
