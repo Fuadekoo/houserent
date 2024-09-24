@@ -13,7 +13,7 @@ const HouseCard = ({ house }) => {
     <Card className="mt-6 w-72"> {/* Adjusted width */}
       <CardHeader color="blue-gray" className="relative h-40"> {/* Adjusted height */}
         <img
-          src={house.image}
+          src={house.image[0]}
           alt="house-image"
           className="w-full h-full object-cover"
         />

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const users = require("../models/usersModel");
 const classModel = require("../models/HouseModel");
+const booking = require('../models/bookingmodel');
 
 const addRoom = async (req, res) => {
     // Access the user ID from the request object
@@ -53,4 +54,14 @@ const getHouses = async (req, res) => {
   }
 }
 
-module.exports = { addRoom,getHouses };
+const getBookedHouses = async (req, res) => {
+  try {
+    const houses = await booking.find();
+    res.status(200).json({ message: "Houses retrieved successfully", success: true, data: houses });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+}
+
+
+module.exports = { addRoom,getHouses ,getBookedHouses};
