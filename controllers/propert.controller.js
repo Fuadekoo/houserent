@@ -53,4 +53,17 @@ const getHouses = async (req, res) => {
   }
 }
 
-module.exports = { addRoom,getHouses };
+const getSingleHouse = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const house = await classModel.findById(id);
+    if (!house) {
+      return res.status(404).json({ message: "House not found", success: false, data: null });
+    }
+    res.status(200).json({ message: "House retrieved successfully", success: true, data: house });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+}
+
+module.exports = { addRoom,getHouses,getSingleHouse };
