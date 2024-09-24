@@ -58,7 +58,7 @@ function TransactionHistory() {
             {transactions.map((transaction) => (
               <tr key={transaction._id} className="hover:bg-gray-100">
                 <td className="py-3 px-4 border-b">{new Date(transaction.date).toLocaleString()}</td>
-                <td className="py-3 px-4 border-b">${transaction.amount}</td>
+                <td className="py-3 px-4 border-b">{transaction.amount} ETB</td>
                 <td className="py-3 px-4 border-b">{transaction.type}</td>
               </tr>
             ))}

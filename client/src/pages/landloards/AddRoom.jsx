@@ -3,18 +3,48 @@ import axios from 'axios';
 
 function AddRoom() {
   const [formData, setFormData] = useState({
-    image: '',
+    image: [], // Change to an array to handle multiple images
     address: '',
     floorLevel: '',
     houseNumber: '',
     rentPerMonth: ''
   });
 
+  const [image, setImage] = useState([]);
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+  };
+
+  // Handle file input for multiple images and convert to base64
+  const convertToBase64 = (e) => {
+    const files = e.target.files;
+    const promises = [];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+      const promise = new Promise((resolve, reject) => {
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+      reader.readAsDataURL(file);
+      promises.push(promise);
+    }
+
+    Promise.all(promises)
+      .then((base64Images) => {
+        setImage(base64Images); // Set preview image state
+        setFormData({
+          ...formData,
+          image: base64Images // Add base64 images to formData
+        });
+      })
+      .catch((error) => {
+        console.error('Error converting images:', error);
+      });
   };
 
   const handleSubmit = async (e) => {
@@ -41,17 +71,24 @@ function AddRoom() {
         <h2 className="text-2xl font-bold mb-6 text-center">Add Room</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <label className="block text-gray-700">Image URL</label>
+            <label className="block text-gray-700">Images</label>
             <input
-              type="text"
-              name="image"
-              value={formData.image}
-              onChange={handleChange}
+              type="file" 
+              multiple 
+              accept="image/*" 
+              onChange={convertToBase64}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="https://example.com/image.jpg"
               required
             />
+            {/* Preview selected images */}
+            <div className="mt-2">
+              {image.map((img, index) => (
+                <img key={index} src={img} alt={`preview-${index}`} width={100} />
+              ))}
+            </div>
           </div>
+
+
           <div className="mb-4">
             <label className="block text-gray-700">Address</label>
             <input
