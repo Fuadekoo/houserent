@@ -8,7 +8,7 @@ const commisionfeeMIddleware = require("../middlewares/commisionfeeMIddleware");
 
 
 // add booking route
-route.post('/booking/:id',authMiddleware,bookfeeMiddleware,commisionfeeMIddleware,bookingRoom);
+bookingRouter.post('/booking/:houseId',authMiddleware,bookingRoom);
 
 // get my bookings route
 

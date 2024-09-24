@@ -51,7 +51,7 @@ function Balance() {
   return (
     <div className="fixed top-4 right-4 bg-white p-4 rounded-lg shadow-lg animate-bounce">
       <h2 className="text-xl font-bold mb-2 text-center">My Balance</h2>
-      <p className="text-center text-2xl text-green-500">${balance}</p>
+      <p className="text-center text-2xl text-green-500">{balance} ETB</p>
     </div>
   );
 }
