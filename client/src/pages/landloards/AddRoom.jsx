@@ -88,10 +88,7 @@ function AddRoom() {
             </div>
           </div>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 9f405e637ff3188e6ad18047ab3b34f416189150
           <div className="mb-4">
             <label className="block text-gray-700">Address</label>
             <input
