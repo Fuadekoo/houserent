@@ -49,23 +49,16 @@ const bookingRoom = async (req, res) => {
     }
 };
 
-const getmybookingRooms = async (req, res) => {
-    const { userId: user } = req.user;
-
+// mybookings rooms from booking tables 
+const myBookings = async (req, res) => {
+    const { userId } = req.user;
     try {
-        // Fetch bookings for the user
-        const bookings = await Booking.find({ user }).populate('house');
-
-        if (!bookings.length) {
-            return res.status(404).json({ message: "No bookings found for this user", success: false, data: null });
-        }
-
-        res.status(200).json({ message: "Bookings fetched successfully", success: true, data: bookings });
+        const bookings = await Booking.find({ user: userId }).populate("house");
+        res.status(200).json({ message: "Bookings retrieved successfully", success: true, data: bookings });
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
 };
 
 
-
-module.exports = { bookingRoom,getmybookingRooms };
+module.exports = { bookingRoom,myBookings };
