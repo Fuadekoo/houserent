@@ -20,12 +20,12 @@ const transactionSchema = new mongoose.Schema({
         default:"deposit from chapa to system",
         required: true
     },
-     date: {
-       type: Date,
-       default: Date.now
-     }
     
-});
+},
+{
+    timestamps: true
+}
+);
 
 const Deposit = mongoose.model('Deposit', transactionSchema);
 
