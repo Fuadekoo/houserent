@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv');
 const express = require('express');
-const Allusers = require('../model/userModel.js');
+const Allusers = require('../models/usersModel.js');
 const { performTransaction } = require('../controllers/transaction.controller.js');
-const Rooms = require("../model/houseModel.js");
+const Rooms = require("../models/HouseModel.js");
 
 dotenv.config();
 const app = express();

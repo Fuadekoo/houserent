@@ -18,6 +18,13 @@ import Wallet from "./pages/Wallet";
 import Profile from "./pages/Profile";
 import AddRoom from "./pages/landloards/AddRoom";
 import Customers from "./pages/landloards/Customers";
+import Paydonate from "./pages/Deposit/Paydonate";
+import Thanks from "./pages/Deposit/Thanks";
+import PaymentFailed from "./pages/Deposit/PaymentFailed.jsx";
+import MyaddRoom from "./pages/landloards/MyaddRoom.jsx";
+
+import DepositDisplay from "./pages/DepositDisplay";
+
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
   return <div>
@@ -26,10 +33,20 @@ function App() {
   {/* <Header /> */}
   <Routes>
     <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
+    {/* the tenants and the landloards are pay for the deposite  */}
+    <Route path="/paynow" element={<ProtectedRoute><Paydonate/></ProtectedRoute>}/>
+    <Route path="/thanks" element={<ProtectedRoute><Thanks/></ProtectedRoute>}/>
+    <Route path="/payment-fail" element={<ProtectedRoute><PaymentFailed/></ProtectedRoute>}/>
+    <Route path="/mydeposit" element={<ProtectedRoute><DepositDisplay/></ProtectedRoute>}/>
+
+
+
+
     {/* route for tenants */}
     <Route path="/user/home" element={<ProtectedRoute><UserHome/></ProtectedRoute>}/>
     <Route path="/user/Bookings" element={<ProtectedRoute><UserBooking/></ProtectedRoute>}/>
     <Route path="/user/Notification" element={<ProtectedRoute><UserNotification/></ProtectedRoute>}/>
+    <Route path="/booking/:id" element={<ProtectedRoute><BookNow/></ProtectedRoute>}/>
 
 {/* route for landloards */}
 <Route path="/addroom" element={<ProtectedRoute><AddRoom/></ProtectedRoute>}/>

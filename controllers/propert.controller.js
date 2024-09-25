@@ -64,4 +64,37 @@ const getBookedHouses = async (req, res) => {
 }
 
 
-module.exports = { addRoom,getHouses ,getBookedHouses};
+const getSingleHouse = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const house = await classModel.findById(id);
+    if (!house) {
+      return res.status(404).json({ message: "House not found", success: false, data: null });
+    }
+    res.status(200).json({ message: "House retrieved successfully", success: true, data: house });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+}
+
+// room the landloard is posts
+const ownerRoom = async (req, res) => {
+  const { userId} = req.user; // Assuming req.user is set by your auth middleware
+  
+  try {
+    // Find rooms where ownerUser matches the current logged-in user's id
+    const myroom = await classModel.find({ ownerUser:userId });
+    
+    if (!myroom || myroom.length === 0) {
+      return res.status(404).json({ message: "The current user has no rooms.", success: false, data: null });
+    }
+
+    // Send the found rooms
+    res.status(200).json({ message: "Rooms retrieved successfully", success: true, data: myroom });
+  } catch (error) {
+    // Send error response in case of any issue
+    res.status(500).json({ message: "Error retrieving rooms", success: false, error: error.message });
+  }
+};
+
+module.exports = { addRoom,getHouses,getSingleHouse,ownerRoom ,getBookedHouses};
