@@ -1,7 +1,7 @@
 
 const users = require("../models/usersModel");
 const Deposit = require("../models/AccoutnDeposit")
-
+const jwt = require('jsonwebtoken');
 const nodemailer= require('nodemailer');
 
 const  path =require('path');
@@ -108,6 +108,38 @@ const handlePaymentSuccess = async (req, res) => {
   }
 };
 
-module.exports = handlePaymentSuccess; // Corrected the function name to 'addAccount'
+
+const getUserDepositHistory = async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization;
+        if (!authHeader) {
+          return res.status(401).json({ success: false, message: 'Authorization header not found' });
+        }
+    
+        const token = authHeader.split(' ')[1];
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const userId = decoded.userId; // Extract userId from the decoded token
+        console.log('Authenticated userId:', userId); // Add logging
+    
+        const user = await Deposit.find({depositor:userId});
+        console.log('Found user:', user); // Add logging
+    
+        if (!user) {
+          return res.status(404).json({ success: false, message: 'User not found' });
+        }
+    
+        res.json({ 
+            success: true, 
+            data: user  });
+      } catch (error) {
+        console.error('Error fetching user balance:', error); // Add logging
+        res.status(500).json({ success: false, message: error.message });
+      }
+};
+
+
+module.exports = {handlePaymentSuccess,
+                  getUserDepositHistory
+                   }; // Corrected the function name to 'addAccount' and the others
 
 
