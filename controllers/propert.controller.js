@@ -54,6 +54,7 @@ const getHouses = async (req, res) => {
   }
 }
 
+<<<<<<< HEAD
 const getBookedHouses = async (req, res) => {
   try {
     const houses = await booking.find();
