@@ -8,7 +8,7 @@ const bookingSchema = new mongoose.Schema({
   },
   house: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'House',
+    ref: 'allclass',
     required: true,
   },
   bookedTime: {
