@@ -22,6 +22,7 @@ import Paydonate from "./pages/Deposit/Paydonate";
 import Thanks from "./pages/Deposit/Thanks";
 import PaymentFailed from "./pages/Deposit/PaymentFailed.jsx";
 import DepositDisplay from "./pages/DepositDisplay";
+import MyaddRoom from "./pages/landloards/MyaddRoom";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -49,6 +50,7 @@ function App() {
 {/* route for landloards */}
 <Route path="/addroom" element={<ProtectedRoute><AddRoom/></ProtectedRoute>}/>
 <Route path="/customers" element={<ProtectedRoute><Customers/></ProtectedRoute>}/>
+<Route path="/myroomPosted" element={<ProtectedRoute><MyaddRoom/></ProtectedRoute>}/>
 
 
 
