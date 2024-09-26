@@ -52,11 +52,11 @@ function Paydonate() {
     return (
         <div style={{ alignItems: 'center', backgroundColor: 'whitesmoke' }}>
             <center style={{ display: 'flex', marginLeft: '30%', flexDirection: 'column', width: '50%', alignContent: 'center', textAlign: 'center' }}>
-                <label>Fname</label>
+                {/* <label>Fname</label>
                 <input type='text' value={fname} onChange={(e) => setFname(e.target.value)} />
                 
                 <label>Email</label>
-                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} /> */}
                 
                 <label>Amount</label>
                 <input type='number' value={amount} onChange={(e) => setAmount(e.target.value)} />
