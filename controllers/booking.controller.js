@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const users = require("../models/usersModel");
 const House = require("../models/HouseModel");
-const Booking = require("../models/BookingModel");
+const Booking = require("../models/bookingmodel");
 
 const bookingRoom = async (req, res) => {
     // Access the user ID from the request object
