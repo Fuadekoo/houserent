@@ -66,8 +66,12 @@ const loginUser = async (req, res) => {
             success:true,
             data:token,
         });
-
-
+        const user = await User.findById(req.body.userId);
+        res.send({
+            message:"user fetched successfully",
+            success:true,
+            data:user,
+        })
 
     } catch (error) {
         res.send({
