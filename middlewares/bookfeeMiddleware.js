@@ -14,11 +14,21 @@ module.exports = async (req, res, next) => {
     try {
         // Access the user ID from the request object
         const userId = req.user.userId;
-        const {id} = req.params;
+        const { id } = req.params;
 
         const room = await Rooms.findById(id);
         console.log(room);
-        const owner = room.ownerUser.toString();  
+
+        // Check if the room exists
+        if (!room) {
+            return res.status(404).json({
+                message: "Room not found",
+                success: false,
+                data: null
+            });
+        }
+
+        const owner = room.ownerUser.toString();
         const bookPrice = room.price;
         const comision = room.AdminPrice;
         console.log(owner);
