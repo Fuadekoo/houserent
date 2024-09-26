@@ -38,6 +38,43 @@ router.post("/register",async(req,res)=>{
     }
 });
 
+// Update user by ID route
+router.put('/update-user-by-id/:id', authMiddleware, async (req, res) => {
+    try {
+        // Ensure the user can only update their own account
+        if (req.user.userId !== req.params.id) {
+            return res.status(401).send({
+                message: "You can only update your own account!",
+                success: false,
+            });
+        }
+
+        // Continue updating the user...
+        const updateUser = await User.findByIdAndUpdate(req.params.id, {
+            $set: {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password ? await bcrypt.hash(req.body.password, 10) : undefined,
+            }
+        }, { new: true });
+
+        const { password, ...rest } = updateUser._doc;
+        res.status(200).send({
+            message: "User updated successfully",
+            success: true,
+            data: rest,
+        });
+    } catch (error) {
+        res.status(500).send({
+            message: error.message,
+            success: false,
+        });
+    }
+});
+
+
+
+
 // login user
 router.post("/login",async(req,res)=>{
     try {

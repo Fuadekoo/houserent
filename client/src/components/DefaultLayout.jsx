@@ -9,8 +9,8 @@ function DefaultLayout({ children }) {
 
   const userMenu = [
     { name: "Home", path: "/", icon: "ri-home-line" },
-    { name: "Bookings", path: "/user/Bookings", icon: "ri-shopping-cart-line" },
-    // { name: "view Booked", path: "/user/viewBooked", icon: "ri-file-list-line" },
+    { name: "Bookings", path: "/user/Bookings", icon: "ri-file-list-line" },
+    { name: "view Booked",path:"/user/viewBooked",icon:"ri-file-list-line"}, 
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
@@ -19,7 +19,7 @@ function DefaultLayout({ children }) {
   const landlordMenu = [
     { name: "Home", path: "/", icon: "ri-home-line" },
     { name: "PostHouses", path: "/addroom", icon: "ri-home-2-line" },
-    { name: "myroom", path: "/myroomPosted", icon: "ri-home-4-line" },
+    { name: "Tenants", path: "/customers", icon: "ri-user-line" },
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
