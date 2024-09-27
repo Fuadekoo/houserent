@@ -62,7 +62,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                     color={house.active ? 'red' : 'green'} // Conditional color for Block/Unblock
                     className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-gray-700"
                 >
-                    {house.active ? 'Unblock' : 'Block'} {/* Conditional text based on "active" */}
+                    {house.active ? 'Block' : 'Unblock'} {/* Conditional text based on "active" */}
                 </Button>
             </CardFooter>
         </Card>
