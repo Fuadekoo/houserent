@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaCheckCircle, FaClock } from 'react-icons/fa'; // Import icons from react-icons
 
 function MyaddRoom() {
     const [rooms, setRooms] = useState([]);
@@ -70,7 +71,14 @@ function MyaddRoom() {
                                 <p>Floor Level: {room.floorLevel}</p>
                                 <p>House Number: {room.houseNumber}</p>
                                 <p>Rent Per Month: {room.rentPerMonth}</p>
+                                <p>Room Status: {room.active ? 'Active' : 'Pending'}</p>
+      {room.active ? (
+        <FaCheckCircle style={{ color: 'green' }} /> // Display verification icon if active
+      ) : (
+        <FaClock style={{ color: 'orange' }} /> // Display pending icon if not active
+      )}
                             </div>
+                            
                             <div className="absolute top-4 right-4 flex space-x-2">
                                 <button
                                     onClick={() => handleEdit(room._id)}
