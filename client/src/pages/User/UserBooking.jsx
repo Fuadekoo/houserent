@@ -5,8 +5,6 @@ const UserBooking = () => {
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [fromTime, setFromTime] = useState('');
-  const [toTime, setToTime] = useState('');
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -28,26 +26,6 @@ const UserBooking = () => {
     fetchBookings();
   }, []);
 
-  const handleBooking = async (houseId) => {
-    try {
-      const token = localStorage.getItem('token'); // Adjust the token retrieval method as necessary
-
-      const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${houseId}`, {
-        fromTime,
-        toTime,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-
-      console.log('Booking successful:', response.data);
-    } catch (err) {
-      console.error('Booking failed:', err.message);
-    }
-  };
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -67,30 +45,6 @@ const UserBooking = () => {
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-3xl font-bold mb-4">User Bookings</h1>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="fromTime">
-          From Time
-        </label>
-        <input
-          type="datetime-local"
-          id="fromTime"
-          value={fromTime}
-          onChange={(e) => setFromTime(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
-      <div className="mb-4">
-        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="toTime">
-          To Time
-        </label>
-        <input
-          type="datetime-local"
-          id="toTime"
-          value={toTime}
-          onChange={(e) => setToTime(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        />
-      </div>
       {bookings.length === 0 ? (
         <p>No bookings found.</p>
       ) : (
@@ -103,12 +57,6 @@ const UserBooking = () => {
               <p>Rent Per Month: {booking.house.rentPerMonth}</p>
               <p>From: {new Date(booking.bookedTime.fromTime).toLocaleString()}</p>
               <p>To: {new Date(booking.bookedTime.toTime).toLocaleString()}</p>
-              <button
-                onClick={() => handleBooking(booking.house._id)}
-                className="mt-4 bg-blue-500 text-white py-2 px-4 rounded"
-              >
-                Book Again
-              </button>
             </div>
           ))}
         </div>
