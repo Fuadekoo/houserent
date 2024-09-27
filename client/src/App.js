@@ -57,8 +57,7 @@ function App() {
 
 {/* route for admin */}
     <Route path="/admin/home" element={<ProtectedRoute><AdminHome/></ProtectedRoute>}/>
-    <Route path="/admin/buses" element={<ProtectedRoute><AdminBuses/></ProtectedRoute>}/>
-    <Route path="/admin/users" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
+    <Route path="/admin/allusers" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
     <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
  
     {/* route all user  */}
