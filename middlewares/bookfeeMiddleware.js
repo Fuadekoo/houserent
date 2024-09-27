@@ -16,7 +16,9 @@ const bookfeeMiddleware = async (req, res, next) => {
         // Access the user ID from the request object
         const userId = req.user.userId;
         const { houseId } = req.params;
-        const { fromTime, toTime } = req.body;
+        // const { fromTime, toTime } = req.body;
+     const { totalPayment, totalDays, bookedTime } = req.body;
+
 
         // Log the room ID for debugging
         console.log(`House ID: ${houseId}`);
@@ -41,15 +43,15 @@ const bookfeeMiddleware = async (req, res, next) => {
         const comision = room.AdminPrice;
 
         // display the deference between thetime of booking start to end
-        const timeDiff = Math.abs(new Date(toTime) - new Date(fromTime));
+        //const timeDiff = Math.abs(new Date(toTime) - new Date(fromTime));
         // change to date the timediff
-        const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+       // const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
         // change the rentpermonth to rent per day
-        const bookPriceperday = bookPricepermonth / 30;
+        //const bookPriceperday = bookPricepermonth / 30;
         
         // calculate the total price of the room
-        const totalPrice = bookPriceperday * diffDays;
+       // const totalPrice = bookPriceperday * diffDays;
         console.log(`Owner: ${owner}`);
 
         // Find the receiver from userowner from rooms table column and id from allusers table is the same. whose role is landlord in alluser table
@@ -70,12 +72,14 @@ const bookfeeMiddleware = async (req, res, next) => {
         const transactionData = {
             sender: userId,
             receiver: receiverId,
-            amount: totalPrice,
+            amount: totalPayment,
             type: "local Transfer from person who book the room to the landlord",
             // Add other necessary fields...
         };
-
+      
         console.log(`Transaction Data: ${JSON.stringify(transactionData)}`);
+         console.log(" cont tot:", totalPayment);
+
 
         // Call the performTransaction function to perform the transaction
         const response = await performTransaction(transactionData);

@@ -6,6 +6,7 @@ const Booking = require("../models/bookingmodel");
 const bookingRoom = async (req, res) => {
     // Access the user ID from the request object
      const { totalPayment, totalDays, bookedTime } = req.body;
+     console.log(" cont tot:", totalPayment);
 
     const { userId: user } = req.user;
     const { houseId } = req.params;
@@ -28,10 +29,7 @@ const bookingRoom = async (req, res) => {
         if (!checkHouse) {
             return res.status(400).json({ message: "The house does not exist", success: false, data: null });
         }
-
-        if (userBalance >= totalPaymentAmount) {
-             // Save the booking data to the Booking model
-         const newBooking = new Booking({
+       const newBooking = new Booking({
             user:user,
             house: houseId,
             bookedTime: bookedTime,
@@ -39,13 +37,26 @@ const bookingRoom = async (req, res) => {
             totalPayment:totalPaymentAmount
           });
          await newBooking.save();
+         res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+        // if (userBalance >= totalPaymentAmount) {
+        //      // Save the booking data to the Booking model
+        //  const newBooking = new Booking({
+        //     user:user,
+        //     house: houseId,
+        //     bookedTime: bookedTime,
+        //     TotalDays: totalDays,
+        //     totalPayment:totalPaymentAmount
+        //   });
+        //  await newBooking.save();
 
-         checkUser.balance -= totalPaymentAmount;
-         await checkUser.save();
-        res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
-        }else{
-         return res.status(400).json({ message: 'Insufficient balance' });
-        }
+        //  checkUser.balance -= totalPaymentAmount;
+        //  await checkUser.save();
+        // res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+        // }else{
+        //  return res.status(400).json({ message: 'Insufficient balance' });
+        // }
+
+
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
