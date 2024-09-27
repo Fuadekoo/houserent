@@ -3,10 +3,9 @@ import React from 'react';
 function Pay({ fname, email, amount, tx_ref, public_key }) {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Deposit</h2>
-        <p className="text-lg mb-4">Amount: <span className="font-semibold">{amount}</span></p>
-        <p className="text-lg mb-4">Current Balance: <span className="font-semibold">150</span></p>
+      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
+        <h2 className="text-xl font-bold mb-4">Deposit</h2>
+        <p className="text-md mb-4">Amount: <span className="font-semibold">{amount}</span></p>
         <form method="POST" action="https://api.chapa.co/v1/hosted/pay">
           <input type="hidden" name="public_key" value={public_key} />
           <input type="hidden" name="tx_ref" value={tx_ref} />
@@ -24,7 +23,7 @@ function Pay({ fname, email, amount, tx_ref, public_key }) {
             type="submit"
             className="w-full bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300 ease-in-out transform hover:scale-105"
           >
-            deposit balance 
+            Deposit Balance
           </button>
         </form>
       </div>
