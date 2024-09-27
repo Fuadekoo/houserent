@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 
 dotenv.config();
 const app = express();
-const addRoomFee = 1000; // Set the add room fee
+// const addRoomFee = 1000; // Set the add room fee
 const addRoomFee = 1000; // Set the add room fee
 
 // Middleware to validate the token
