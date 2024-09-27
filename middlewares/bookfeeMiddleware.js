@@ -5,12 +5,16 @@ const Allusers = require('../models/usersModel.js');
 const { performTransaction } = require('../controllers/transaction.controller.js');
 const HouseModel = require("../models/HouseModel.js");
 const mongoose = require('mongoose'); 
+const HouseModel = require("../models/HouseModel.js");
+const mongoose = require('mongoose'); 
 
 dotenv.config();
 const app = express();
 const addRoomFee = 1000; // Set the add room fee
+const addRoomFee = 1000; // Set the add room fee
 
 // Middleware to validate the token
+const bookfeeMiddleware = async (req, res, next) => {
 const bookfeeMiddleware = async (req, res, next) => {
     try {
         // Access the user ID from the request object
@@ -95,12 +99,25 @@ const bookfeeMiddleware = async (req, res, next) => {
             });
         }
 
+        console.log(`Transaction Response: ${JSON.stringify(response)}`);
+
+        // Check if the transaction was successful
+        if (!response || !response.success) {
+            return res.status(500).json({
+                message: "Transaction failed",
+                success: false,
+                data: response ? response.message : null
+            });
+        }
+
         // Proceed to the next middleware function or the route handler
         next();
 
     } catch (error) {
         console.error(`Error in bookfeeMiddleware: ${error.message}`);
+        console.error(`Error in bookfeeMiddleware: ${error.message}`);
         res.status(500).json({
+            message: "Internal server error",
             message: "Internal server error",
             success: false,
             data: error.message,
@@ -108,4 +125,5 @@ const bookfeeMiddleware = async (req, res, next) => {
     }
 };
 
+module.exports = bookfeeMiddleware;
 module.exports = bookfeeMiddleware;
