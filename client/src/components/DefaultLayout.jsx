@@ -26,9 +26,9 @@ function DefaultLayout({ children }) {
   ];
 
   const adminMenu = [
-    { name: "Home", path: "/", icon: "ri-home-line" },
+    { name: "Home", path: "/admin/home", icon: "ri-home-line" },
     { name: "AllUsers",path:"/admin/allusers",icon:"ri-file-list-line"},
-    { name: "AllpostHouses",path:"/admin/allposthouses",icon:"ri-file-list-line"}, 
+    { name: "BlockedHouses",path:"/admin/blockedhouses",icon:"ri-file-list-line"}, 
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }

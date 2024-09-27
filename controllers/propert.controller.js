@@ -46,12 +46,59 @@ const addRoom = async (req, res) => {
 
 const getHouses = async (req, res) => {
   try {
-    const houses = await classModel.find();
-    res.status(200).json({ message: "Houses retrieved successfully", success: true, data: houses });
+    const houses = await classModel.find({ active: true  }); // Fetch blocked houses
+    res.status(200).json({ message: "Blocked houses retrieved successfully", success: true, data: houses });
   } catch (error) {
     res.status(500).json({ message: error.message, success: false, data: null });
   }
-}
+};
+
+const usergetHouses = async (req, res) => {
+  try {
+    const houses = await classModel.find(); // Fetch blocked houses
+    res.status(200).json({ message: "Blocked houses retrieved successfully", success: true, data: houses });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+};
+
+
+const getActiveHouse = async (req, res) => {
+  try {
+    const houses = await classModel.find({ active: false  }); // Fetch active houses
+    res.status(200).json({ message: "Active houses retrieved successfully", success: true, data: houses });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+};
+
+////////////////////////////////////////////////////////////////////////
+const blockRoom = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id))
+        return res.status(404).json({ error: "Invalid room ID" });
+
+    try {
+        // Find the room by ID
+        const room = await classModel.findById(id);
+        if (!room)
+            return res.status(404).json({ error: "room not found" });
+
+        // Toggle the blocked status
+        const newBlockedStatus = !room.active; // Toggle blocked status (true -> false, false -> true)
+
+        // Update the user with the new blocked status
+        const updatedRoom = await classModel.findByIdAndUpdate(id, { active: newBlockedStatus }, { new: true });
+
+        res.status(200).json({ message: "User status updated successfully", room: updatedRoom });
+    } catch (error) {
+        console.error("Error updating user status:", error);
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+};
+
+////////////////////////////////////////////////////////
+
 
 const getSingleHouse = async (req, res) => {
   const { id } = req.params;
@@ -86,4 +133,10 @@ const ownerRoom = async (req, res) => {
   }
 };
 
-module.exports = { addRoom,getHouses,getSingleHouse,ownerRoom };
+module.exports = { addRoom,
+                    getHouses,
+                    getSingleHouse,
+                    ownerRoom ,
+                    getActiveHouse , 
+                    blockRoom,
+                    usergetHouses};

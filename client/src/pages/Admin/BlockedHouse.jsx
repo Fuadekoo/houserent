@@ -1,8 +1,9 @@
+
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import HouseCard from './HouseCard';
+import IsRoomBlockCard from './IsRoomBlockCard';
 
-const HousesList = () => {
+const BlockedHouse = () => {
   const [houses, setHouses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,7 +11,7 @@ const HousesList = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/property/userallroom');
+        const response = await axios.get('http://localhost:5000/api/property/allroom');
         if (response.data.success) {
           setHouses(response.data.data);
         } else {
@@ -37,10 +38,10 @@ const HousesList = () => {
   return (
     <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
       {houses.map((house) => (
-        <HouseCard key={house._id} house={house} />
+        <IsRoomBlockCard key={house._id} house={house} />
       ))}
     </div>
   );
 };
 
-export default HousesList;
+export default BlockedHouse;

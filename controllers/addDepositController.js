@@ -15,6 +15,8 @@ const handlePaymentSuccess = async (req, res) => {
 
 
        const emailPassword = process.env.emailPassword;  // THE EMAIL PASSWORD IN THE .ENV
+
+       console.log("the password is :", emailPassword)
   
   try {
     // Find the user by their ID
@@ -46,9 +48,7 @@ const handlePaymentSuccess = async (req, res) => {
     //   transFee:parseFloat(amount) - parseFloat(netPrice)
 
    }
-        await Deposit.insertMany([tranHistory]);  // Save to the "allclass" collection
-
-    
+      await Deposit.insertMany([tranHistory]);  // Save to the "allclass" collection
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
   
@@ -84,7 +84,7 @@ const handlePaymentSuccess = async (req, res) => {
       attachments: [
         {
         //  filename: 'chapa.png',
-          path: path.join(__dirname, '../houserent/Images/chapa.png'), // path to your image
+          path: path.join(__dirname, '../client/Images/chapa.png'), // path to your image
           cid: 'chapaImage' // same cid value as in the html img src
         }
       ]

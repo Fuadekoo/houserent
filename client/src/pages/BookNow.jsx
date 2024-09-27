@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Spin, DatePicker, Button, Form, message } from 'antd';
-import moment from 'moment';
+
 import 'tailwindcss/tailwind.css';
 
 const { RangePicker } = DatePicker;
@@ -11,8 +11,14 @@ function BookNow() {
   const { id } = useParams();
   const [houseDetails, setHouseDetails] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [fromTime, setFromTime] = useState(null);
-  const [toTime, setToTime] = useState(null);
+  const [fromTime, setFromTime] = useState();
+  const [toTime, setToTime] = useState();
+
+  const [totalDays, setTotalDays] = useState(0);
+  const [totalPayment, setTotalPayment] = useState(0);
+
+
+
 
   useEffect(() => {
     const fetchHouseDetails = async () => {
@@ -34,16 +40,47 @@ function BookNow() {
     fetchHouseDetails();
   }, [id]);
 
+    // Handle time slot selection
+  function selectedTimeSlot(values) {
+    const from = values[0].format('MMM DD YYYY HH:mm');
+    const to = values[1].format('MMM DD YYYY HH:mm');
+    // const diffDays = values[1].diff(values[0], 'days');
+    const diffDays = values[1].diff(values[0], 'days');
+
+    setFromTime(from);
+    setToTime(to);
+    setTotalDays(diffDays);
+  }
+  //////////////////////////////////////////////////////////////////////////
+   useEffect(() => {
+    if (houseDetails) {
+      const rentPerDay = houseDetails.rentPerMonth / 30;
+      setTotalPayment(totalDays * rentPerDay);
+    }
+  }, [totalDays, houseDetails]);
+
+  /////////////////////////////////////////////////////////////////////////
+
   const handleBooking = async () => {
+     if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
+      alert('Please select valid booking details');
+      return;
+    }
+  const bookingData = {
+    totalPayment,
+    bookedTime: { fromTime, toTime },
+    totalDays,  // Change this to match backend
+   };
+
     try {
-      const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${id}`, {
-        fromTime,
-        toTime,
-      }, {
+    
+       const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${id}`, 
+      bookingData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
+
       if (response.data.success) {
         message.success('House booked successfully');
       } else {
@@ -54,12 +91,6 @@ function BookNow() {
     }
   };
 
-  const onDateChange = (values) => {
-    if (values) {
-      setFromTime(moment(values[0]).toISOString());
-      setToTime(moment(values[1]).toISOString());
-    }
-  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -91,7 +122,7 @@ function BookNow() {
                     <RangePicker
                       showTime={{ format: 'HH:mm' }}
                       format="YYYY-MM-DD HH:mm"
-                      onChange={onDateChange}
+                      onChange={selectedTimeSlot}
                       className="w-full"
                     />
                   </Form.Item>
