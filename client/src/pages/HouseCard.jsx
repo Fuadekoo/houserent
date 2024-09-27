@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     Card,
     CardHeader,
@@ -10,6 +10,8 @@ import {
 } from '@material-tailwind/react';
 
 const HouseCard = ({ house }) => {
+
+    
     return (
         <Card className="mt-6 w-64 transform transition-transform duration-300 hover:scale-105">
             <CardHeader color="blue-gray" className="relative h-32">
@@ -40,6 +42,7 @@ const HouseCard = ({ house }) => {
                 >
                     <Link to={`/booking/${house._id}`}>More Info</Link>
                 </Button>
+
             </CardFooter>
         </Card>
     );

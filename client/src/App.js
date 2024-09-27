@@ -22,6 +22,7 @@ import Paydonate from "./pages/Deposit/Paydonate";
 import Thanks from "./pages/Deposit/Thanks";
 import PaymentFailed from "./pages/Deposit/PaymentFailed.jsx";
 import DepositDisplay from "./pages/DepositDisplay";
+import BlockedHouse from "./pages/Admin/BlockedHouse";
 import MyaddRoom from "./pages/landloards/MyaddRoom";
 
 function App() {
@@ -58,7 +59,8 @@ function App() {
     <Route path="/admin/home" element={<ProtectedRoute><AdminHome/></ProtectedRoute>}/>
     <Route path="/admin/buses" element={<ProtectedRoute><AdminBuses/></ProtectedRoute>}/>
     <Route path="/admin/users" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
-
+    <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
+ 
     {/* route all user  */}
     <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>
     <Route path="/Login" element={<PublicRoute><Login/></PublicRoute>}/>

@@ -5,9 +5,12 @@ const Booking = require("../models/bookingmodel");
 
 const bookingRoom = async (req, res) => {
     // Access the user ID from the request object
+     const { totalPayment, totalDays, bookedTime } = req.body;
+     console.log(" cont tot:", totalPayment);
+
     const { userId: user } = req.user;
     const { houseId } = req.params;
-    const { fromTime, toTime } = req.body;
+    
 
     try {
         // Check if the tenant user exists
@@ -16,40 +19,44 @@ const bookingRoom = async (req, res) => {
             return res.status(400).json({ message: "The user does not exist or you are not 'tenant'", success: false, data: null });
         }
 
+      // Check if the user has enough balance
+       const userBalance = parseFloat(checkUser.balance);
+       const totalPaymentAmount = parseFloat(totalPayment);
+
+
         // Check if the house exists
         const checkHouse = await House.findOne({ _id: houseId });
         if (!checkHouse) {
             return res.status(400).json({ message: "The house does not exist", success: false, data: null });
         }
-
-        // Check if the house is already booked
-        const isBooked = await House.findOne({ _id: houseId, bookedBy: { $exists: true } });
-        if (isBooked) {
-            return res.status(400).json({ message: "The house is already booked", success: false, data: null });
-        }
-        // Check if the user's balance is enough to book the house
-        const userBalance = checkUser.balance;
-        const housePrice = checkHouse.price;
-        if (userBalance < housePrice) {
-            return res.status(400).json({ message: "Insufficient balance", success: false, data: null });
-        }
-
-        // Book the house
-        checkHouse.bookedBy = user;
-        await checkHouse.save();
-
-        // Save the booking data to the Booking model
-        const newBooking = new Booking({
-            user,
+       const newBooking = new Booking({
+            user:user,
             house: houseId,
-            bookedTime: {
-                fromTime,
-                toTime,
-            },
-        });
-        await newBooking.save();
+            bookedTime: bookedTime,
+            TotalDays: totalDays,
+            totalPayment:totalPaymentAmount
+          });
+         await newBooking.save();
+         res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+        // if (userBalance >= totalPaymentAmount) {
+        //      // Save the booking data to the Booking model
+        //  const newBooking = new Booking({
+        //     user:user,
+        //     house: houseId,
+        //     bookedTime: bookedTime,
+        //     TotalDays: totalDays,
+        //     totalPayment:totalPaymentAmount
+        //   });
+        //  await newBooking.save();
 
-        res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+        //  checkUser.balance -= totalPaymentAmount;
+        //  await checkUser.save();
+        // res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+        // }else{
+        //  return res.status(400).json({ message: 'Insufficient balance' });
+        // }
+
+
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
@@ -60,11 +67,14 @@ const myBookings = async (req, res) => {
     const { userId } = req.user;
     try {
         const bookings = await Booking.find({ user: userId }).populate("house");
+        
         res.status(200).json({ message: "Bookings retrieved successfully", success: true, data: bookings });
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
 };
+
+
 
 
 module.exports = { bookingRoom,myBookings };

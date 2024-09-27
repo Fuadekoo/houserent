@@ -30,6 +30,10 @@ const houseSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'users', // Reference to the User model
     required: true
+  },
+  active:{
+    type:Boolean,
+    default:false
   }
 });
 
