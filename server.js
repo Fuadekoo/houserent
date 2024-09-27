@@ -22,7 +22,7 @@ const transactionRoute = require("./routes/transactionRoute");
 const bookingRoute = require("./routes/bookingroute");
 
 // this is used for api
-app.use("/api/users",usersRoute);
+    app.use("/api/users",usersRoute);
 app.use("/api/property",houseRoute);
 app.use("/api/transaction",transactionRoute);
 app.use("/api/bookRoom",bookingRoute);
