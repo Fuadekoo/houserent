@@ -87,7 +87,11 @@ function BookNow() {
         message.error(response.data.message);
       }
     } catch (error) {
-      message.error('Failed to book house');
+      if (error.response && error.response.data && error.response.data.message) {
+        message.error(error.response.data.message);
+      } else {
+        message.error('Failed to book house');
+      }
     }
   };
 

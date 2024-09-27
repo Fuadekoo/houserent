@@ -1,12 +1,15 @@
 const express = require("express")
 const houseRouter=express.Router();
-const {addRoom,getSingleHouse,ownerRoom ,blockRoom, getActiveHouse,getBlockHouse} =require('../controllers/propert.controller');
+const {addRoom,getSingleHouse,ownerRoom ,blockRoom, getActiveHouse,getBlockHouse,deleteRoom} =require('../controllers/propert.controller');
 const authMiddleware = require("../middlewares/authMiddleware");
 const roomPostFeeMiddleware = require("../middlewares/roomPostFeeMiddleware");
 
 
 // add house route
 houseRouter.post('/addroom',authMiddleware,roomPostFeeMiddleware, addRoom);
+
+// delete the post house route
+houseRouter.delete('/deleteroom/:id',authMiddleware,deleteRoom);
 
 // get all houses route bloch and unblock
 houseRouter.get('/allroom', getActiveHouse);
