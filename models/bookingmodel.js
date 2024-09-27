@@ -22,10 +22,17 @@ const bookingSchema = new Schema({
       type: String,
       required: true
     }
-  }
-}, {
-  timestamps: true, // This will automatically add `createdAt` and `updatedAt` fields
-  versionKey: false
+  },
+  TotalDays:{
+    type: String ,
+    required:true
+  },
+
+  totalPayment: { 
+    type: Number ,
+    required:true
+  },
+
 });
 
 const Booking = mongoose.model('Booking', bookingSchema);
