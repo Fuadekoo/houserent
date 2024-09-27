@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrash, FaCheckCircle, FaClock } from 'react-icons/fa'; // Import icons from react-icons
+import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
 
 function MyaddRoom() {
     const [rooms, setRooms] = useState([]);
@@ -96,6 +96,7 @@ function MyaddRoom() {
                             </div>
                             
                             <div className="absolute top-4 right-4 flex space-x-2">
+                            <FaUser className="mr-1" />
                                 <button
                                     onClick={() => handleEdit(room._id)}
                                     className="text-blue-500 hover:text-blue-700 transition duration-300"
