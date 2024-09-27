@@ -11,7 +11,7 @@ const BlockedHouse = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/property/allroom');
+        const response = await axios.get('http://localhost:5000/api/property/blocked-rooms');
         if (response.data.success) {
           setHouses(response.data.data);
         } else {
