@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function DefaultLayout({ children }) {
@@ -84,6 +84,13 @@ function DefaultLayout({ children }) {
           {/* Header */}
           <div className='flex justify-between items-center bg-white rounded p-4'>
             <h1 className='text-2xl font-bold'>houserent system</h1>
+            <Link to='/profile'>  
+        {user ? (
+          <img className='rounded-full h-10 w-10 object-cover' src={user.avatar} alt='profile'/>
+        ):(
+          <li className=' text-slate-700 hover:underline'>Sign in</li>
+      )}     
+       </Link>
             <h2 className='text-xl'>{user?.name}</h2>
           </div>
           {/* Body */}
