@@ -27,6 +27,12 @@ const bookingRoom = async (req, res) => {
         if (isBooked) {
             return res.status(400).json({ message: "The house is already booked", success: false, data: null });
         }
+        // Check if the user's balance is enough to book the house
+        const userBalance = checkUser.balance;
+        const housePrice = checkHouse.price;
+        if (userBalance < housePrice) {
+            return res.status(400).json({ message: "Insufficient balance", success: false, data: null });
+        }
 
         // Book the house
         checkHouse.bookedBy = user;
