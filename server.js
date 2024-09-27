@@ -7,11 +7,18 @@ require('dotenv').config()
 app.use(cors()); 
 const dbconfig = require("./config/dbconfig");
 const port = process.env.PORT || 5000;
-app.use(express.json());
+// app.use(express.json());
+
+app.use(express.json({ limit: '10mb' }));
+// ////////////////////////////////
+// If you're using bodyParser
+const bodyParser = require('body-parser');
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // this is used for gate usersModel
 const usersRoute = require("./routes/usersRoute");
-
+// ////////////////////////////////
 // this is used for gate house Model 
 const houseRoute = require("./routes/houseRoute");
 
