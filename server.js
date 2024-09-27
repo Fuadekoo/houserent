@@ -11,7 +11,7 @@ app.use(express.json());
 
 // this is used for gate usersModel
 const usersRoute = require("./routes/usersRoute");
-
+// ////////////////////////////////
 // this is used for gate house Model 
 const houseRoute = require("./routes/houseRoute");
 

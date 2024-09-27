@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function DefaultLayout({ children }) {
@@ -9,8 +9,8 @@ function DefaultLayout({ children }) {
 
   const userMenu = [
     { name: "Home", path: "/", icon: "ri-home-line" },
-    { name: "Bookings", path: "/user/Bookings", icon: "ri-file-list-line" },
-    { name: "view Booked",path:"/user/viewBooked",icon:"ri-file-list-line"}, 
+    { name: "Booked", path: "/user/Bookings", icon: "ri-shopping-cart-line" },
+    // { name: "view Booked", path: "/user/viewBooked", icon: "ri-file-list-line" },
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
@@ -19,7 +19,7 @@ function DefaultLayout({ children }) {
   const landlordMenu = [
     { name: "Home", path: "/", icon: "ri-home-line" },
     { name: "PostHouses", path: "/addroom", icon: "ri-home-2-line" },
-    { name: "Tenants", path: "/customers", icon: "ri-user-line" },
+    { name: "myroom", path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
@@ -84,6 +84,13 @@ function DefaultLayout({ children }) {
           {/* Header */}
           <div className='flex justify-between items-center bg-white rounded p-4'>
             <h1 className='text-2xl font-bold'>houserent system</h1>
+            <Link to='/profile'>  
+        {user ? (
+          <img className='rounded-full h-10 w-10 object-cover' src={user.avatar} alt='profile'/>
+        ):(
+          <li className=' text-slate-700 hover:underline'>Sign in</li>
+      )}     
+       </Link>
             <h2 className='text-xl'>{user?.name}</h2>
           </div>
           {/* Body */}

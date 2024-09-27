@@ -6,7 +6,7 @@ import DepositHistory from './DepositHistory';
 function DepositDisplay() {
   return (
     <div>
-      <p>This is display my balance and add a balance to my account from chapa payments</p>
+      {/* <p>This is display my balance and add a balance to my account from chapa payments</p> */}
       <Balance />
       <ChapaPayment/>
       <DepositHistory />
