@@ -40,8 +40,6 @@ const bookfeeMiddleware = async (req, res, next) => {
         }
 
         const owner = room.ownerUser.toString();
-        const bookPricepermonth = room.rentPerMonth;
-        const comision = room.AdminPrice;
 
 
         console.log(`Owner: ${owner}`);
@@ -102,7 +100,6 @@ const bookfeeMiddleware = async (req, res, next) => {
         next();
 
     } catch (error) {
-        console.error(`Error in bookfeeMiddleware: ${error.message}`);
         console.error(`Error in bookfeeMiddleware: ${error.message}`);
         res.status(500).json({
             message: "Internal server error",
