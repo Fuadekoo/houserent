@@ -5,8 +5,8 @@ const Allusers = require('../models/usersModel.js');
 const { performTransaction } = require('../controllers/transaction.controller.js');
 const HouseModel = require("../models/HouseModel.js");
 const mongoose = require('mongoose'); 
-const HouseModel = require("../models/HouseModel.js");
-const mongoose = require('mongoose'); 
+// const HouseModel = require("../models/HouseModel.js");
+//const mongoose = require('mongoose'); 
 
 dotenv.config();
 const app = express();
@@ -14,7 +14,7 @@ const app = express();
 const addRoomFee = 1000; // Set the add room fee
 
 // Middleware to validate the token
-const bookfeeMiddleware = async (req, res, next) => {
+//const bookfeeMiddleware = async (req, res, next) => {
 const bookfeeMiddleware = async (req, res, next) => {
     try {
         // Access the user ID from the request object
