@@ -148,5 +148,53 @@ router.post("/get-user-by-id",authMiddleware,async(req,res)=>{
         })
     }
 })
+// Fetch all users with optional search functionality
+router.get("/getUsers", async (req, res) => {
+    try {
+        const { searchTerm } = req.query;
+        const query = searchTerm
+            ? {
+                $or: [
+                    { name: { $regex: searchTerm, $options: 'i' } },
+                    { email: { $regex: searchTerm, $options: 'i' } },
+                    { phone: { $regex: searchTerm, $options: 'i' } }
+                ]
+            }
+            : {};
+
+        const users = await User.find(query);
+        res.status(200).json(users);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
+
+// Block or unblock a user
+router.put("/toggleBlockUser/:userId/block",  async (req, res) => {
+    const { userId } = req.params;
+    const { isBlocked } = req.body;
+
+    try {
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { isBlocked },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        res.status(200).json({
+            message: `User has been ${isBlocked ? 'blocked' : 'unblocked'}`,
+            success: true,
+            data: user
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+});
 
 module.exports = router;
