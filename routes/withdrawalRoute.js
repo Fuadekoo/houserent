@@ -6,6 +6,6 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 
 // Routes for withdrawal
-withdrawalRoute.get('/withdrawal', authMiddleware, withdrew);
+withdrawalRoute.post('/withdrawal', authMiddleware, withdrew);
 
-module.exports = router;
+module.exports = withdrawalRoute;

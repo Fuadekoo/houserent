@@ -13,7 +13,7 @@ const WithdrawalForm = () => {
     try {
       const token = localStorage.getItem('token'); // Adjust the token retrieval method as necessary
       const response = await axios.post(
-        'http://localhost:5000/api/withdrawal',
+        'http://localhost:5000/api/withdrawal/withdrawal',
         { amount, withdrawOption, withdrewAccount },
         {
           headers: {

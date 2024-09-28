@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require('cors'); // Import cors
 const app = express();
 require('dotenv').config()
+const mongoose = require("mongoose");
 
 // this is used if the backend and front end is use different port make safe
 app.use(cors()); 
@@ -22,11 +23,15 @@ const transactionRoute = require("./routes/transactionRoute");
 // this is used for booking Model
 const bookingRoute = require("./routes/bookingroute");
 
+// this is used for withdraw Model
+const withdrawalRoute = require("./routes/withdrawalRoute");
+
 // this is used for api
     app.use("/api/users",usersRoute);
 app.use("/api/property",houseRoute);
 app.use("/api/transaction",transactionRoute);
 app.use("/api/bookRoom",bookingRoute);
+app.use("/api/withdrawal",withdrawalRoute);
 
 
 // this is used fo run server

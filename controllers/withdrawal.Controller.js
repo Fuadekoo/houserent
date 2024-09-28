@@ -1,32 +1,33 @@
-const express = require('express');
-const Withdrawal = require('../models/WithdrawalModel');
-const User = require('../models/usersModel'); // Assuming you have a User model
+const mongoose = require('mongoose');
+const Withdrawal = require('../models/WithdrawalModel'); // Assuming you have a Withdrawal model
+const users = require("../models/usersModel"); // Assuming you have a User model
 
 // Withdraw route
 const withdrew = async (req, res) => {
-    const { userId: user } = req.user;
-    const {amount, withdrawOption, withdrewAccount } = req.body;
+    const { userId: ownerUser } = req.user; // Get the userId from the authentication middleware
+    const { amount, withdrawOption, withdrewAccount } = req.body;
 
     // Validate request
-    if (!user || !amount || !withdrawOption || !withdrewAccount) {
+    if (!ownerUser || !amount || !withdrawOption || !withdrewAccount) {
         return res.status(400).json({ message: 'All fields are required' });
     }
 
     try {
-        // Find the user the role is landloards 
-        const user = await User.findOne({ _id: user, role: "landloard" });
-        if (!user) {
-            return res.status(404).json({ message: 'User not found or you are not a landloard' });
+        // Find the user with the role of landlord
+        const checkUser = await users.findOne({ _id: ownerUser ,role:"landlord"});
+        console.log(checkUser);
+        if (!checkUser) {
+            return res.status(404).json({ message: 'User not found or you are not a landlord' });
         }
 
         // Check if the user has sufficient balance
-        if (user.balance < amount) {
+        if (checkUser.balance < amount) {
             return res.status(400).json({ message: 'Insufficient balance' });
         }
 
         // Create a withdrawal record
         const withdrawal = new Withdrawal({
-            ownerUser: user,
+            ownerUser: checkUser._id,
             withdrawalAmount: amount,
             withdrawOption,
             withdrewAccount
@@ -35,10 +36,10 @@ const withdrew = async (req, res) => {
         await withdrawal.save();
 
         // Deduct the amount from the user's balance
-        user.balance -= amount;
-        await user.save();
+        checkUser.balance -= amount;
+        await checkUser.save();
 
-        res.status(200).json({ message: 'Withdrawal in progress', balance: user.balance });
+        res.status(200).json({ message: 'Withdrawal in progress', balance: checkUser.balance });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
