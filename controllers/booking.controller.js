@@ -38,24 +38,6 @@ const bookingRoom = async (req, res) => {
           });
          await newBooking.save();
          res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
-        // if (userBalance >= totalPaymentAmount) {
-        //      // Save the booking data to the Booking model
-        //  const newBooking = new Booking({
-        //     user:user,
-        //     house: houseId,
-        //     bookedTime: bookedTime,
-        //     TotalDays: totalDays,
-        //     totalPayment:totalPaymentAmount
-        //   });
-        //  await newBooking.save();
-
-        //  checkUser.balance -= totalPaymentAmount;
-        //  await checkUser.save();
-        // res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
-        // }else{
-        //  return res.status(400).json({ message: 'Insufficient balance' });
-        // }
-
 
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
