@@ -11,8 +11,12 @@ const addRoom = async (req, res) => {
       const checkUser = await users.findOne({ _id: ownerUser ,role:"landlord"});
       // const checkUser = await users.findOne({ _id: ownerUser});
       if (!checkUser) {
-          return res.status(400).json({ message: "The user does not exist or you are not 'landlord'", success: false, data: null });
+          return res.status(400).json({ message: "you are not 'landlord'", success: false, data: null });
       }
+      if (description.length > 50) {
+        return res.status(400).json({ message: "Description is too long", success: false, data: null });
+      }
+
 
 
 
