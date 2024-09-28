@@ -10,7 +10,7 @@ const HousesList = () => {
   useEffect(() => {
     const fetchHouses = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/property/userallroom');
+        const response = await axios.get('http://localhost:5000/api/property/active-rooms');
         if (response.data.success) {
           setHouses(response.data.data);
         } else {

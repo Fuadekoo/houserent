@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
 
 function MyaddRoom() {
     const [rooms, setRooms] = useState([]);
@@ -32,9 +32,26 @@ function MyaddRoom() {
         console.log(`Edit room with ID: ${roomId}`);
     };
 
-    const handleDelete = (roomId) => {
-        // Implement delete functionality here
-        console.log(`Delete room with ID: ${roomId}`);
+    const handleDelete = async (roomId) => {
+        try {
+            const token = localStorage.getItem('token'); // Adjust the token retrieval method as necessary
+            const response = await axios.delete(`http://localhost:5000/api/property/deleteroom/${roomId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.data.success) {
+                // Remove the deleted room from the state
+                setRooms(rooms.filter(room => room._id !== roomId));
+                alert('Room deleted successfully');
+            } else {
+                alert(response.data.message);
+            }
+        } catch (error) {
+            console.error('Failed to delete room:', error);
+            alert('Verify home is not delete');
+        }
     };
 
     if (loading) {
@@ -70,8 +87,16 @@ function MyaddRoom() {
                                 <p>Floor Level: {room.floorLevel}</p>
                                 <p>House Number: {room.houseNumber}</p>
                                 <p>Rent Per Month: {room.rentPerMonth}</p>
+                                <p>Room Status: {room.active ? 'Active' : 'Pending'}</p>
+                                {room.active ? (
+                                    <FaCheckCircle style={{ color: 'green' }} /> // Display verification icon if active
+                                ) : (
+                                    <FaClock style={{ color: 'orange' }} /> // Display pending icon if not active
+                                )}
                             </div>
+                            
                             <div className="absolute top-4 right-4 flex space-x-2">
+                            <FaUser className="mr-1" />
                                 <button
                                     onClick={() => handleEdit(room._id)}
                                     className="text-blue-500 hover:text-blue-700 transition duration-300"

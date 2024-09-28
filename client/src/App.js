@@ -24,6 +24,7 @@ import PaymentFailed from "./pages/Deposit/PaymentFailed.jsx";
 import DepositDisplay from "./pages/DepositDisplay";
 import BlockedHouse from "./pages/Admin/BlockedHouse";
 import MyaddRoom from "./pages/landloards/MyaddRoom";
+import Withdrawal from "./pages/landloards/Withdrawal";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -52,6 +53,7 @@ function App() {
 <Route path="/addroom" element={<ProtectedRoute><AddRoom/></ProtectedRoute>}/>
 <Route path="/customers" element={<ProtectedRoute><Customers/></ProtectedRoute>}/>
 <Route path="/myroomPosted" element={<ProtectedRoute><MyaddRoom/></ProtectedRoute>}/>
+<Route path="/withdraw" element={<ProtectedRoute><Withdrawal/></ProtectedRoute>}/>
 
 
 

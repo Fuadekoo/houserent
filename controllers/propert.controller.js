@@ -44,9 +44,9 @@ const addRoom = async (req, res) => {
   }
 };
 
-const getHouses = async (req, res) => {
+const getBlockHouse = async (req, res) => {
   try {
-    const houses = await classModel.find({ active: true  }); // Fetch blocked houses
+    const houses = await classModel.find({ active: false  }); // Fetch blocked houses
     res.status(200).json({ message: "Blocked houses retrieved successfully", success: true, data: houses });
   } catch (error) {
     res.status(500).json({ message: error.message, success: false, data: null });
@@ -65,7 +65,7 @@ const usergetHouses = async (req, res) => {
 
 const getActiveHouse = async (req, res) => {
   try {
-    const houses = await classModel.find({ active: false  }); // Fetch active houses
+    const houses = await classModel.find({ active: true  }); // Fetch active houses
     res.status(200).json({ message: "Active houses retrieved successfully", success: true, data: houses });
   } catch (error) {
     res.status(500).json({ message: error.message, success: false, data: null });
@@ -133,10 +133,30 @@ const ownerRoom = async (req, res) => {
   }
 };
 
+
+// deleteRoom when only the active is false 
+const deleteRoom = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const room = await classModel.findById(id);
+    if (!room) {
+      return res.status(404).json({ message: "Room not found", success: false, data: null });
+    }
+    if (room.active === true) {
+      return res.status(400).json({ message: "Room is active, cannot delete", success: false, data: null });
+    }
+    await classModel.findByIdAndDelete(id);
+    res.status(200).json({ message: "Room deleted successfully", success: true, data: null });
+  } catch (error) {
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+}
+
 module.exports = { addRoom,
-                    getHouses,
+                    getBlockHouse,
                     getSingleHouse,
                     ownerRoom ,
                     getActiveHouse , 
                     blockRoom,
+                    deleteRoom,
                     usergetHouses};
