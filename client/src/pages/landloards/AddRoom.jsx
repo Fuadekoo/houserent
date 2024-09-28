@@ -7,6 +7,7 @@ function AddRoom() {
     address: '',
     floorLevel: '',
     houseNumber: '',
+    housecategory:'',
     description:'',
     rentPerMonth: ''
   });
@@ -126,6 +127,24 @@ function AddRoom() {
               required
             />
           </div>
+
+          <div className="mb-4">
+        <label className="block text-gray-700">House Category</label>
+        <select
+          name="housecategory"
+          value={formData.housecategory}
+          onChange={handleChange}
+          className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          required
+        >
+          <option value="">Select a category</option>
+          <option value="Apartama">Apartama</option>
+          <option value="Villa">Villa</option>
+          <option value="Condominium">Condominium</option>
+          <option value="compound house">Compound House</option>
+          <option value="single house">Single House</option>
+        </select>
+      </div>
 
           <div className="mb-4">
             <label className="block text-gray-700">description</label>
