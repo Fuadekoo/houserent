@@ -18,6 +18,10 @@ const houseSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  description:{
+    type:String,
+    required:true
+  },
   rentPerMonth: {
     type: String,
     required: true
