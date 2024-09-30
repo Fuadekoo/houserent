@@ -99,10 +99,10 @@ router.post("/login",async(req,res)=>{
             });
         }
 
-        // check user isblocked is true or false
+        // check user is blocked
         if(userExists.isBlocked){
             res.send({
-                message:"user is blocked",
+                message:"your account is blocked by administrator",
                 success:false,
                 data:null,
             });
@@ -124,7 +124,7 @@ router.post("/login",async(req,res)=>{
 
 
         res.send({
-            message:"user loggged successfully",
+            message:"user logged  in successfully",
             success:true,
             data:token,
         });
@@ -132,10 +132,11 @@ router.post("/login",async(req,res)=>{
 
 
     } catch (error) {
-        res.send({
-            message:error.message,
-            success:false,
-            data:null,
+        console.error('Error during login:', error);
+        return res.status(500).send({
+            message: "An error occurred during login",
+            success: false,
+            data: null,
         });
     }
 });
