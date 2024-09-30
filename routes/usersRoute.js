@@ -98,6 +98,15 @@ router.post("/login",async(req,res)=>{
                 data:null,
             });
         }
+
+        // check user isblocked is true or false
+        if(userExists.isBlocked){
+            res.send({
+                message:"user is blocked",
+                success:false,
+                data:null,
+            });
+        }
         const passwordMatch = await bcrypt.compare(req.body.password,userExists.password);
         if(!passwordMatch){
             res.send({
