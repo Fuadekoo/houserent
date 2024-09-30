@@ -37,10 +37,10 @@ const bookingRoom = async (req, res) => {
             totalPayment:totalPaymentAmount
           });
          await newBooking.save();
-         res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+        return res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
 
     } catch (error) {
-        res.status(500).json({ message: "Internal server error", success: false, data: error.message });
+        return res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
 };
 
@@ -50,9 +50,9 @@ const myBookings = async (req, res) => {
     try {
         const bookings = await Booking.find({ user: userId }).populate("house");
         
-        res.status(200).json({ message: "Bookings retrieved successfully", success: true, data: bookings });
+        return res.status(200).json({ message: "Bookings retrieved successfully", success: true, data: bookings });
     } catch (error) {
-        res.status(500).json({ message: "Internal server error", success: false, data: error.message });
+        return res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
 };
 
