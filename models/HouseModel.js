@@ -18,6 +18,15 @@ const houseSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  housecategory:{
+    type:String,
+    enum: ['Apartama', 'Villa', 'Condominium','compound house','single house'],
+    required:true
+  },
+  description:{
+    type:String,
+    required:true
+  },
   rentPerMonth: {
     type: String,
     required: true

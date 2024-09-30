@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert2';
 
 function MyaddRoom() {
     const [rooms, setRooms] = useState([]);
@@ -44,13 +45,31 @@ function MyaddRoom() {
             if (response.data.success) {
                 // Remove the deleted room from the state
                 setRooms(rooms.filter(room => room._id !== roomId));
-                alert('Room deleted successfully');
+                // alert('Room deleted successfully');
+                swal.fire({
+                    icon: 'success',
+                    title: 'Room deleted successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
             } else {
-                alert(response.data.message);
+                swal.fire({
+                    icon: 'error',
+                    title: 'Failed to Delete room.',
+                    text: error.response?.data?.message || 'An error occurred',
+                    timer: 3000,
+                  });
+                // alert(response.data.message);
             }
         } catch (error) {
             console.error('Failed to delete room:', error);
-            alert('Verify home is not delete');
+            swal.fire({
+                icon: 'error',
+                title: 'Verify home is not delete',
+                text: error.response?.data?.message || 'An error occurred',
+                timer: 3000,
+              });
+            // alert('Verify home is not delete');
         }
     };
 

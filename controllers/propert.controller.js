@@ -5,14 +5,20 @@ const classModel = require("../models/HouseModel");
 const addRoom = async (req, res) => {
     // Access the user ID from the request object
     const { userId: ownerUser } = req.user;
-    const {image, address, floorLevel, houseNumber, rentPerMonth} = req.body;
+    const {image, address, floorLevel, houseNumber,housecategory,description,rentPerMonth} = req.body;
   try {
       // Check if the owner user exists
       const checkUser = await users.findOne({ _id: ownerUser ,role:"landlord"});
       // const checkUser = await users.findOne({ _id: ownerUser});
       if (!checkUser) {
-          return res.status(400).json({ message: "The user does not exist or you are not 'landlord'", success: false, data: null });
+          return res.status(400).json({ message: "you are not 'landlord'", success: false, data: null });
       }
+      if (description.length > 50) {
+        return res.status(400).json({ message: "Description is too long", success: false, data: null });
+      }
+
+
+
 
       // assign to admin price 10% of the price of the room
       const AdminPrice = rentPerMonth * 0.02 * 6;
@@ -23,6 +29,8 @@ const addRoom = async (req, res) => {
              houseNumber:houseNumber, 
              rentPerMonth:rentPerMonth,
           AdminPrice: AdminPrice,
+          housecategory:housecategory,
+          description:description,
           ownerUser: ownerUser
       };
           try {

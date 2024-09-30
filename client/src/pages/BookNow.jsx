@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { Spin, DatePicker, Button, Form, message } from 'antd';
-
+import { Spin, DatePicker, Button, Form, message, Checkbox } from 'antd';
+import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 
 const { RangePicker } = DatePicker;
@@ -13,12 +13,9 @@ function BookNow() {
   const [loading, setLoading] = useState(true);
   const [fromTime, setFromTime] = useState();
   const [toTime, setToTime] = useState();
-
   const [totalDays, setTotalDays] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
-
-
-
+  const [isChecked, setIsChecked] = useState(false); // State for checkbox
 
   useEffect(() => {
     const fetchHouseDetails = async () => {
@@ -40,61 +37,86 @@ function BookNow() {
     fetchHouseDetails();
   }, [id]);
 
-    // Handle time slot selection
+  // Handle time slot selection
   function selectedTimeSlot(values) {
     const from = values[0].format('MMM DD YYYY HH:mm');
     const to = values[1].format('MMM DD YYYY HH:mm');
-    // const diffDays = values[1].diff(values[0], 'days');
     const diffDays = values[1].diff(values[0], 'days');
 
     setFromTime(from);
     setToTime(to);
     setTotalDays(diffDays);
   }
-  //////////////////////////////////////////////////////////////////////////
-   useEffect(() => {
+
+  useEffect(() => {
     if (houseDetails) {
       const rentPerDay = houseDetails.rentPerMonth / 30;
       setTotalPayment(totalDays * rentPerDay);
     }
   }, [totalDays, houseDetails]);
 
-  /////////////////////////////////////////////////////////////////////////
-
   const handleBooking = async () => {
-     if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
-      alert('Please select valid booking details');
+    if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
+      // alert('Please select valid booking details');
+      swal.fire({
+        icon: 'error',
+        title: 'Please select valid booking details',
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     }
-  const bookingData = {
-    totalPayment,
-    bookedTime: { fromTime, toTime },
-    totalDays,  // Change this to match backend
-   };
+    const bookingData = {
+      totalPayment,
+      bookedTime: { fromTime, toTime },
+      totalDays,
+    };
 
     try {
-    
-       const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${id}`, 
-      bookingData, {
+      const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${id}`, 
+        bookingData, {
         headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
         },
       });
 
       if (response.data.success) {
-        message.success('House booked successfully');
+        // message.success('House booked successfully');
+        swal.fire({
+          icon: 'success',
+          title: response.data.message || 'House booked successfully',
+          showConfirmButton: false,
+          timer: 1500
+        });
       } else {
-        message.error(response.data.message);
+        // message.error(response.data.message);
+        swal.fire({
+          icon: 'error',
+          title: response.data.message || 'Failed to book house',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
-        message.error(error.response.data.message);
+        // message.error(error.response.data.message);
+        swal.fire({
+          icon: 'error',
+          title: error.response.data.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
       } else {
-        message.error('Failed to book house');
+        // message.error('Failed to book house');
+        swal.fire({
+          icon: 'error',
+          title: 'Failed to book house',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     }
   };
-
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -121,6 +143,7 @@ function BookNow() {
                 <p className="mb-2">Floor Level: {houseDetails.floorLevel}</p>
                 <p className="mb-2">House Number: {houseDetails.houseNumber}</p>
                 <p className="mb-2">Rent Per Month: {houseDetails.rentPerMonth} birr</p>
+                <p className="mb-2">description: {houseDetails.description}</p>
                 <Form layout="vertical" onFinish={handleBooking}>
                   <Form.Item label="Select Booking Time" required>
                     <RangePicker
@@ -130,7 +153,20 @@ function BookNow() {
                       className="w-full"
                     />
                   </Form.Item>
-                  <Button type="primary" htmlType="submit" className="w-full">
+                  <Form.Item>
+                    <Checkbox
+                      checked={isChecked}
+                      onChange={(e) => setIsChecked(e.target.checked)}
+                    >
+                      I agree to the terms and conditions
+                    </Checkbox>
+                  </Form.Item>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="w-full"
+                    disabled={!isChecked} // Disable button if checkbox is not checked
+                  >
                     Book Now
                   </Button>
                 </Form>

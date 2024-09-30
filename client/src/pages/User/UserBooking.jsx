@@ -1,6 +1,7 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { FaClock } from 'react-icons/fa'; // Import the clock icon from react-icons
 
 const UserBooking = () => {
   const [bookings, setBookings] = useState([]);
@@ -97,9 +98,10 @@ const UserBooking = () => {
               <p>Rent Per Month: {booking.house.rentPerMonth}</p>
               <p>From: {new Date(booking.bookedTime.fromTime).toLocaleString()}</p>
               <p>To: {new Date(booking.bookedTime.toTime).toLocaleString()}</p>
-              <button className="text-lg font-bold bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition duration-300 ease-in-out shadow-md">
-                Remaining Time: {remainingTimes[booking._id]}
-              </button>
+              <button className="flex items-center text-lg font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-md hover:from-purple-600 hover:to-pink-600 transition duration-300 ease-in-out shadow-md">
+  <FaClock className="mr-2" /> {/* Add the clock icon with some margin to the right */}
+  Remaining Time: {remainingTimes[booking._id]}
+</button>
             </div>
           ))}
         </div>

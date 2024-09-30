@@ -38,6 +38,7 @@ const bookingRoom = async (req, res) => {
           });
          await newBooking.save();
          res.status(200).json({ message: "House booked successfully", success: true, data: newBooking });
+
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
     }
