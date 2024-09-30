@@ -120,7 +120,7 @@ const getSingleHouse = async (req, res) => {
     res.status(500).json({ message: error.message, success: false, data: null });
   }
 }
-
+///////////////////////////
 // room the landloard is posts
 const ownerRoom = async (req, res) => {
   const { userId} = req.user; // Assuming req.user is set by your auth middleware
@@ -142,6 +142,7 @@ const ownerRoom = async (req, res) => {
 };
 
 
+
 // deleteRoom when only the active is false 
 const deleteRoom = async (req, res) => {
   const { id } = req.params;
@@ -160,6 +161,27 @@ const deleteRoom = async (req, res) => {
   }
 }
 
+
+const ownerEditRoom = async (req, res) => {
+  const { id } = req.params;
+  const {rentPerMonth }= req.body
+
+  try {
+    const updatehouse = await classModel.findOne({ _id: id});
+    if (!updatehouse) {
+      return res.status(404).json({ message: 'Class not found' });
+    }
+    updatehouse.rentPerMonth = rentPerMonth;
+
+    await updatehouse.save();
+    res.send("The Class information is successfully updated");
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error updating class information' });
+  }
+};
+
+
 module.exports = { addRoom,
                     getBlockHouse,
                     getSingleHouse,
@@ -167,4 +189,5 @@ module.exports = { addRoom,
                     getActiveHouse , 
                     blockRoom,
                     deleteRoom,
-                    usergetHouses};
+                    usergetHouses,
+                    ownerEditRoom};

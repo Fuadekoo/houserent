@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
+import { Link } from 'react-router-dom';
 import swal from 'sweetalert2';
 
 function MyaddRoom() {
@@ -28,10 +29,9 @@ function MyaddRoom() {
         fetchRooms();
     }, []);
 
-    const handleEdit = (roomId) => {
-        // Implement edit functionality here
-        console.log(`Edit room with ID: ${roomId}`);
-    };
+    if(rooms.length === 0){
+        return <div> <p>the user has no room yet</p></div>
+    }
 
     const handleDelete = async (roomId) => {
         try {
@@ -115,13 +115,18 @@ function MyaddRoom() {
                             </div>
                             
                             <div className="absolute top-4 right-4 flex space-x-2">
-                            <FaUser className="mr-1" />
-                                <button
-                                    onClick={() => handleEdit(room._id)}
-                                    className="text-blue-500 hover:text-blue-700 transition duration-300"
-                                >
+
+                           {/* the link to all the booked user information  */}
+                            <Link to={`/roomsBookedUser/${room._id}`}                               >
+                                    <FaUser className="mr-1" /> 
+                            </Link>
+                            
+                           {/* the link to editRoom info  */}
+                            <Link  className="text-blue-500 hover:text-blue-700 transition duration-300" 
+                                    to={`/editOwnerHouseInfo/${room._id}`}                                 >
                                     <FaEdit />
-                                </button>
+                            </Link>
+
                                 <button
                                     onClick={() => handleDelete(room._id)}
                                     className="text-red-500 hover:text-red-700 transition duration-300"

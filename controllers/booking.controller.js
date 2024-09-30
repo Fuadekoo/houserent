@@ -57,6 +57,32 @@ const myBookings = async (req, res) => {
 };
 
 
+// Fetch all users who booked a particular room
+
+// Fetch all users who booked a particular room
+const getBookedUsersForRoom = async (req, res) => {
+  const { houseId } = req.params;
+
+  try {
+    // Find bookings for the given houseId and populate the user information
+    const bookings = await Booking.find({ house: houseId }).populate('user'); // Fetch user details
+
+    if (!bookings || bookings.length === 0) {
+      return res.status(404).json({ message: 'No bookings found for this house.', success: false });
+    }
+
+    res.status(200).json({ message: 'Bookings retrieved successfully', success: true, data: bookings });
+  } catch (error) {
+    res.status(500).json({ message: 'Error retrieving bookings', success: false, error: error.message });
+  }
+};
 
 
-module.exports = { bookingRoom,myBookings };
+
+
+
+
+
+module.exports = { bookingRoom,myBookings ,getBookedUsersForRoom};
+
+

@@ -1,6 +1,6 @@
 const express = require("express")
 const bookingRouter=express.Router();
-const {bookingRoom,myBookings } =require('../controllers/booking.controller');
+const {bookingRoom,myBookings ,getBookedUsersForRoom } =require('../controllers/booking.controller');
 const authMiddleware = require("../middlewares/authMiddleware");
 const bookingfeeMiddleware = require("../middlewares/bookfeeMiddleware");
 const commisionfeeMIddleware = require("../middlewares/commisionfeeMIddleware");
@@ -13,5 +13,9 @@ bookingRouter.post('/booking/:houseId',authMiddleware,bookfeeMiddleware,bookingR
 
 // get my bookings route
 bookingRouter.get('/mybookings',authMiddleware,myBookings);
+
+bookingRouter.get('/roomsBookedUser/:houseId',authMiddleware,getBookedUsersForRoom);
+
+
 
 module.exports=bookingRouter;
