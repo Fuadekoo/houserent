@@ -17,7 +17,7 @@ function DefaultLayout({ children }) {
   ];
 
   const landlordMenu = [
-    { name: "Home", path: "/", icon: "ri-home-line" },
+    { name: "Home", path: "/myhome", icon: "ri-home-line" },
     { name: "PostHouses", path: "/addroom", icon: "ri-home-2-line" },
     { name: "myroom", path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },

@@ -41,7 +41,7 @@ function App() {
     <BrowserRouter >
   {/* <Header /> */}
   <Routes>
-    <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
+    <Route path="/myhome" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
     {/* the tenants and the landloards are pay for the deposite  */}
     <Route path="/paynow" element={<ProtectedRoute><Paydonate/></ProtectedRoute>}/>
     <Route path="/thanks" element={<ProtectedRoute><Thanks/></ProtectedRoute>}/>
@@ -83,7 +83,7 @@ function App() {
 
     {/* route for guests */}
     <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
-    <Route path="/contact" element={<PublicRoute><Contact/></PublicRoute>}/>
+    <Route path="/" element={<PublicRoute><Contact/></PublicRoute>}/>
     <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
     <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/> 
     
