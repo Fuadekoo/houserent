@@ -1,6 +1,6 @@
 const express = require("express")
 const houseRouter=express.Router();
-const {addRoom,getSingleHouse,ownerRoom ,blockRoom, getActiveHouse,getBlockHouse,deleteRoom} =require('../controllers/propert.controller');
+const {addRoom,getSingleHouse,ownerRoom ,blockRoom, getActiveHouse,getBlockHouse,deleteRoom , ownerEditRoom} =require('../controllers/propert.controller');
 const authMiddleware = require("../middlewares/authMiddleware");
 const roomPostFeeMiddleware = require("../middlewares/roomPostFeeMiddleware");
 
@@ -32,6 +32,7 @@ houseRouter.get('/myaddroom',authMiddleware,ownerRoom);
 
 houseRouter.patch('/blockRoom/:id' ,blockRoom);
 
+houseRouter.put('/owner-edit-room/:id', ownerEditRoom);
 
 
 module.exports=houseRouter;

@@ -24,6 +24,8 @@ import PaymentFailed from "./pages/Deposit/PaymentFailed.jsx";
 import DepositDisplay from "./pages/DepositDisplay";
 import BlockedHouse from "./pages/Admin/BlockedHouse";
 import MyaddRoom from "./pages/landloards/MyaddRoom";
+import Edithouse from "./pages/landloards/Edithouse.jsx";
+import HouseBookedUser from "./pages/landloards/HouseBookedUser.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -38,7 +40,10 @@ function App() {
     <Route path="/thanks" element={<ProtectedRoute><Thanks/></ProtectedRoute>}/>
     <Route path="/payment-fail" element={<ProtectedRoute><PaymentFailed/></ProtectedRoute>}/>
     <Route path="/mydeposit" element={<ProtectedRoute><DepositDisplay/></ProtectedRoute>}/>
+    <Route path="/editOwnerHouseInfo/:id" element={<ProtectedRoute><Edithouse/></ProtectedRoute>}/>
 
+
+    <Route path="/roomsBookedUser/:houseId" element={<ProtectedRoute><HouseBookedUser/></ProtectedRoute>}/>
 
 
 
