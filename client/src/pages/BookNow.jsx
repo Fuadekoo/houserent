@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Spin, DatePicker, Button, Form, message, Checkbox } from 'antd';
-
+import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 
 const { RangePicker } = DatePicker;
@@ -57,7 +57,13 @@ function BookNow() {
 
   const handleBooking = async () => {
     if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
-      alert('Please select valid booking details');
+      // alert('Please select valid booking details');
+      swal.fire({
+        icon: 'error',
+        title: 'Please select valid booking details',
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     }
     const bookingData = {
@@ -75,15 +81,39 @@ function BookNow() {
       });
 
       if (response.data.success) {
-        message.success('House booked successfully');
+        // message.success('House booked successfully');
+        swal.fire({
+          icon: 'success',
+          title: response.data.message || 'House booked successfully',
+          showConfirmButton: false,
+          timer: 1500
+        });
       } else {
-        message.error(response.data.message);
+        // message.error(response.data.message);
+        swal.fire({
+          icon: 'error',
+          title: response.data.message || 'Failed to book house',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
-        message.error(error.response.data.message);
+        // message.error(error.response.data.message);
+        swal.fire({
+          icon: 'error',
+          title: error.response.data.message,
+          showConfirmButton: false,
+          timer: 1500
+        });
       } else {
-        message.error('Failed to book house');
+        // message.error('Failed to book house');
+        swal.fire({
+          icon: 'error',
+          title: 'Failed to book house',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     }
   };

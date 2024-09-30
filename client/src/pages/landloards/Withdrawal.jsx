@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import swal from 'sweetalert2';
 
 const WithdrawalForm = () => {
   const [amount, setAmount] = useState('');
@@ -22,10 +23,22 @@ const WithdrawalForm = () => {
         }
       );
 
-      setMessage(response.data.message);
-      
+      // setMessage(response.data.message);
+      swal.fire({
+        icon: 'success',
+        title: response.data.message|| 'WITHDREWAL IN PROGRESS',
+        showConfirmButton: false,
+        timer: 1500
+      });
+
     } catch (error) {
-      setMessage(error.response.data.message || 'An error occurred');
+      swal.fire({
+        icon: 'error',
+        title: error.response?.data?.message || 'An error occurred',
+        text: error.response?.data?.message || 'An error occurred',
+        timer: 3000,
+      });
+      // setMessage(error.response.data.message || 'An error occurred');
     }
   };
 

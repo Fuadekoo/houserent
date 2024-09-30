@@ -67,16 +67,16 @@ function AddRoom() {
         showConfirmButton: false,
         timer: 1500
       });
-      alert('Room added successfully!');
+
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       swal.fire({
         icon: 'error',
         title: 'Failed to add room.',
         text: error.response?.data?.message || 'An error occurred',
         timer: 3000,
       });
-      alert('Failed to add room.');
+
     }
   };
 
@@ -170,7 +170,7 @@ function AddRoom() {
               required
             />
           </div>
-          
+
           <div className="mb-4">
             <label className="block text-gray-700">Rent Per Month</label>
             <input

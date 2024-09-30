@@ -20,6 +20,11 @@ const withdrew = async (req, res) => {
             return res.status(404).json({ message: 'User not found or you are not a landlord' });
         }
 
+        // check the minimum withddrew is 1000 
+        if(amount<1000){
+            return res.status(404).json({ message: 'Minimum withdraw is 1000 ETB' });
+        }
+
         // Check if the user has sufficient balance
         if (checkUser.balance < amount) {
             return res.status(400).json({ message: 'Insufficient balance' });
