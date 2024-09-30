@@ -37,18 +37,18 @@ const addRoom = async (req, res) => {
     const check = await classModel.findOne({ image: image });
 
     if (check) {
-      return res.json("exist");
+      res.json("exist");
     } else {
-      return res.json("notexist");
+      res.json("notexist");
       await classModel.insertMany([data]);  // Save to the "allclass" collection
     }
   } catch (e) {
-    return res.json("fail");
+    res.json("fail");
   }
 
      // res.status(200).json({ message: "Room created successfully", success: true, data: data });
   } catch (error) {
-      return res.status(500).json({ message: error.message, success: false, data: null });
+      res.status(500).json({ message: error.message, success: false, data: null });
   }
 };
 
@@ -64,9 +64,9 @@ const getBlockHouse = async (req, res) => {
 const usergetHouses = async (req, res) => {
   try {
     const houses = await classModel.find(); // Fetch blocked houses
-    return res.status(200).json({ message: "Blocked houses retrieved successfully", success: true, data: houses });
+    res.status(200).json({ message: "Blocked houses retrieved successfully", success: true, data: houses });
   } catch (error) {
-    return res.status(500).json({ message: error.message, success: false, data: null });
+    res.status(500).json({ message: error.message, success: false, data: null });
   }
 };
 
@@ -74,9 +74,9 @@ const usergetHouses = async (req, res) => {
 const getActiveHouse = async (req, res) => {
   try {
     const houses = await classModel.find({ active: true  }); // Fetch active houses
-    return res.status(200).json({ message: "Active houses retrieved successfully", success: true, data: houses });
+    res.status(200).json({ message: "Active houses retrieved successfully", success: true, data: houses });
   } catch (error) {
-    return res.status(500).json({ message: error.message, success: false, data: null });
+    res.status(500).json({ message: error.message, success: false, data: null });
   }
 };
 
@@ -98,9 +98,9 @@ const blockRoom = async (req, res) => {
         // Update the user with the new blocked status
         const updatedRoom = await classModel.findByIdAndUpdate(id, { active: newBlockedStatus }, { new: true });
 
-        return res.status(200).json({ message: "User status updated successfully", room: updatedRoom });
+        res.status(200).json({ message: "User status updated successfully", room: updatedRoom });
     } catch (error) {
-        // console.error("Error updating user status:", error);
+        console.error("Error updating user status:", error);
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
@@ -115,9 +115,9 @@ const getSingleHouse = async (req, res) => {
     if (!house) {
       return res.status(404).json({ message: "House not found", success: false, data: null });
     }
-    return res.status(200).json({ message: "House retrieved successfully", success: true, data: house });
+    res.status(200).json({ message: "House retrieved successfully", success: true, data: house });
   } catch (error) {
-    return res.status(500).json({ message: error.message, success: false, data: null });
+    res.status(500).json({ message: error.message, success: false, data: null });
   }
 }
 
@@ -134,10 +134,10 @@ const ownerRoom = async (req, res) => {
     }
 
     // Send the found rooms
-    return res.status(200).json({ message: "Rooms retrieved successfully", success: true, data: myroom });
+    res.status(200).json({ message: "Rooms retrieved successfully", success: true, data: myroom });
   } catch (error) {
     // Send error response in case of any issue
-    return res.status(500).json({ message: "Error retrieving rooms", success: false, error: error.message });
+    res.status(500).json({ message: "Error retrieving rooms", success: false, error: error.message });
   }
 };
 
