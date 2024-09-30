@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
 
 const houseSchema = new mongoose.Schema({
-  image: [{
+  image:[ {
     type: String,
     required: true
-  }],
+  },
+],
   address: {
     type: String,
     required: true
@@ -39,9 +40,9 @@ const houseSchema = new mongoose.Schema({
     ref: 'users', // Reference to the User model
     required: true
   },
-  active: {
-    type: Boolean,
-    default: false
+  active:{
+    type:Boolean,
+    default:false
   }
 });
 

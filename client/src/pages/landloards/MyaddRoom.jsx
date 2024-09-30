@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
 
 function MyaddRoom() {
@@ -45,25 +44,13 @@ function MyaddRoom() {
             if (response.data.success) {
                 // Remove the deleted room from the state
                 setRooms(rooms.filter(room => room._id !== roomId));
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Deleted!',
-                    text: 'Room deleted successfully',
-                });
+                alert('Room deleted successfully');
             } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: response.data.message,
-                });
+                alert(response.data.message);
             }
         } catch (error) {
             console.error('Failed to delete room:', error);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error!',
-                text: 'Failed to delete room',
-            });
+            alert('Verify home is not delete');
         }
     };
 

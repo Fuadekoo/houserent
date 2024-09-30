@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Spin, DatePicker, Button, Form, message, Checkbox } from 'antd';
-import Swal from 'sweetalert2';
 
 import 'tailwindcss/tailwind.css';
 
@@ -58,7 +57,7 @@ function BookNow() {
 
   const handleBooking = async () => {
     if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
-      Swal.fire('Error', 'Please select valid booking details', 'error');
+      alert('Please select valid booking details');
       return;
     }
     const bookingData = {

@@ -56,7 +56,7 @@ function DefaultLayout({ children }) {
         </div>
 
         {/* User Role */}
-        <div className='mb-4 text-xl font-bold text-red-950'>
+        <div className='mb-4 text-xl font-bold text-white'>
           {user?.isAdmin ? 'Admin' : user?.role === 'landlord' ? 'Landlord' : 'Tenant'}
         </div>
 
