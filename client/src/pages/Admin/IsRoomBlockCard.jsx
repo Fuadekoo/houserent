@@ -52,7 +52,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
             <CardFooter className="pt-0">
                 <Button
                     color="blue"
-                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-blue-700"
+                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-green-800 bg-zinc-600 mb-2"
                 >
                     <Link to={`/booking/${house._id}`}>More Info</Link>
                 </Button>
@@ -60,7 +60,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 <Button
                     onClick={handleBlock}
                     color={house.active ? 'red' : 'green'} // Conditional color for Block/Unblock
-                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-gray-700"
+                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-red-700 bg-red-400"
                 >
                     {house.active ? 'Block' : 'Unblock'} {/* Conditional text based on "active" */}
                 </Button>

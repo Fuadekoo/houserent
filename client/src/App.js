@@ -25,6 +25,11 @@ import DepositDisplay from "./pages/DepositDisplay";
 import BlockedHouse from "./pages/Admin/BlockedHouse";
 import MyaddRoom from "./pages/landloards/MyaddRoom";
 import Withdrawal from "./pages/landloards/Withdrawal";
+import Dashboard from "./pages/Admin/Dashboard";
+import About from "./pages/guest/About.jsx";
+import Contact from "./pages/guest/Contact.jsx";
+import Service from "./pages/guest/Service.jsx";
+import Navbar from "./pages/guest/Navbar.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -61,13 +66,19 @@ function App() {
     <Route path="/admin/home" element={<ProtectedRoute><AdminHome/></ProtectedRoute>}/>
     <Route path="/admin/allusers" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
     <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
+    <Route path="/Dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
  
     {/* route all user  */}
     <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>
     <Route path="/Login" element={<PublicRoute><Login/></PublicRoute>}/>
     <Route path="/balance" element={<ProtectedRoute><Wallet/></ProtectedRoute>}/>
     <Route path="/Profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
-   
+
+    {/* route for guests */}
+    <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
+    <Route path="/contact" element={<PublicRoute><Contact/></PublicRoute>}/>
+    <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
+    <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/> 
     
     </Routes>
     </BrowserRouter>

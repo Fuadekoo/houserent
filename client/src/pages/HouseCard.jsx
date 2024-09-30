@@ -38,11 +38,10 @@ const HouseCard = ({ house }) => {
             <CardFooter className="pt-0">
                 <Button 
                     color="blue" 
-                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-blue-700"
+                    className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-green-700 bg-zinc-600"
                 >
                     <Link to={`/booking/${house._id}`}>More Info</Link>
                 </Button>
-
             </CardFooter>
         </Card>
     );

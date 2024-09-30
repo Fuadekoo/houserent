@@ -26,6 +26,7 @@ function DefaultLayout({ children }) {
   ];
 
   const adminMenu = [
+    { name: "Dashboard", path: "/Dashboard", icon: "ri-dashboard-line" },
     { name: "Home", path: "/admin/home", icon: "ri-home-line" },
     { name: "AllUsers",path:"/admin/allusers",icon:"ri-file-list-line"},
     { name: "BlockedHouses",path:"/admin/blockedhouses",icon:"ri-file-list-line"}, 
