@@ -92,7 +92,7 @@ router.post("/login",async(req,res)=>{
     try {
         const userExists = await User.findOne({phone:req.body.phone});
         if(!userExists){
-            res.send({
+            return res.send({
                 message:"user doesn`t exist",
                 success:false,
                 data:null,
@@ -101,7 +101,7 @@ router.post("/login",async(req,res)=>{
 
         // check user is blocked
         if(userExists.isBlocked){
-            res.send({
+            return res.send({
                 message:"your account is blocked by administrator",
                 success:false,
                 data:null,
@@ -109,7 +109,7 @@ router.post("/login",async(req,res)=>{
         }
         const passwordMatch = await bcrypt.compare(req.body.password,userExists.password);
         if(!passwordMatch){
-            res.send({
+            return res.send({
                 message:"incorrect password",
                 success:false,
                 data:null,
@@ -123,7 +123,7 @@ router.post("/login",async(req,res)=>{
         {expiresIn:"1d",});
 
 
-        res.send({
+        return res.send({
             message:"user logged  in successfully",
             success:true,
             data:token,
@@ -132,7 +132,6 @@ router.post("/login",async(req,res)=>{
 
 
     } catch (error) {
-        console.error('Error during login:', error);
         return res.status(500).send({
             message: "An error occurred during login",
             success: false,
