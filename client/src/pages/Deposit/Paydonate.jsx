@@ -50,21 +50,20 @@ function Paydonate() {
     const public_key = "CHAPUBK_TEST-MpebGxPZFUjHLlRuyxzZxF7QQtW1Vy6p";
 
     return (
-        <div className="flex flex-col items-center bg-whitesmoke min-h-screen py-10">
-            <div className="flex flex-col items-center bg-white shadow-lg rounded-lg p-8 w-full max-w-md animate-fadeIn">
-                {/* <h2 className="text-2xl font-bold mb-4">Donate</h2> */}
+        <div style={{ alignItems: 'center', backgroundColor: 'whitesmoke' }}>
+            <center style={{ display: 'flex', marginLeft: '30%', flexDirection: 'column', width: '50%', alignContent: 'center', textAlign: 'center' }}>
+                {/* <label>Fname</label>
+                <input type='text' value={fname} onChange={(e) => setFname(e.target.value)} />
                 
-                <label className="text-left w-full mb-2">Amount</label>
-                <input 
-                    type='number' 
-                    value={amount} 
-                    onChange={(e) => setAmount(e.target.value)} 
-                    className="w-full p-2 mb-4 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-                />
+                <label>Email</label>
+                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} /> */}
                 
-                <Pay fname={fname} email={email} amount={amount} tx_ref={tx_ref} public_key={public_key} />
-                {/* <p className="mt-4 text-gray-600">Current Balance:</p> */}
-            </div>
+                <label>Amount</label>
+                <input type='number' value={amount} onChange={(e) => setAmount(e.target.value)} />
+            </center>
+
+            <Pay fname={fname} email={email} amount={amount} tx_ref={tx_ref} public_key={public_key} />
+            <p>Current Balance:</p>
         </div>
     );
 }

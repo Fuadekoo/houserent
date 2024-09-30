@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function DefaultLayout({ children }) {
@@ -26,10 +26,12 @@ function DefaultLayout({ children }) {
   ];
 
   const adminMenu = [
-    { name: "Home", path: "/", icon: "ri-home-line" },
+    { name: "Dashboard", path: "/Dashboard", icon: "ri-dashboard-line" },
+    { name: "Home", path: "/admin/home", icon: "ri-home-line" },
     { name: "AllUsers",path:"/admin/allusers",icon:"ri-file-list-line"},
-    { name: "AllpostHouses",path:"/admin/allposthouses",icon:"ri-file-list-line"}, 
+    { name: "BlockedHouses",path:"/admin/blockedhouses",icon:"ri-file-list-line"}, 
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
+    { name: "withdraw Confirmation", path: "/withdrawConfirm", icon: "ri-wallet-3-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
   ];
@@ -47,11 +49,11 @@ function DefaultLayout({ children }) {
 
   return (
     <div className='flex h-screen bg-gray-200'>
-      <div className={`bg-blue-500 transition-all duration-200 ease-in-out ${collapsed ? 'w-16' : 'w-64'} p-4 rounded`}>
+      <div className={`bg-zinc-800 transition-all duration-200 ease-in-out ${collapsed ? 'w-16' : 'w-64'} p-4 rounded`}>
         {/* Hamburger menu */}
         <div className="flex justify-end">
           <button className='flex flex-col w-10 h-10 justify-around mb-4 right-1' onClick={() => { setCollapsed(!collapsed) }}>
-            {collapsed ? (<i className="ri-menu-2-fill text-2xl"></i>) : (<i className="ri-close-line text-2xl"></i>)}
+            {collapsed ? (<i className="ri-menu-2-fill text-2xl text-white"></i>) : (<i className="ri-close-line text-2xl text-white"></i>)}
           </button>
         </div>
 
@@ -64,7 +66,7 @@ function DefaultLayout({ children }) {
         {menuToBeRendered.map((item, index) => {
           const isActive = activePath === item.path;
           return (
-            <div key={index} className={`mb-3 flex items-center space-x-2 cursor-pointer p-2 rounded text-white w-full transition duration-200 ease-in-out transform hover:scale-105 ${isActive ? 'bg-green-600' : 'bg-blue-700 hover:bg-blue-600'}`} onClick={() => {
+            <div key={index} className={`mb-3 flex items-center space-x-2 cursor-pointer p-2 rounded text-white w-full transition duration-200 ease-in-out transform hover:scale-105 ${isActive ? 'bg-green-600' : 'bg-stone-500 hover:bg-blue-600'}`} onClick={() => {
               if (item.path === "/logout") {
                 console.log("logout successfully");
                 localStorage.removeItem("token");
@@ -84,6 +86,13 @@ function DefaultLayout({ children }) {
           {/* Header */}
           <div className='flex justify-between items-center bg-white rounded p-4'>
             <h1 className='text-2xl font-bold'>houserent system</h1>
+            <Link to='/profile'>  
+        {user ? (
+          <img className='rounded-full h-10 w-10 object-cover' src={user.avatar} alt='profile'/>
+        ):(
+          <li className=' text-slate-700 hover:underline'>Sign in</li>
+      )}     
+       </Link>
             <h2 className='text-xl'>{user?.name}</h2>
           </div>
           {/* Body */}

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrash } from 'react-icons/fa';
+import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
+import { Link } from 'react-router-dom';
+import swal from 'sweetalert2';
 
 function MyaddRoom() {
     const [rooms, setRooms] = useState([]);
@@ -27,14 +29,48 @@ function MyaddRoom() {
         fetchRooms();
     }, []);
 
-    const handleEdit = (roomId) => {
-        // Implement edit functionality here
-        console.log(`Edit room with ID: ${roomId}`);
-    };
+    if(rooms.length === 0){
+        return <div> <p>the user has no room yet</p></div>
+    }
 
-    const handleDelete = (roomId) => {
-        // Implement delete functionality here
-        console.log(`Delete room with ID: ${roomId}`);
+    const handleDelete = async (roomId) => {
+        try {
+            const token = localStorage.getItem('token'); // Adjust the token retrieval method as necessary
+            const response = await axios.delete(`http://localhost:5000/api/property/deleteroom/${roomId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.data.success) {
+                // Remove the deleted room from the state
+                setRooms(rooms.filter(room => room._id !== roomId));
+                // alert('Room deleted successfully');
+                swal.fire({
+                    icon: 'success',
+                    title: 'Room deleted successfully!',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            } else {
+                swal.fire({
+                    icon: 'error',
+                    title: 'Failed to Delete room.',
+                    text: error.response?.data?.message || 'An error occurred',
+                    timer: 3000,
+                  });
+                // alert(response.data.message);
+            }
+        } catch (error) {
+            console.error('Failed to delete room:', error);
+            swal.fire({
+                icon: 'error',
+                title: 'Verify home is not delete',
+                text: error.response?.data?.message || 'An error occurred',
+                timer: 3000,
+              });
+            // alert('Verify home is not delete');
+        }
     };
 
     if (loading) {
@@ -70,14 +106,27 @@ function MyaddRoom() {
                                 <p>Floor Level: {room.floorLevel}</p>
                                 <p>House Number: {room.houseNumber}</p>
                                 <p>Rent Per Month: {room.rentPerMonth}</p>
+                                <p>Room Status: {room.active ? 'Active' : 'Pending'}</p>
+                                {room.active ? (
+                                    <FaCheckCircle style={{ color: 'green' }} /> // Display verification icon if active
+                                ) : (
+                                    <FaClock style={{ color: 'orange' }} /> // Display pending icon if not active
+                                )}
                             </div>
+                            
                             <div className="absolute top-4 right-4 flex space-x-2">
-                                <button
-                                    onClick={() => handleEdit(room._id)}
-                                    className="text-blue-500 hover:text-blue-700 transition duration-300"
-                                >
+
+                           {/* the link to all the booked user information  */}
+                            <Link to={`/roomsBookedUser/${room._id}`}                               >
+                                    <FaUser className="mr-1" /> 
+                            </Link>
+                            
+                           {/* the link to editRoom info  */}
+                            <Link  className="text-blue-500 hover:text-blue-700 transition duration-300" 
+                                    to={`/editOwnerHouseInfo/${room._id}`}                                 >
                                     <FaEdit />
-                                </button>
+                            </Link>
+
                                 <button
                                     onClick={() => handleDelete(room._id)}
                                     className="text-red-500 hover:text-red-700 transition duration-300"

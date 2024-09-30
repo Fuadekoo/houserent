@@ -6,17 +6,20 @@ const { performTransaction } = require('../controllers/transaction.controller.js
 const HouseModel = require("../models/HouseModel.js");
 const mongoose = require('mongoose'); 
 
+
 dotenv.config();
 const app = express();
-const addRoomFee = 1000; // Set the add room fee
 
 // Middleware to validate the token
+//const bookfeeMiddleware = async (req, res, next) => {
 const bookfeeMiddleware = async (req, res, next) => {
     try {
         // Access the user ID from the request object
         const userId = req.user.userId;
         const { houseId } = req.params;
-        const { fromTime, toTime } = req.body;
+        // const { fromTime, toTime } = req.body;
+     const { totalPayment } = req.body;
+
 
         // Log the room ID for debugging
         console.log(`House ID: ${houseId}`);
@@ -37,19 +40,8 @@ const bookfeeMiddleware = async (req, res, next) => {
         }
 
         const owner = room.ownerUser.toString();
-        const bookPricepermonth = room.rentPerMonth;
-        const comision = room.AdminPrice;
 
-        // display the deference between thetime of booking start to end
-        const timeDiff = Math.abs(new Date(toTime) - new Date(fromTime));
-        // change to date the timediff
-        const diffDays = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
 
-        // change the rentpermonth to rent per day
-        const bookPriceperday = bookPricepermonth / 30;
-        
-        // calculate the total price of the room
-        const totalPrice = bookPriceperday * diffDays;
         console.log(`Owner: ${owner}`);
 
         // Find the receiver from userowner from rooms table column and id from allusers table is the same. whose role is landlord in alluser table
@@ -70,15 +62,28 @@ const bookfeeMiddleware = async (req, res, next) => {
         const transactionData = {
             sender: userId,
             receiver: receiverId,
-            amount: totalPrice,
+            amount: totalPayment,
             type: "local Transfer from person who book the room to the landlord",
             // Add other necessary fields...
         };
-
+      
         console.log(`Transaction Data: ${JSON.stringify(transactionData)}`);
+         console.log(" cont tot:", totalPayment);
+
 
         // Call the performTransaction function to perform the transaction
         const response = await performTransaction(transactionData);
+
+        console.log(`Transaction Response: ${JSON.stringify(response)}`);
+
+        // Check if the transaction was successful
+        if (!response || !response.success) {
+            return res.status(500).json({
+                message: "Transaction failed",
+                success: false,
+                data: response ? response.message : null
+            });
+        }
 
         console.log(`Transaction Response: ${JSON.stringify(response)}`);
 
@@ -97,6 +102,7 @@ const bookfeeMiddleware = async (req, res, next) => {
     } catch (error) {
         console.error(`Error in bookfeeMiddleware: ${error.message}`);
         res.status(500).json({
+            message: "Internal server error",
             message: "Internal server error",
             success: false,
             data: error.message,
