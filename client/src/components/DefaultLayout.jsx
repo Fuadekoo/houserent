@@ -31,6 +31,7 @@ function DefaultLayout({ children }) {
     { name: "AllUsers",path:"/admin/allusers",icon:"ri-file-list-line"},
     { name: "BlockedHouses",path:"/admin/blockedhouses",icon:"ri-file-list-line"}, 
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
+    { name: "withdraw Confirmation", path: "/withdrawConfirm", icon: "ri-wallet-3-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
   ];

@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema({
     },
     posstHouse: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Rooms'
+        ref: 'allclass'
     }],
     
 },{

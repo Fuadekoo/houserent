@@ -27,6 +27,7 @@ import MyaddRoom from "./pages/landloards/MyaddRoom";
 import Edithouse from "./pages/landloards/Edithouse.jsx";
 import HouseBookedUser from "./pages/landloards/HouseBookedUser.jsx";
 import Withdrawal from "./pages/landloards/Withdrawal";
+import withdrawConfirm from "./pages/Admin/WithdrewConfirm.jsx";
 import Dashboard from "./pages/Admin/Dashboard";
 import About from "./pages/guest/About.jsx";
 import Contact from "./pages/guest/Contact.jsx";
@@ -72,6 +73,7 @@ function App() {
     <Route path="/admin/allusers" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
     <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
     <Route path="/Dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+    <Route path="/withdrawConfirm" element={<ProtectedRoute><withdrawConfirm/></ProtectedRoute>}/>
  
     {/* route all user  */}
     <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>
