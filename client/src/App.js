@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader";
 import { useSelector } from "react-redux";
 import AdminHome from "./pages/Admin/AdminHome";
-import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import UserHome from "./pages/User/UserHome";
 import UserBooking from "./pages/User/UserBooking";
@@ -33,6 +32,7 @@ import About from "./pages/guest/About.jsx";
 import Contact from "./pages/guest/Contact.jsx";
 import Service from "./pages/guest/Service.jsx";
 import Navbar from "./pages/guest/Navbar.jsx";
+import GuestHome from "./pages/guest/GuestHome.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -41,7 +41,8 @@ function App() {
     <BrowserRouter >
   {/* <Header /> */}
   <Routes>
-    <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
+  {/* <Route path="/alluserhome" element={<PublicRoute><Home/></PublicRoute>}/> */}
+    <Route path="/myhome" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
     {/* the tenants and the landloards are pay for the deposite  */}
     <Route path="/paynow" element={<ProtectedRoute><Paydonate/></ProtectedRoute>}/>
     <Route path="/thanks" element={<ProtectedRoute><Thanks/></ProtectedRoute>}/>
@@ -83,7 +84,7 @@ function App() {
 
     {/* route for guests */}
     <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
-    <Route path="/contact" element={<PublicRoute><Contact/></PublicRoute>}/>
+    <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/>
     <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
     <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/> 
     

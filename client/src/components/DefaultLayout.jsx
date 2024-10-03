@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LanguageChange from "./LanguageChange";
 
 function DefaultLayout({ children }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function DefaultLayout({ children }) {
   ];
 
   const landlordMenu = [
-    { name: "Home", path: "/", icon: "ri-home-line" },
+    { name: "Home", path: "/myhome", icon: "ri-home-line" },
     { name: "PostHouses", path: "/addroom", icon: "ri-home-2-line" },
     { name: "myroom", path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
@@ -94,6 +95,7 @@ function DefaultLayout({ children }) {
       )}     
        </Link>
             <h2 className='text-xl'>{user?.name}</h2>
+            <LanguageChange />
           </div>
           {/* Body */}
           <div>
