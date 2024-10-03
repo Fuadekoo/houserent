@@ -21,8 +21,9 @@ const Login = () => {
         if(response.data.success){
           message.success(response.data.message);
           localStorage.setItem("token",response.data.data);
-          navigate("/");
+          
           dispatch(HideLoading());
+          navigate("/");
         }else{
           message.error(response.data.message);
           dispatch(HideLoading());

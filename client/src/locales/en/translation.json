@@ -1,4 +1,52 @@
 {
-    "welcome": "Welcome to our website",
-    "login": "Log In"
+  "admin": {
+    "adminhome":{},
+    "adminpayment":{},
+    "adminuser":{},
+    "blockedhouse":{},
+    "dashboard":{},
+    "isroomblockedcard":{},
+    "withdrewconfirm":{}
+  },
+
+  "guest": {
+    "navbar": {
+      "welcome": "Welcome",
+      "login": "Login"
+    }
+
+  },
+
+  "landloard": {
+    "addroom":{},
+    "customers":{},
+    "edithouse":{},
+    "housebookeduser":{},
+    "myaddroom":{},
+    "withdrawal":{}
+  },
+  "tenant": {
+    "balance":{},
+    "chapapayment":{},
+    "transactionhistory":{},
+    "userbooking":{},
+    "userhome":{},
+    "usernotification":{}
+  },
+  "components": {
+    "defaultlayout":{}
+  },
+
+  "common": {
+    "booknoow":{},
+    "depositdislay":{},
+    "deposithistory":{},
+    "home":{},
+    "housecard":{},
+    "login":{},
+    "profile":{},
+    "register":{},
+    "wallet":{}
   }
+
+}
