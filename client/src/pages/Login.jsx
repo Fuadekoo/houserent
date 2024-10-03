@@ -3,8 +3,13 @@ import { Form,message } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
 import axios from 'axios';
+import Loader from '../components/Loader';
 import { HideLoading, ShowLoading } from '../redux/alertsSlice';
+import LanguageChange from '../components/LanguageChange';
+import { useTranslation } from 'react-i18next';
 const Login = () => {
+  // const { Loading } = useSelector(state => state.alerts);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate(); 
     const onFinish = async (values) => {
@@ -52,7 +57,7 @@ const Login = () => {
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           type='submit'
         >
-          Login
+          {t('header.login')}
         </button>
       </Form>
       <div className='flex gap-2 mt-5'>

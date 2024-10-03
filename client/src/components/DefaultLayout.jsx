@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LanguageChange from "./LanguageChange";
 
 function DefaultLayout({ children }) {
   const navigate = useNavigate();
@@ -94,6 +95,7 @@ function DefaultLayout({ children }) {
       )}     
        </Link>
             <h2 className='text-xl'>{user?.name}</h2>
+            <LanguageChange />
           </div>
           {/* Body */}
           <div>

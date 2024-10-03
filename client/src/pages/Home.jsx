@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import HouseCard from './HouseCard';
+import Loading from '../components/Loader'; // Make sure to import your Loading component
 
 const HousesList = () => {
   const [houses, setHouses] = useState([]);
@@ -26,8 +27,10 @@ const HousesList = () => {
     fetchHouses();
   }, []);
 
+
+
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    return <Loading />;
   }
 
   if (error) {

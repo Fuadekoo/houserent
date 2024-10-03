@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader";
 import { useSelector } from "react-redux";
 import AdminHome from "./pages/Admin/AdminHome";
-import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import UserHome from "./pages/User/UserHome";
 import UserBooking from "./pages/User/UserBooking";
