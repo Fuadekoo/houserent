@@ -205,5 +205,24 @@ router.put("/toggleBlockUser/:userId/block",  async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
+router.get("users",async(req,res)=>{
+    try {
+        
+        const userCount = await User.countDocuments();
+        console.log(userCount);
+        res.send({
+            message:"user count fetched successfully",
+            success:true,
+            data:userCount,
+        })
+}
+catch (error) {
+    res.send({
+        message:error.message,
+        success:false,
+        data:null,
+    })
+};
+})
 
 module.exports = router;

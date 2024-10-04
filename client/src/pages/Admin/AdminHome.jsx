@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import IsRoomBlockCard from './IsRoomBlockCard';
+import Loading from "../../components/Loader";
 
 const AdminHome = () => {
   const [houses, setHouses] = useState([]);
@@ -29,7 +30,7 @@ const AdminHome = () => {
   }, []);
 
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    <Loading/>
   }
 
   if (error) {

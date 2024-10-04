@@ -35,8 +35,13 @@ export function AdminUsers() {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [blockStatus, setBlockStatus] = useState({});
-    const [activeTab, setActiveTab] = useState('all'); // Track the active tabs
-    
+    const [activeTab, setActiveTab] = useState('all');
+
+    // Pagination states
+    const [currentPage, setCurrentPage] = useState(1);
+    const usersPerPage = 5; // Adjust this value for the number of users per page
+    const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
+
     const navigate = useNavigate();
 
     const handleSearch = async (e) => {
@@ -44,67 +49,85 @@ export function AdminUsers() {
         try {
             const response = await axios.get(`/api/users/getUsers?searchTerm=${searchTerm}`);
             setFilteredUsers(response.data);
+            setCurrentPage(1); // Reset to first page on new search
         } catch (error) {
             console.error("Error fetching users:", error);
         }
     };
-  const handleBlockUnblock = async (userId, isBlocked) => {
-    try {
-        await axios.put(`/api/users/toggleBlockUser/${userId}/block`, { isBlocked: !isBlocked });
 
-        // Fetch the updated list of users after the block/unblock action
-        const response = await axios.get('/api/users/getUsers');
-        setUsers(response.data);
+    const handleBlockUnblock = async (userId, isBlocked) => {
+        try {
+            await axios.put(`/api/users/toggleBlockUser/${userId}/block`, { isBlocked: !isBlocked });
+            const response = await axios.get('/api/users/getUsers');
+            setUsers(response.data);
 
-        // Update block status based on the response data
-        const updatedBlockStatus = {};
-        response.data.forEach(user => {
-            updatedBlockStatus[user._id] = user.isBlocked;
-        });
-        setBlockStatus(updatedBlockStatus);
-        
-    } catch (error) {
-        console.error("Error updating block status:", error);
-    }
-};
-
+            const updatedBlockStatus = {};
+            response.data.forEach(user => {
+                updatedBlockStatus[user._id] = user.isBlocked;
+            });
+            setBlockStatus(updatedBlockStatus);
+        } catch (error) {
+            console.error("Error updating block status:", error);
+        }
+    };
 
     useEffect(() => {
         const fetchUsers = async () => {
             try {
-                const response = await axios.get('/api/users/getUsers'); // Adjust the endpoint as necessary
+                const response = await axios.get('/api/users/getUsers');
                 setUsers(response.data);
                 const initialBlockStatus = {};
                 response.data.forEach(user => {
                     initialBlockStatus[user._id] = user.isBlocked;
                 });
                 setBlockStatus(initialBlockStatus);
+                setFilteredUsers(response.data); // Initialize filtered users
             } catch (error) {
                 console.error("Error fetching users:", error);
             }
         };
         fetchUsers();
     }, []);
-    // Filter users based on the selected tab (All, Blocked, Unblocked)
+
+    // Filter users based on the selected tab
     useEffect(() => {
-      let filtered;
-      if (activeTab === 'all') {
-          filtered = users; // Show all users
-      } else if (activeTab === 'blocked') {
-          filtered = users.filter(user => user.isBlocked); // Show blocked users
-      } else if (activeTab === 'unblocked') {
-          filtered = users.filter(user => !user.isBlocked); // Show unblocked users
-      }
-      setFilteredUsers(filtered);
-  }, [activeTab, users]);
+        let filtered;
+        if (activeTab === 'all') {
+            filtered = users;
+        } else if (activeTab === 'blocked') {
+            filtered = users.filter(user => user.isBlocked);
+        } else if (activeTab === 'unblocked') {
+            filtered = users.filter(user => !user.isBlocked);
+        }
+        setFilteredUsers(filtered);
+        setCurrentPage(1); // Reset to first page when tab changes
+    }, [activeTab, users]);
 
     useEffect(() => {
-        setFilteredUsers(users.filter(user => 
+        setFilteredUsers(users.filter(user =>
             user.name.includes(searchTerm) ||
             user.email.includes(searchTerm) ||
             user.phone.toString().includes(searchTerm)
         ));
+        setCurrentPage(1); // Reset to first page when search term changes
     }, [searchTerm, users]);
+
+    // Get current users based on pagination
+    const indexOfLastUser = currentPage * usersPerPage;
+    const indexOfFirstUser = indexOfLastUser - usersPerPage;
+    const currentUsers = filteredUsers.slice(indexOfFirstUser, indexOfLastUser);
+
+    const handleNextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    const handlePreviousPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     return (
         <Card className="h-full w-full">
@@ -118,14 +141,6 @@ export function AdminUsers() {
                             See information about all members
                         </Typography>
                     </div>
-                    {/* <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-                        <Button variant="outlined" size="sm">
-                            View all
-                        </Button>
-                        <Button className="flex items-center gap-3" size="sm">
-                            <UserPlusIcon strokeWidth={2} className="h-4 w-4" /> Add member
-                        </Button>
-                    </div> */}
                 </div>
                 <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                     <Tabs value={activeTab} className="w-full md:w-max">
@@ -174,9 +189,9 @@ export function AdminUsers() {
                         </tr>
                     </thead>
                     <tbody>
-                        {filteredUsers.map(
-                            ({ _id, name, email,phone,avatar, role, org, isBlocked, date }, index) => {
-                                const isLast = index === filteredUsers.length - 1;
+                        {currentUsers.map(
+                            ({ _id, name, email, phone, avatar, role, org, isBlocked, date }, index) => {
+                                const isLast = index === currentUsers.length - 1;
                                 const classes = isLast
                                     ? "p-4"
                                     : "p-4 border-b border-blue-gray-50";
@@ -185,7 +200,7 @@ export function AdminUsers() {
                                     <tr key={_id}>
                                         <td className={classes}>
                                             <div className="flex items-center gap-3">
-                                                <Avatar src={avatar} alt={name}  size="sm" className='rounded-full h-10 w-10 object-cover' />
+                                                <Avatar src={avatar} alt={name} size="sm" className='rounded-full h-10 w-10 object-cover' />
                                                 <div className="flex flex-col">
                                                     <Typography
                                                         variant="small"
@@ -258,6 +273,12 @@ export function AdminUsers() {
                                                     )}
                                                 </IconButton>
                                             </Tooltip>
+                                            {/* editing user  */}
+                                            {/* <Tooltip content="Edit User">
+                                                <IconButton variant="text" onClick={() => navigate(`/admin/editUser/${_id}`)}>
+                                                    <PencilIcon className="h-4 w-4" />
+                                                </IconButton>
+                                            </Tooltip> */}
                                         </td>
                                     </tr>
                                 );
@@ -267,20 +288,22 @@ export function AdminUsers() {
                 </table>
             </CardBody>
             <CardFooter className="flex items-center justify-between border-t border-blue-gray-50 p-4">
-                <Typography variant="small" color="blue-gray" className="font-normal">
-                    Page 1 of 10
-                </Typography>
-                <div className="flex gap-2">
-                    <Button variant="outlined" size="sm">
-                        Previous
+                <div className="flex items-center">
+                    <Typography className="mx-2">{`Page ${currentPage} of ${totalPages}`}</Typography>
+                    <div className="inline-flex">
+                    <Button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l'  onClick={handlePreviousPage} disabled={currentPage === 1}>
+                      Prev
                     </Button>
-                    <Button variant="outlined" size="sm">
-                        Next
+                    <Button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l' onClick={handleNextPage} disabled={currentPage === totalPages}>
+                    Next
                     </Button>
+                    </div>
                 </div>
+                <Typography variant="small" color="blue-gray" className="font-normal">
+                    Total users: {filteredUsers.length}
+                </Typography>
             </CardFooter>
         </Card>
     );
 }
-
 export default AdminUsers;

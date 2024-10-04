@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import LanguageChange from "./LanguageChange";
 
 function DefaultLayout({ children }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function DefaultLayout({ children }) {
   ];
 
   const landlordMenu = [
-    { name: "Home", path: "/", icon: "ri-home-line" },
+    { name: "Home", path: "/myhome", icon: "ri-home-line" },
     { name: "PostHouses", path: "/addroom", icon: "ri-home-2-line" },
     { name: "myroom", path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
@@ -26,10 +27,12 @@ function DefaultLayout({ children }) {
   ];
 
   const adminMenu = [
+    { name: "Dashboard", path: "/Dashboard", icon: "ri-dashboard-line" },
     { name: "Home", path: "/admin/home", icon: "ri-home-line" },
     { name: "AllUsers",path:"/admin/allusers",icon:"ri-file-list-line"},
     { name: "BlockedHouses",path:"/admin/blockedhouses",icon:"ri-file-list-line"}, 
     { name: "wallet", path: "/balance", icon: "ri-wallet-line" },
+    { name: "withdraw Confirmation", path: "/withdrawConfirm", icon: "ri-wallet-3-line" },
     { name: "Profile", path: "/profile", icon: "ri-user-line" },
     { name: "Logout", path: "/logout", icon: "ri-logout-box-line" }
   ];
@@ -92,6 +95,7 @@ function DefaultLayout({ children }) {
       )}     
        </Link>
             <h2 className='text-xl'>{user?.name}</h2>
+            <LanguageChange />
           </div>
           {/* Body */}
           <div>

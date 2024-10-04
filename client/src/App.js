@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader";
 import { useSelector } from "react-redux";
 import AdminHome from "./pages/Admin/AdminHome";
-import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import UserHome from "./pages/User/UserHome";
 import UserBooking from "./pages/User/UserBooking";
@@ -29,6 +28,13 @@ import HouseBookedUser from "./pages/landloards/HouseBookedUser.jsx";
 import Withdrawal from "./pages/landloards/Withdrawal";
 import FilterHome from "./components/FilterHome.jsx";
 import Location from "./components/Location.jsx";
+import withdrawConfirm from "./pages/Admin/WithdrewConfirm.jsx";
+import Dashboard from "./pages/Admin/Dashboard";
+import About from "./pages/guest/About.jsx";
+import Contact from "./pages/guest/Contact.jsx";
+import Service from "./pages/guest/Service.jsx";
+import Navbar from "./pages/guest/Navbar.jsx";
+import GuestHome from "./pages/guest/GuestHome.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -37,7 +43,8 @@ function App() {
     <BrowserRouter >
   {/* <Header /> */}
   <Routes>
-    <Route path="/" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
+  {/* <Route path="/alluserhome" element={<PublicRoute><Home/></PublicRoute>}/> */}
+    <Route path="/myhome" element={<ProtectedRoute><Home/></ProtectedRoute>}/>
     {/* the tenants and the landloards are pay for the deposite  */}
     <Route path="/paynow" element={<ProtectedRoute><Paydonate/></ProtectedRoute>}/>
     <Route path="/thanks" element={<ProtectedRoute><Thanks/></ProtectedRoute>}/>
@@ -70,13 +77,20 @@ function App() {
     <Route path="/admin/home" element={<ProtectedRoute><AdminHome/></ProtectedRoute>}/>
     <Route path="/admin/allusers" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
     <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
+    <Route path="/Dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
+    <Route path="/withdrawConfirm" element={<ProtectedRoute><withdrawConfirm/></ProtectedRoute>}/>
  
     {/* route all user  */}
     <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>
     <Route path="/Login" element={<PublicRoute><Login/></PublicRoute>}/>
     <Route path="/balance" element={<ProtectedRoute><Wallet/></ProtectedRoute>}/>
     <Route path="/Profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
-   
+
+    {/* route for guests */}
+    <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
+    <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/>
+    <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
+    <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/> 
     
     </Routes>
     </BrowserRouter>
