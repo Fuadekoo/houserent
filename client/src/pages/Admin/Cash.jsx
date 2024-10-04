@@ -176,7 +176,7 @@ const Cash = () => {
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
         >
-          Previous
+          Prev
         </Button>
         <div className="flex items-center gap-2">
           <Typography variant="small" color="blue-gray" className="font-normal">

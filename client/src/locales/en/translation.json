@@ -1,11 +1,44 @@
 {
   "admin": {
-    "adminhome":{},
     "adminpayment":{},
-    "adminuser":{},
-    "blockedhouse":{},
-    "dashboard":{},
-    "isroomblockedcard":{},
+    "adminuser":{
+      "all": "All",
+      "blocked":"Blocked",
+      "unblocked":"Unblocked",
+      "member":"Members List",
+      "seeall":"See information About All Members",
+      "prev":"prev",
+      "next":"next",
+      "total":"Total Users"
+    },
+    "cash":{
+      "withdrawal":"Withdrawal Requests",
+      "manage":"Manage Withdrawal Requests",
+      "name":"Name",
+      "email":"Email",
+      "phone":"Phone",
+      "select":"Select Status",
+      "pending":"Pending",
+      "done":"Done",
+      "update":"Update",
+      "prev":"prev",
+      "next":"next",
+      "of":"of"
+    },
+    "dashboard":{
+      "users":"Users",
+      "Houses":"Houses",
+      "Bookings":"Bookings",
+      "Transactions":"Transactions",
+      "deposit":"Deposit",
+      "withdrawal":"Withdrawal"
+    },
+    "isroomblockedcard":{
+      "floor":"Floor Level",
+      "House":"House Number",
+      "rent":"Rent per month",
+      "ETB":"ETB"
+    },
     "withdrewconfirm":{}
   },
 
@@ -18,12 +51,59 @@
   },
 
   "landloard": {
-    "addroom":{},
-    "customers":{},
-    "edithouse":{},
-    "housebookeduser":{},
-    "myaddroom":{},
-    "withdrawal":{}
+    "addroom":{
+      "add":"Add Room",
+      "image":"Images",
+      "address":"Address",
+      "floor":"Floor Level",
+      "house":"House Number",
+      "housecatagory":"House Catagory",
+      "apartama":"Apartment",
+      "condo":"Condo",
+      "compound":"Compound House",
+      "single":"Single House",
+      "description":"Description",
+      "rent":"Rent per month"
+    },
+    "edithouse":{
+      "info":"House Information",
+      "rent":"Rent per month",
+      "update":"Update"
+    },
+    "housebookeduser":{
+      "noroom":"No Room",
+      "error":"Error",
+      "bookeduser":"Booked User",
+      "nouser":"No Users have booking",
+      "user":"User",
+      "email":"Email",
+      "phone":"Phone",
+      "booking":"Booking Duration",
+      "tpay":"Total Payment",
+      "tday":"Total Days"
+    },
+    "myaddroom":{
+      "error":"Error",
+      "noroom":"No Room",
+      "addroom":"Add Room",
+      "floor":"Floor Level",
+      "house":"House Number",
+      "rent":"Rent per month",
+      "roomstatus":"Room Status",
+      "active":"Active",
+      "pending":"Pending"
+    },
+    "withdrawal":{
+      "withdrawalfund":"Withdrawal Funds",
+      "amount":"Amount",
+      "option":"Select Withdrawal Option",
+      "cbe":"CBE Birr",
+      "tele":"Tele Birr",
+      "amole":"Amole",
+      "abysinia":"Abysinia Bank",
+      "acc":"Account Number",
+      "withdrawal":"Withdrawal"
+    }
   },
   "tenant": {
     "balance":{},
@@ -38,7 +118,14 @@
   },
 
   "common": {
-    "booknoow":{},
+    "booknoow":{
+      "floor":"Floor Level",
+      "house":"House Number",
+      "rent":"Rent per month",
+      "description":"Description",
+      "iagree":"I Agree",
+      "book":"Book Now"
+    },
     "depositdislay":{},
     "deposithistory":{},
     "home":{},

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
+import Loading from '../../components/Loader';
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
@@ -24,7 +25,7 @@ const Dashboard = () => {
   }, []);
 
   if (!data) {
-    return <div>Loading...</div>;
+    <Loading/>
   }
 
   const cards = [
