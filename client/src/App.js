@@ -26,6 +26,8 @@ import MyaddRoom from "./pages/landloards/MyaddRoom";
 import Edithouse from "./pages/landloards/Edithouse.jsx";
 import HouseBookedUser from "./pages/landloards/HouseBookedUser.jsx";
 import Withdrawal from "./pages/landloards/Withdrawal";
+import FilterHome from "./components/FilterHome.jsx";
+import Location from "./components/Location.jsx";
 import withdrawConfirm from "./pages/Admin/WithdrewConfirm.jsx";
 import Cash from "./pages/Admin/Cash.jsx"
 import Dashboard from "./pages/Admin/Dashboard";
@@ -51,7 +53,8 @@ function App() {
     <Route path="/payment-fail" element={<ProtectedRoute><PaymentFailed/></ProtectedRoute>}/>
     <Route path="/mydeposit" element={<ProtectedRoute><DepositDisplay/></ProtectedRoute>}/>
     <Route path="/editOwnerHouseInfo/:id" element={<ProtectedRoute><Edithouse/></ProtectedRoute>}/>
-
+    <Route path="/location" element={<ProtectedRoute><Location/></ProtectedRoute>}/>
+     
 
     <Route path="/roomsBookedUser/:houseId" element={<ProtectedRoute><HouseBookedUser/></ProtectedRoute>}/>
 
@@ -62,6 +65,7 @@ function App() {
     <Route path="/user/Bookings" element={<ProtectedRoute><UserBooking/></ProtectedRoute>}/>
     <Route path="/user/Notification" element={<ProtectedRoute><UserNotification/></ProtectedRoute>}/>
     <Route path="/booking/:id" element={<ProtectedRoute><BookNow/></ProtectedRoute>}/>
+    <Route path="/filterHousesCategory" element={<ProtectedRoute><FilterHome/></ProtectedRoute>}/>
 
 {/* route for landloards */}
 <Route path="/addroom" element={<ProtectedRoute><AddRoom/></ProtectedRoute>}/>

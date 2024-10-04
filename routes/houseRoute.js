@@ -4,7 +4,11 @@ const {addRoom,getSingleHouse,ownerRoom ,blockRoom, getActiveHouse,getBlockHouse
 const authMiddleware = require("../middlewares/authMiddleware");
 const roomPostFeeMiddleware = require("../middlewares/roomPostFeeMiddleware");
 
-
+const {getApartamaFilter ,
+                 getVillaFilter,
+                 getCondominiumFilter,
+                 getCompoundHouseFilter,
+                 getSingleHouseFilter} =require("../controllers/property.filtter")
 // add house route
 houseRouter.post('/addroom',authMiddleware,roomPostFeeMiddleware, addRoom);
 
@@ -33,6 +37,14 @@ houseRouter.get('/myaddroom',authMiddleware,ownerRoom);
 houseRouter.patch('/blockRoom/:id' ,blockRoom);
 
 houseRouter.put('/owner-edit-room/:id', ownerEditRoom);
+
+
+// fetch the filtered house category like apartama   villa  condominium  compound-house  single-house
+houseRouter.get('/filter-apartama',getApartamaFilter);
+houseRouter.get('/filter-villa',getVillaFilter);
+houseRouter.get('/filter-condominium',getCondominiumFilter);
+houseRouter.get('/filter-compound-house',getCompoundHouseFilter);
+houseRouter.get('/filter-single-house',getSingleHouseFilter);
 
 
 module.exports=houseRouter;
