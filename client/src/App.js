@@ -27,12 +27,14 @@ import Edithouse from "./pages/landloards/Edithouse.jsx";
 import HouseBookedUser from "./pages/landloards/HouseBookedUser.jsx";
 import Withdrawal from "./pages/landloards/Withdrawal";
 import withdrawConfirm from "./pages/Admin/WithdrewConfirm.jsx";
+import Cash from "./pages/Admin/Cash.jsx"
 import Dashboard from "./pages/Admin/Dashboard";
 import About from "./pages/guest/About.jsx";
 import Contact from "./pages/guest/Contact.jsx";
 import Service from "./pages/guest/Service.jsx";
 import Navbar from "./pages/guest/Navbar.jsx";
 import GuestHome from "./pages/guest/GuestHome.jsx";
+import Mywithdraw from "./pages/landloards/MyWithdraw.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -74,7 +76,9 @@ function App() {
     <Route path="/admin/allusers" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
     <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
     <Route path="/Dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
-    <Route path="/withdrawConfirm" element={<ProtectedRoute><withdrawConfirm/></ProtectedRoute>}/>
+    <Route path="/cash" element={<ProtectedRoute><Cash/></ProtectedRoute>}/>
+    <Route path="/withdrewconfirm" element={<ProtectedRoute><withdrawConfirm/></ProtectedRoute>}/>
+    <Route path="/mywithdraw" element={<ProtectedRoute><Mywithdraw/></ProtectedRoute>}/>
  
     {/* route all user  */}
     <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>
