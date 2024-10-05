@@ -40,6 +40,18 @@ const houseSchema = new mongoose.Schema({
     ref: 'users', // Reference to the User model
     required: true
   },
+  bathrooms:{
+    type:Number,
+    required:true,
+},
+bedrooms :{
+    type:Number,
+    required:true,
+},
+parking:{
+    type:Boolean,
+    required:true,
+},
   active:{
     type:Boolean,
     default:false

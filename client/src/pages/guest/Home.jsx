@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import HouseCard from './HouseCard';
-import Loading from '../components/Loader'; // Make sure to import your Loading component
+
 
 const HousesList = () => {
   const [houses, setHouses] = useState([]);
@@ -27,10 +27,8 @@ const HousesList = () => {
     fetchHouses();
   }, []);
 
-
-
   if (loading) {
-    return <Loading />;
+    return <div className="text-center mt-10">Loading...</div>;
   }
 
   if (error) {
@@ -38,7 +36,7 @@ const HousesList = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    <div className="flex p-2 flex-wrap justify-center gap-6 overflow-y-auto h-96">
       {houses.map((house) => (
         <HouseCard key={house._id} house={house} />
       ))}

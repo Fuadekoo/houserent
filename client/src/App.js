@@ -34,6 +34,7 @@ import Contact from "./pages/guest/Contact.jsx";
 import Service from "./pages/guest/Service.jsx";
 import Navbar from "./pages/guest/Navbar.jsx";
 import GuestHome from "./pages/guest/GuestHome.jsx";
+import Search from "./pages/guest/Search.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -84,10 +85,12 @@ function App() {
     <Route path="/Profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
 
     {/* route for guests */}
+  
     <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
     <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/>
     <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
-    <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/> 
+    <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/>
+    <Route path="/search" element={<PublicRoute><Search/></PublicRoute>}/>
     
     </Routes>
     </BrowserRouter>
