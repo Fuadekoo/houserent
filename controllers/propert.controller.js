@@ -3,54 +3,51 @@ const users = require("../models/usersModel");
 const classModel = require("../models/HouseModel");
 
 const addRoom = async (req, res) => {
-    // Access the user ID from the request object
-    const { userId: ownerUser } = req.user;
-    const {image, address, floorLevel, houseNumber,housecategory,description,rentPerMonth} = req.body;
+  // Access the user ID from the request object
+  const { userId: ownerUser } = req.user;
+  const { image, address, floorLevel, houseNumber, housecategory, description, rentPerMonth, bathrooms, bedrooms, parking } = req.body;
+
   try {
       // Check if the owner user exists
-      const checkUser = await users.findOne({ _id: ownerUser ,role:"landlord"});
-      // const checkUser = await users.findOne({ _id: ownerUser});
+      const checkUser = await users.findOne({ _id: ownerUser, role: "landlord" });
       if (!checkUser) {
-          return res.status(400).json({ message: "you are not 'landlord'", success: false, data: null });
+          return res.status(400).json({ message: "You are not a landlord", success: false, data: null });
       }
+
       if (description.length > 50) {
-        return res.status(400).json({ message: "Description is too long", success: false, data: null });
+          return res.status(400).json({ message: "Description is too long", success: false, data: null });
       }
 
-
-
-
-      // assign to admin price 10% of the price of the room
+      // Admin price calculation
       const AdminPrice = rentPerMonth * 0.02 * 6;
-       const data  = {
-           image:image,
-            address:address,
-             floorLevel:floorLevel, 
-             houseNumber:houseNumber, 
-             rentPerMonth:rentPerMonth,
-          AdminPrice: AdminPrice,
-          housecategory:housecategory,
-          description:description,
-          ownerUser: ownerUser
+      const data = {
+          image,
+          address,
+          floorLevel,
+          houseNumber,
+          rentPerMonth,
+          AdminPrice,
+          housecategory,
+          description,
+          ownerUser,
+          bathrooms,
+          bedrooms,
+          parking,
       };
-          try {
-    const check = await classModel.findOne({ image: image });
 
-    if (check) {
-      res.json("exist");
-    } else {
-      res.json("notexist");
-      await classModel.insertMany([data]);  // Save to the "allclass" collection
-    }
-  } catch (e) {
-    res.json("fail");
-  }
+      const check = await classModel.findOne({ image: image });
 
-     // res.status(200).json({ message: "Room created successfully", success: true, data: data });
+      if (check) {
+          return res.status(400).json({ message: "Room with this image already exists", success: false });
+      } else {
+          await classModel.insertMany([data]);  // Save to the database
+          return res.status(200).json({ message: "Room created successfully", success: true, data: data });
+      }
   } catch (error) {
-      res.status(500).json({ message: error.message, success: false, data: null });
+      return res.status(500).json({ message: error.message, success: false });
   }
 };
+
 
 const getBlockHouse = async (req, res) => {
   try {
@@ -181,6 +178,72 @@ const ownerEditRoom = async (req, res) => {
   }
 };
 
+const searchHouses = async (req, res) => {
+  const {
+    address,
+    housecategory,
+    minBathrooms,
+    minBedrooms,
+    parking,
+    minRent,
+    maxRent,
+    searchTerm,
+  } = req.query;
+
+  let query = { active: true }; // Fetch only active houses
+  const limit = parseInt(req.query.limit) || 9;
+  const startIndex = parseInt(req.query.startIndex) || 0;
+
+  // Build query based on filters
+  if (address) {
+    query.address = { $regex: address, $options: 'i' }; // Case-insensitive search for address
+  }
+  if (housecategory && housecategory !== 'all') {
+    query.housecategory = housecategory; // Exact match for house category
+  }
+  if (minBathrooms) {
+    query.bathrooms = { $gte: parseInt(minBathrooms) }; // Minimum number of bathrooms
+  }
+  if (minBedrooms) {
+    query.bedrooms = { $gte: parseInt(minBedrooms) }; // Minimum number of bedrooms
+  }
+  if (parking) {
+    query.parking = parking === 'true'; // Convert parking string to boolean
+  }
+  if (minRent) {
+    query.rentPerMonth = { ...(query.rentPerMonth || {}), $gte: parseInt(minRent) }; // Minimum rent filter
+  }
+  if (maxRent) {
+    query.rentPerMonth = { ...(query.rentPerMonth || {}), $lte: parseInt(maxRent) }; // Maximum rent filter
+  }
+
+  if (searchTerm) {
+    query.$or = [
+      { housecategory: { $regex: searchTerm, $options: 'i' } },
+      { address: { $regex: searchTerm, $options: 'i' } },
+    ]; // Allows searching across multiple fields
+  }
+
+  try {
+    const sort = req.query.sort || 'createdAt';
+    const order = req.query.order || 'desc';
+
+    const houses = await classModel.find(query)
+      .sort({ [sort]: order })
+      .limit(limit)
+      .skip(startIndex);
+
+    if (!houses || houses.length === 0) {
+      return res.status(404).json({ message: "No houses found with the provided filters", success: false, data: null });
+    }
+
+    res.status(200).json({ message: "Houses retrieved successfully", success: true, data: houses });
+  } catch (error) {
+    console.error(error); // Log errors for debugging
+    res.status(500).json({ message: error.message, success: false, data: null });
+  }
+};
+
 
 module.exports = { addRoom,
                     getBlockHouse,
@@ -190,4 +253,5 @@ module.exports = { addRoom,
                     blockRoom,
                     deleteRoom,
                     usergetHouses,
-                    ownerEditRoom};
+                    ownerEditRoom,
+                    searchHouses};
