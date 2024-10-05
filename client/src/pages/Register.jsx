@@ -46,6 +46,9 @@ const Register = () => {
             placeholder='Enter your email'
           />
         </Form.Item>
+        {/* add a +251 form fild that is outo fill form  infront of phone input */}
+        
+
         <Form.Item name='phone' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: 'Please enter your phone number' }]}>
           <input
             type='number'
