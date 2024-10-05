@@ -13,10 +13,8 @@ export default function Search() {
         searchTerm: '',
         housecategory: 'all',
         parking: false,
-        // minBathrooms: 0,
-        // minBedrooms: 0,
         minRent: 0,
-        maxRent: 20000000,
+        maxRent: 100000,
         sort: 'createdAt',
         order: 'desc',
     });
