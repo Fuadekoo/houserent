@@ -6,7 +6,6 @@ import ChapaPayment from './User/ChapaPayment';
 function Wallet() {
   return (
     <div>
-      <p>This is display my balance and add a balance to my account from chapa payments</p>
       <Balance />
       <ChapaPayment/>
       <TransactionHistory />

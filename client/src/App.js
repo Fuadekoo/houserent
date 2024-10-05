@@ -9,9 +9,7 @@ import Loader from "./components/Loader";
 import { useSelector } from "react-redux";
 import AdminHome from "./pages/Admin/AdminHome";
 import AdminUsers from "./pages/Admin/AdminUsers";
-import UserHome from "./pages/User/UserHome";
 import UserBooking from "./pages/User/UserBooking";
-import UserNotification from "./pages/User/UserNotification";
 import BookNow from "./pages/BookNow";
 import Wallet from "./pages/Wallet";
 import Profile from "./pages/Profile";
@@ -62,9 +60,7 @@ function App() {
 
 
     {/* route for tenants */}
-    <Route path="/user/home" element={<ProtectedRoute><UserHome/></ProtectedRoute>}/>
     <Route path="/user/Bookings" element={<ProtectedRoute><UserBooking/></ProtectedRoute>}/>
-    <Route path="/user/Notification" element={<ProtectedRoute><UserNotification/></ProtectedRoute>}/>
     <Route path="/booking/:id" element={<ProtectedRoute><BookNow/></ProtectedRoute>}/>
     <Route path="/filterHousesCategory" element={<ProtectedRoute><FilterHome/></ProtectedRoute>}/>
 
