@@ -1,6 +1,5 @@
 {
   "admin": {
-    "adminpayment":{},
     "adminuser":{
       "all": "All",
       "blocked":"Blocked",
@@ -106,15 +105,60 @@
     }
   },
   "tenant": {
-    "balance":{},
-    "chapapayment":{},
-    "transactionhistory":{},
-    "userbooking":{},
-    "userhome":{},
-    "usernotification":{}
+    "balance":{
+      "mybalance":"My Balance",
+      "ETB":"ETB"
+    },
+    "chapapayment":{
+      "Deposit":"Deposit",
+      "showdeposit":"Show Deposit",
+      "withdrawal":"Withdrawal"
+    },
+    "transactionhistory":{
+      "transaction":"Transaction History",
+      "date":"Date",
+      "amount":"Amount",
+      "status":"Status",
+      "pending":"Pending",
+      "done":"Done",
+      "type":"Type",
+      "ETB":"ETB"
+      
+    },
+    "userbooking":{
+      "userbooking":"User Booking",
+      "address":"Address",
+      "floor":"Floor Level",
+      "house":"House Number",
+      "rent":"Rent per month",
+      "description":"Description",
+      "from":"From",
+      "to":"To",
+      "remaining":"Remaining Time"
+    }
+
   },
   "components": {
-    "defaultlayout":{}
+    "defaultlayout":{
+      "home":"Home",
+      "booked":"Booked",
+      "wallet":"Wallet",
+      "profile":"Profile",
+      "logout":"Logout",
+      "postHouse":"Post House",
+      "myroom":"My Room",
+      "wallet":"Wallet",
+      "cashorder":"Cash Order",
+      "dashboard":"Dashboard",
+      "alluser":"All User",
+      "blockedhouse":"Blocked House",
+      "withdrawalconfirm":"Withdrawal Confirm",
+      "admin":"Admin",
+      "landloard":"Landloard",
+      "tenant":"Tenant",
+      "houserentsys":"House Rent System",
+      "signin":"Sign In"
+    }
   },
 
   "common": {
@@ -129,11 +173,67 @@
     "depositdislay":{},
     "deposithistory":{},
     "home":{},
-    "housecard":{},
-    "login":{},
-    "profile":{},
-    "register":{},
-    "wallet":{}
+    "housecard":{
+      "floor":"Floor Level",
+      "House":"House Number",
+      "rent":"Rent per month",
+      "ETB":"ETB",
+      "moreinfo":"More Info"
+    },
+    "login":{
+      "login":"Login",
+      "email":"Email",
+      "password":"Password",
+      "forgot":"Forgot Password",
+      "register":"Register",
+      "signin":"Sign In",
+      "dont":"Don't have an account?",
+      "loginpage":"Login Page",
+      "enterphone":"Enter Phone Number",
+      "enterpassword":"Enter Password"
+    },
+    "profile":{
+      "title":"Profile page",
+      "confirmpasswordPlaceholder":"Confirm Your Password",
+      "profile":"Profile",
+      "usernamePlaceholder":"Enter Your Name",
+      "emailPlaceholder":"Enter Your Email",
+      "passwordPlaceholder":"Enter Your Password",
+      "confirmPasswordPlaceholder":"Confirm Your Password",
+      "name":"Name",
+      "email":"Email",
+      "phone":"Phone",
+      "address":"Address",
+      "update":"Update",
+      "uploadError":"Upload Error",
+      "uploadSuccess":"Upload Success",
+      "uploading":"Uploading",
+      "updateButton":"Update",
+      "passwordsDoNotMatch":"Passwords do not match",
+      "userUpdatedSuccessfully":"User updated successfully"
+    },
+    "register":{
+      "title":"Register page",
+      "register":"Register",
+      "namePlaceholder":"Enter Your Name",
+      "emailPlaceholder":"Enter Your Email",
+      "phonePlaceholder":"Enter Your Phone",
+      "addressPlaceholder":"Enter Your address",
+      "passwordPlaceholder":"Enter Your Password",
+      "confirmpasswordPlaceholder":"Confirm Your Password",
+      "rolePlaceholder":"Select Your Role",
+      "roleTenant":"Tenant",
+      "roleLandlord":"Landloard",
+      "email":"Email",
+      "phone":"Phone",
+      "address":"Address",
+      "password":"Password",
+      "confirmpassword":"Confirm Password",
+      "registerpage":"Register Page",
+      "signin":"Sign In",
+      "login":"Login",
+      "haveAccount":"Already have an account?"
+    }
   }
 
 }

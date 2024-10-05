@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Loading from '../../components/Loader';
 
 function Balance() {
   const [balance, setBalance] = useState(null);
@@ -41,7 +42,7 @@ function Balance() {
   }, []);
 
   if (loading) {
-    return <div className="text-center mt-10">Loading...</div>;
+    <Loading />;
   }
 
   if (error) {

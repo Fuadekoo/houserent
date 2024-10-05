@@ -2,13 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import Loading from '../../components/Loader';
+import { HideLoading, ShowLoading } from '../../redux/alertsSlice';
+import { useDispatch} from 'react-redux';
+import { json } from 'react-router-dom';
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        dispatch(ShowLoading());
         const token = localStorage.getItem('token'); // Adjust the token retrieval method as necessary
         const response = await axios.get('http://localhost:5000/api/dashboard/counts', {
           headers: {
@@ -16,8 +21,10 @@ const Dashboard = () => {
           },
         });
         setData(response.data);
+        dispatch(HideLoading());
       } catch (error) {
-        console.error('Error fetching data:', error);
+        dispatch(HideLoading());
+        return json({ message: error.message });
       }
     };
 
@@ -25,7 +32,7 @@ const Dashboard = () => {
   }, []);
 
   if (!data) {
-    <Loading/>
+    return <Loading />;
   }
 
   const cards = [

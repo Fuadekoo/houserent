@@ -3,24 +3,31 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import IsRoomBlockCard from './IsRoomBlockCard';
 import Loading from "../../components/Loader";
+import { HideLoading, ShowLoading } from '../../redux/alertsSlice';
+import { useDispatch} from 'react-redux';
 
 const AdminHome = () => {
   const [houses, setHouses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchHouses = async () => {
       try {
+        dispatch(ShowLoading());
         const response = await axios.get('http://localhost:5000/api/property/active-rooms');
         
         if (response.data.success) {
           setHouses(response.data.data);
+          dispatch(HideLoading());
         } else {
           setError(response.data.message);
+          dispatch(HideLoading());
         }
       } catch (err) {
         setError('Failed to fetch houses');
+        dispatch(HideLoading());
       } finally {
         setLoading(false);
       }

@@ -1,4 +1,231 @@
 {
-    "welcome": "እንኳን ደህና መጡ",
-    "login": "ግባ"
+    "admin": {
+        "adminuser": {
+            "all": "ሁሉም",
+            "blocked": "ታግሷል",
+            "unblocked": "አልታገሰም",
+            "member": "አባላት ዝርዝር",
+            "seeall": "ስለ ሁሉም አባላት መረጃ ይመልከቱ",
+            "prev": "ቀዳሚ",
+            "next": "ቀጣይ",
+            "total": "ጠቅላላ ተጠቃሚዎች"
+        },
+        "cash": {
+            "withdrawal": "የማስወገድ ጥያቄዎች",
+            "manage": "የማስወገድ ጥያቄዎችን ያቀናብሩ",
+            "name": "ስም",
+            "email": "ኢሜይል",
+            "phone": "ስልክ",
+            "select": "ሁኔታ ይምረጡ",
+            "pending": "በመጠባበቅ ላይ",
+            "done": "ተጠናቋል",
+            "update": "አዘምን",
+            "prev": "ቀዳሚ",
+            "next": "ቀጣይ",
+            "of": "ከ"
+        },
+        "dashboard": {
+            "users": "ተጠቃሚዎች",
+            "Houses": "ቤቶች",
+            "Bookings": "ቦታ በመያዝ",
+            "Transactions": "ግብይቶች",
+            "deposit": "ተቀማጭ",
+            "withdrawal": "ማስወገድ"
+        },
+        "isroomblockedcard": {
+            "floor": "የወለል ደረጃ",
+            "House": "የቤት ቁጥር",
+            "rent": "ወርሃዊ ኪራይ",
+            "ETB": "ብር"
+        },
+        "withdrewconfirm": {}
+    },
+    "guest": {
+        "navbar": {
+            "welcome": "እንኳን ደህና መጡ",
+            "login": "ግባ"
+        }
+    },
+    "landloard": {
+        "addroom": {
+            "add": "ክፍል አክል",
+            "image": "ምስሎች",
+            "address": "አድራሻ",
+            "floor": "የወለል ደረጃ",
+            "house": "የቤት ቁጥር",
+            "housecatagory": "የቤት ምድብ",
+            "apartama": "አፓርታማ",
+            "condo": "ኮንዶ",
+            "compound": "ኮምፓውንድ ቤት",
+            "single": "አንድ ቤት",
+            "description": "መግለጫ",
+            "rent": "ወርሃዊ ኪራይ"
+        },
+        "edithouse": {
+            "info": "የቤት መረጃ",
+            "rent": "ወርሃዊ ኪራይ",
+            "update": "አዘምን"
+        },
+        "housebookeduser": {
+            "noroom": "ክፍል የለም",
+            "error": "ስህተት",
+            "bookeduser": "ተያይዞ ያለ ተጠቃሚ",
+            "nouser": "ምንም ተጠቃሚ አልተያዘም",
+            "user": "ተጠቃሚ",
+            "email": "ኢሜይል",
+            "phone": "ስልክ",
+            "booking": "የቦታ ያዝ ጊዜ",
+            "tpay": "ጠቅላላ ክፍያ",
+            "tday": "ጠቅላላ ቀናት"
+        },
+        "myaddroom": {
+            "error": "ስህተት",
+            "noroom": "ክፍል የለም",
+            "addroom": "ክፍል አክል",
+            "floor": "የወለል ደረጃ",
+            "house": "የቤት ቁጥር",
+            "rent": "ወርሃዊ ኪራይ",
+            "roomstatus": "የክፍል ሁኔታ",
+            "active": "ንቁ",
+            "pending": "በመጠባበቅ ላይ"
+        },
+        "withdrawal": {
+            "withdrawalfund": "የማስወገድ ገንዘብ",
+            "amount": "መጠን",
+            "option": "የማስወገድ አማራጭ ይምረጡ",
+            "cbe": "ሲቢኢ ብር",
+            "tele": "ቴሌ ብር",
+            "amole": "አሞሌ",
+            "abysinia": "አቢሲኒያ ባንክ",
+            "acc": "የመለያ ቁጥር",
+            "withdrawal": "ማስወገድ"
+        }
+    },
+    "tenant": {
+        "balance": {
+            "mybalance": "የእኔ ሚዛን",
+            "ETB": "ብር"
+        },
+        "chapapayment": {
+            "Deposit": "ተቀማጭ",
+            "showdeposit": "ተቀማጭ አሳይ",
+            "withdrawal": "ማስወገድ"
+        },
+        "transactionhistory": {
+            "transaction": "የግብይት ታሪክ",
+            "date": "ቀን",
+            "amount": "መጠን",
+            "status": "ሁኔታ",
+            "pending": "በመጠባበቅ ላይ",
+            "done": "ተጠናቋል",
+            "type": "አይነት",
+            "ETB": "ብር"
+        },
+        "userbooking": {
+            "userbooking": "የተጠቃሚ ቦታ ያዝ",
+            "address": "አድራሻ",
+            "floor": "የወለል ደረጃ",
+            "house": "የቤት ቁጥር",
+            "rent": "ወርሃዊ ኪራይ",
+            "description": "መግለጫ",
+            "from": "ከ",
+            "to": "እስከ",
+            "remaining": "የቀረው ጊዜ"
+        }
+    },
+    "components": {
+        "defaultlayout": {
+            "home": "መነሻ",
+            "booked": "ተያዝ",
+            "wallet": "የገንዘብ ቦርሳ",
+            "profile": "መገለጫ",
+            "logout": "ውጣ",
+            "postHouse": "ቤት ለማስቀመጥ",
+            "myroom": "የእኔ ክፍል",
+            "cashorder": "የገንዘብ ትዕዛዝ",
+            "dashboard": "ዳሽቦርድ",
+            "alluser": "ሁሉም ተጠቃሚ",
+            "blockedhouse": "ታግሷል ቤት",
+            "withdrawalconfirm": "የማስወገድ ማረጋገጫ",
+            "admin": "አስተዳዳሪ",
+            "landloard": "አከራይ",
+            "tenant": "ተከራይ",
+            "houserentsys": "የቤት ኪራይ ስርዓት",
+            "signin": "ግባ"
+        }
+    },
+    "common": {
+        "booknoow": {
+            "floor": "የወለል ደረጃ",
+            "house": "የቤት ቁጥር",
+            "rent": "ወርሃዊ ኪራይ",
+            "description": "መግለጫ",
+            "iagree": "እስማማለሁ",
+            "book": "አሁን ይያዙ"
+        },
+        "depositdislay": {},
+        "deposithistory": {},
+        "home": {},
+        "housecard": {
+            "floor": "የወለል ደረጃ",
+            "House": "የቤት ቁጥር",
+            "rent": "ወርሃዊ ኪራይ",
+            "ETB": "ብር",
+            "moreinfo": "ተጨማሪ መረጃ"
+        },
+        "login": {
+            "login": "ግባ",
+            "email": "ኢሜይል",
+            "password": "የይለፍ ቃል",
+            "forgot": "የይለፍ ቃል ረስተዋል",
+            "register": "መመዝገብ",
+            "signin": "ግባ",
+            "dont": "መለያ የለህም?",
+            "loginpage": "የመግቢያ ገጽ",
+            "enterphone": "ስልክ ቁጥር አስገባ",
+            "enterpassword": "የይለፍ ቃል አስገባ"
+        },
+        "profile": {
+            "title": "የመገለጫ ገጽ",
+            "confirmpasswordPlaceholder": "የይለፍ ቃልዎን ያረጋግጡ",
+            "profile": "መገለጫ",
+            "usernamePlaceholder": "ስምዎን አስገባ",
+            "emailPlaceholder": "ኢሜይልዎን አስገባ",
+            "passwordPlaceholder": "የይለፍ ቃልዎን አስገባ",
+            "confirmPasswordPlaceholder": "የይለፍ ቃልዎን ያረጋግጡ",
+            "name": "ስም",
+            "email": "ኢሜይል",
+            "phone": "ስልክ",
+            "address": "አድራሻ",
+            "update": "አዘምን",
+            "uploadError": "ማስገባት አልተሳካም",
+            "uploadSuccess": "ማስገባት ተሳክቷል",
+            "uploading": "በመስቀል ላይ",
+            "updateButton": "አዘምን",
+            "passwordsDoNotMatch": "የይለፍ ቃሎች አይዛመዱም",
+            "userUpdatedSuccessfully": "ተጠቃሚ በተሳካ ሁኔታ ተሻሽሏል"
+        },
+        "register": {
+            "title": "የመመዝገቢያ ገጽ",
+            "register": "መመዝገብ",
+            "namePlaceholder": "ስምዎን አስገባ",
+            "emailPlaceholder": "ኢሜይልዎን አስገባ",
+            "phonePlaceholder": "ስልክዎን አስገባ",
+            "addressPlaceholder": "አድራሻዎን አስገባ",
+            "passwordPlaceholder": "የይለፍ ቃልዎን አስገባ",
+            "confirmpasswordPlaceholder": "የይለፍ ቃልዎን ያረጋግጡ",
+            "rolePlaceholder": "ሚናዎን ይምረጡ",
+            "roleTenant": "ተከራይ",
+            "roleLandlord": "አከራይ",
+            "email": "ኢሜይል",
+            "phone": "ስልክ",
+            "address": "አድራሻ",
+            "password": "የይለፍ ቃል",
+            "confirmpassword": "የይለፍ ቃል ያረጋግጡ",
+            "registerpage": "የመመዝገቢያ ገጽ",
+            "signin": "ግባ",
+            "login": "ግባ",
+            "haveAccount": "መለያ አለህ?"
+        }
+    }
 }
