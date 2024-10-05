@@ -47,7 +47,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 </Typography>
                 <Typography>Floor Level: {house.floorLevel}</Typography>
                 <Typography>House Number: {house.houseNumber}</Typography>
-                <Typography>Rent Per Month: ${house.rentPerMonth}</Typography>
+                <Typography>Rent Per Month: {house.rentPerMonth} ETB</Typography>
             </CardBody>
             <CardFooter className="pt-0">
                 <Button

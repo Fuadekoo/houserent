@@ -8,7 +8,6 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Loader from "./components/Loader";
 import { useSelector } from "react-redux";
 import AdminHome from "./pages/Admin/AdminHome";
-import AdminBuses from "./pages/Admin/AdminBuses";
 import AdminUsers from "./pages/Admin/AdminUsers";
 import UserHome from "./pages/User/UserHome";
 import UserBooking from "./pages/User/UserBooking";
@@ -27,7 +26,10 @@ import MyaddRoom from "./pages/landloards/MyaddRoom";
 import Edithouse from "./pages/landloards/Edithouse.jsx";
 import HouseBookedUser from "./pages/landloards/HouseBookedUser.jsx";
 import Withdrawal from "./pages/landloards/Withdrawal";
+import FilterHome from "./components/FilterHome.jsx";
+import Location from "./components/Location.jsx";
 import withdrawConfirm from "./pages/Admin/WithdrewConfirm.jsx";
+import Cash from "./pages/Admin/Cash.jsx"
 import Dashboard from "./pages/Admin/Dashboard";
 import About from "./pages/guest/About.jsx";
 import Contact from "./pages/guest/Contact.jsx";
@@ -35,6 +37,7 @@ import Service from "./pages/guest/Service.jsx";
 import Navbar from "./pages/guest/Navbar.jsx";
 import GuestHome from "./pages/guest/GuestHome.jsx";
 import Search from "./pages/guest/Search.jsx";
+import Mywithdraw from "./pages/landloards/MyWithdraw.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -51,7 +54,8 @@ function App() {
     <Route path="/payment-fail" element={<ProtectedRoute><PaymentFailed/></ProtectedRoute>}/>
     <Route path="/mydeposit" element={<ProtectedRoute><DepositDisplay/></ProtectedRoute>}/>
     <Route path="/editOwnerHouseInfo/:id" element={<ProtectedRoute><Edithouse/></ProtectedRoute>}/>
-
+    <Route path="/location" element={<ProtectedRoute><Location/></ProtectedRoute>}/>
+     
 
     <Route path="/roomsBookedUser/:houseId" element={<ProtectedRoute><HouseBookedUser/></ProtectedRoute>}/>
 
@@ -62,6 +66,7 @@ function App() {
     <Route path="/user/Bookings" element={<ProtectedRoute><UserBooking/></ProtectedRoute>}/>
     <Route path="/user/Notification" element={<ProtectedRoute><UserNotification/></ProtectedRoute>}/>
     <Route path="/booking/:id" element={<ProtectedRoute><BookNow/></ProtectedRoute>}/>
+    <Route path="/filterHousesCategory" element={<ProtectedRoute><FilterHome/></ProtectedRoute>}/>
 
 {/* route for landloards */}
 <Route path="/addroom" element={<ProtectedRoute><AddRoom/></ProtectedRoute>}/>
@@ -76,7 +81,9 @@ function App() {
     <Route path="/admin/allusers" element={<ProtectedRoute><AdminUsers/></ProtectedRoute>}/>
     <Route path="/admin/blockedhouses" element={<ProtectedRoute><BlockedHouse/></ProtectedRoute>}/>
     <Route path="/Dashboard" element={<ProtectedRoute><Dashboard/></ProtectedRoute>}/>
-    <Route path="/withdrawConfirm" element={<ProtectedRoute><withdrawConfirm/></ProtectedRoute>}/>
+    <Route path="/cash" element={<ProtectedRoute><Cash/></ProtectedRoute>}/>
+    <Route path="/withdrewconfirm" element={<ProtectedRoute><withdrawConfirm/></ProtectedRoute>}/>
+    <Route path="/mywithdraw" element={<ProtectedRoute><Mywithdraw/></ProtectedRoute>}/>
  
     {/* route all user  */}
     <Route path="/Register" element={<PublicRoute><Register/></PublicRoute>}/>

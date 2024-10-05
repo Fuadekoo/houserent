@@ -159,8 +159,8 @@ function AddRoom() {
               <option value="Apartama">Apartama</option>
               <option value="Villa">Villa</option>
               <option value="Condominium">Condominium</option>
-              <option value="compound house">Compound House</option>
-              <option value="single house">Single House</option>
+              <option value="compound_house">Compound House</option>
+              <option value="single_house">Single House</option>
             </select>
           </div>
           <div className="mb-4">

@@ -9,6 +9,14 @@ const upload = multer({ limits: { fileSize: 5 * 1024 * 1024 } });
 // register new user
 router.post("/register",async(req,res)=>{
     try {
+        // the number is all ways start from 9 or 7 only
+        if(![9,7].includes(parseInt(req.body.phone.toString().charAt(0)))) {
+            return res.send({
+                message:"phone number should start with 9 or 7",
+                success:false,
+                data:null
+            });
+        }
         const ExistingUser= await User.findOne({phone: req.body.phone});
         if(ExistingUser){
             return res.send({

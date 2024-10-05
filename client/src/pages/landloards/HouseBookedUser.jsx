@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Loading from '../../components/Loader';
 
 const HouseBookedUser = () => {
   const { houseId } = useParams(); // Get houseId from the URL
@@ -35,7 +36,7 @@ if(bookings.length === 0){
 }
 
   if (loading) {
-    return <div>Loading...</div>;
+    <Loading/>
   }
 
   if (error) {

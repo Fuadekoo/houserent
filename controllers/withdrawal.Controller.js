@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Withdrawal = require('../models/WithdrawalModel'); // Assuming you have a Withdrawal model
-const users = require("../models/usersModel"); // Assuming you have a User model
+const users = require("../models/usersModel"); 
+// const Withdrawal = require('../models/Withdrawal');
+const User = require('../models/usersModel');// Assuming you have a User model
 
 // Withdraw route
 const withdrew = async (req, res) => {
@@ -108,8 +110,55 @@ const withdrewConfirm = async (req, res) => {
     }
 };
 
+
+
+// Fetch all withdrew data  with optional search functionality
+ const getWithdrawals = async (req, res) => {
+    try {
+        const { searchTerm } = req.query;
+        const query = searchTerm
+            ? {
+                $or: [
+                    { withdrawalAmount: { $regex: searchTerm, $options: 'i' } },
+                    { withdrawOption: { $regex: searchTerm, $options: 'i' } },
+                    { withdrewAccount: { $regex: searchTerm, $options: 'i' } }
+                ]
+            }
+            : {};
+
+        const withdrawals = await Withdrawal.find(query).populate('ownerUser');
+        res.status(200).json(withdrawals);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Server error' });
+    }
+ };
+//  pending or done the payment
+const withdrawalapprove =  async (req, res) => {
+    const { withdrawalId } = req.params;
+    const { withdrewStatus } = req.body;
+
+    try {
+        const withdrawal = await Withdrawal.findByIdAndUpdate(
+            withdrawalId,
+            { withdrewStatus },
+            { new: true }
+        );
+
+        if (!withdrawal) {
+            return res.status(404).json({ message: 'Withdrawal not found' });
+        }
+
+        res.status(200).json({ message: 'Withdrawal status updated', withdrawal });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 module.exports = {
     withdrew,
     withdrewConfirm,
-    withdrewfetch
+    withdrewfetch,
+    getWithdrawals,
+    withdrawalapprove
 };

@@ -20,7 +20,7 @@ const houseSchema = new mongoose.Schema({
   },
   housecategory:{
     type:String,
-    enum: ['Apartama', 'Villa', 'Condominium','compound house','single house'],
+    enum: ['Apartama', 'Villa', 'Condominium','compound_house','single_house'],
     required:true
   },
   description:{
