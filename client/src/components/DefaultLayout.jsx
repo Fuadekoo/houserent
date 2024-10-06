@@ -21,10 +21,10 @@ function DefaultLayout({ children }) {
 
   const landlordMenu = [
     { name: t('components.defaultlayout.home'), path: "/myhome", icon: "ri-home-line" },
-    { name: t('components.defaultlayout.postHouses'), path: "/addroom", icon: "ri-home-2-line" },
-    { name: t('components.defaultlayout.myRoom'), path: "/myroomPosted", icon: "ri-home-4-line" },
+    { name: t('components.defaultlayout.postHouse'), path: "/addroom", icon: "ri-home-2-line" },
+    { name: t('components.defaultlayout.myroom'), path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: t('components.defaultlayout.wallet'), path: "/balance", icon: "ri-wallet-line" },
-    { name: t('components.defaultlayout.cashOrder'), path: "/mywithdraw", icon: "ri-wallet-3-line" },
+    { name: t('components.defaultlayout.cashorder'), path: "/mywithdraw", icon: "ri-wallet-3-line" },
     { name: t('components.defaultlayout.profile'), path: "/profile", icon: "ri-user-line" },
     { name: t('components.defaultlayout.logout'), path: "/logout", icon: "ri-logout-box-line" }
   ];
@@ -32,10 +32,10 @@ function DefaultLayout({ children }) {
   const adminMenu = [
     { name: t('components.defaultlayout.dashboard'), path: "/Dashboard", icon: "ri-dashboard-line" },
     { name: t('components.defaultlayout.home'), path: "/admin/home", icon: "ri-home-line" },
-    { name: t('components.defaultlayout.allUsers'), path: "/admin/allusers", icon: "ri-file-list-line" },
-    { name: t('components.defaultlayout.blockedHouses'), path: "/admin/blockedhouses", icon: "ri-file-list-line" },
+    { name: t('components.defaultlayout.alluser'), path: "/admin/allusers", icon: "ri-file-list-line" },
+    { name: t('components.defaultlayout.blockedhouse'), path: "/admin/blockedhouses", icon: "ri-file-list-line" },
     { name: t('components.defaultlayout.wallet'), path: "/balance", icon: "ri-wallet-line" },
-    { name: t('components.defaultlayout.withdrawConfirmation'), path: "/cash", icon: "ri-wallet-3-line" },
+    { name: t('components.defaultlayout.withdrawalconfirm'), path: "/cash", icon: "ri-wallet-3-line" },
     { name: t('components.defaultlayout.profile'), path: "/profile", icon: "ri-user-line" },
     { name: t('components.defaultlayout.logout'), path: "/logout", icon: "ri-logout-box-line" }
   ];
@@ -63,7 +63,7 @@ function DefaultLayout({ children }) {
 
         {/* User Role */}
         <div className='mb-4 text-xl font-bold text-white'>
-          {user?.isAdmin ? t('components.defaultlayout.admin') : user?.role === 'landlord' ? t('components.defaultlayout.landlord') : t('components.defaultlayout.tenant')}
+          {user?.isAdmin ? t('components.defaultlayout.admin') : user?.role === 'landlord' ? t('components.defaultlayout.landloard') : t('components.defaultlayout.tenant')}
         </div>
 
         {/* Sidebar */}

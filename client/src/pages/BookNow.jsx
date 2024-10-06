@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 import { Spin, DatePicker, Button, Form, message, Checkbox } from 'antd';
 import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
+import { useTranslation } from 'react-i18next';
 
 const { RangePicker } = DatePicker;
 
 function BookNow() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const [houseDetails, setHouseDetails] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -140,10 +142,10 @@ function BookNow() {
               </div>
               <div className="md:w-1/2 p-4">
                 <h2 className="text-2xl font-bold mb-4">{houseDetails.address}</h2>
-                <p className="mb-2">Floor Level: {houseDetails.floorLevel}</p>
-                <p className="mb-2">House Number: {houseDetails.houseNumber}</p>
-                <p className="mb-2">Rent Per Month: {houseDetails.rentPerMonth} birr</p>
-                <p className="mb-2">description: {houseDetails.description}</p>
+                <p className="mb-2">{t('common.booknow.floor')}: {houseDetails.floorLevel}</p>
+                <p className="mb-2">{t('common.booknow.house')}: {houseDetails.houseNumber}</p>
+                <p className="mb-2">{t('common.booknow.rent')}: {houseDetails.rentPerMonth} birr</p>
+                <p className="mb-2">{t('common.booknow.description')}: {houseDetails.description}</p>
                 <Form layout="vertical" onFinish={handleBooking}>
                   <Form.Item label="Select Booking Time" required>
                     <RangePicker
@@ -158,7 +160,8 @@ function BookNow() {
                       checked={isChecked}
                       onChange={(e) => setIsChecked(e.target.checked)}
                     >
-                      I agree to the terms and conditions
+                      {t('common.booknow.iagree')}
+                      
                     </Checkbox>
                   </Form.Item>
                   <Button
@@ -167,7 +170,7 @@ function BookNow() {
                     className="w-full"
                     disabled={!isChecked} // Disable button if checkbox is not checked
                   >
-                    Book Now
+                    {t('common.booknow.book')}
                   </Button>
                 </Form>
               </div>
