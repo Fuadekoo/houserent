@@ -5,7 +5,7 @@ const classModel = require("../models/HouseModel");
 const addRoom = async (req, res) => {
     // Access the user ID from the request object
     const { userId: ownerUser } = req.user;
-    const {image, address, floorLevel, houseNumber,housecategory,description,rentPerMonth} = req.body;
+    const {image, RoomLocation, address, floorLevel, houseNumber,housecategory,description,rentPerMonth} = req.body;
   try {
       // Check if the owner user exists
       const checkUser = await users.findOne({ _id: ownerUser ,role:"landlord"});
@@ -31,7 +31,8 @@ const addRoom = async (req, res) => {
           AdminPrice: AdminPrice,
           housecategory:housecategory,
           description:description,
-          ownerUser: ownerUser
+          ownerUser: ownerUser,
+          RoomLocation:RoomLocation
       };
           try {
     const check = await classModel.findOne({ image: image });

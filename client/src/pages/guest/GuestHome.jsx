@@ -10,6 +10,7 @@ import PublicRoute from '../../components/PublicRoute'
 function GuestHome() {
   return <div>
     <Navbar />
+  
     <Home />
     
 

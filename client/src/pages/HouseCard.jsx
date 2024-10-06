@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import {FaMapMarkerAlt } from 'react-icons/fa'; // Import icons from react-icons
+
 import {
     Card,
     CardHeader,
@@ -10,6 +12,8 @@ import {
 } from '@material-tailwind/react';
 
 const HouseCard = ({ house }) => {
+        const zoom = 16; // 15 is ideal
+
 
     
     return (
@@ -21,6 +25,7 @@ const HouseCard = ({ house }) => {
                     className="w-full h-full object-cover"
                 />
             </CardHeader>
+
             <CardBody>
                 <Typography variant="h5" color="blue-gray" className="mb-2">
                     {house.address}

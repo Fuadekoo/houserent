@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser } from 'react-icons/fa'; // Import icons from react-icons
+import { FaEdit, FaTrash, FaCheckCircle, FaClock,FaUser, FaMapMarkerAlt } from 'react-icons/fa'; // Import icons from react-icons
 import { Link } from 'react-router-dom';
 import swal from 'sweetalert2';
+import DisplayLocation from '../../components/DisplayLocation';
 
 function MyaddRoom() {
     const [rooms, setRooms] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+
+    const [showMap, setShowMap] = useState(null); // State to track which map to show
+    const toggleMapVisibility = (roomId) => {
+        setShowMap(showMap === roomId ? null : roomId); // Toggle visibility based on roomId
+    };
 
     useEffect(() => {
         const fetchRooms = async () => {
@@ -102,16 +109,40 @@ function MyaddRoom() {
                             className="bg-white shadow-md rounded-lg p-4 transform transition duration-500 hover:scale-105 relative"
                         >
                             <div className="p-4">
+                           
                                 <h2 className="text-xl font-semibold">Address: {room.address}</h2>
                                 <p>Floor Level: {room.floorLevel}</p>
                                 <p>House Number: {room.houseNumber}</p>
                                 <p>Rent Per Month: {room.rentPerMonth}</p>
                                 <p>Room Status: {room.active ? 'Active' : 'Pending'}</p>
+                               
                                 {room.active ? (
                                     <FaCheckCircle style={{ color: 'green' }} /> // Display verification icon if active
                                 ) : (
                                     <FaClock style={{ color: 'orange' }} /> // Display pending icon if not active
                                 )}
+
+                                 {/* Map toggle button */}
+                                <button
+                                    className="text-blue-500 hover:text-blue-700 mt-2"
+                                    onClick={() => toggleMapVisibility(room._id)}
+                                >
+                                <span style={{display:"flex", flexDirection:"row"}}>
+                                     <FaMapMarkerAlt /> {/* Map icon */}
+                                    {showMap === room._id ? ' Hide Map' : ' View Map'}
+                                </span>
+                                   
+                                </button>
+
+                                {/* Conditionally display the map */}
+                                {showMap === room._id && room.RoomLocation && (
+                                    <DisplayLocation
+                                        latitude={room.RoomLocation.latitudeValue}
+                                        longitude={room.RoomLocation.longitudeValue}
+                                    />
+                                )}
+
+                               
                             </div>
                             
                             <div className="absolute top-4 right-4 flex space-x-2">
@@ -143,3 +174,4 @@ function MyaddRoom() {
 }
 
 export default MyaddRoom;
+

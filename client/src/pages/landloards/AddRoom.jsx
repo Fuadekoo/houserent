@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
 
@@ -14,6 +14,27 @@ function AddRoom() {
   });
 
   const [image, setImage] = useState([]);
+
+   const [position, setPosition] = useState({ latitude: null, longitude: null });
+  const zoom = 16; // 15 is ideal
+
+// useEffect for the location of the current user to add the room
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setPosition({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    } else {
+      console.log("Geolocation is not available in your browser.");
+    }
+  }, []);
+
+  const latitudeValue = position.latitude;
+  const longitudeValue = position.longitude;
+
 
   const handleChange = (e) => {
     setFormData({
@@ -42,7 +63,8 @@ function AddRoom() {
         setImage(base64Images); // Set preview image state
         setFormData({
           ...formData,
-          image: base64Images // Add base64 images to formData
+          image: base64Images ,// Add base64 images to formData
+          RoomLocation:{latitudeValue ,longitudeValue}
         });
       })
       .catch((error) => {
