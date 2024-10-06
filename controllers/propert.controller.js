@@ -182,8 +182,6 @@ const searchHouses = async (req, res) => {
   const {
     address,
     housecategory,
-    minBathrooms,
-    minBedrooms,
     parking,
     minRent,
     maxRent,
@@ -200,12 +198,6 @@ const searchHouses = async (req, res) => {
   }
   if (housecategory && housecategory !== 'all') {
     query.housecategory = housecategory; // Exact match for house category
-  }
-  if (minBathrooms) {
-    query.bathrooms = { $gte: parseInt(minBathrooms) }; // Minimum number of bathrooms
-  }
-  if (minBedrooms) {
-    query.bedrooms = { $gte: parseInt(minBedrooms) }; // Minimum number of bedrooms
   }
   if (parking) {
     query.parking = parking === 'true'; // Convert parking string to boolean
