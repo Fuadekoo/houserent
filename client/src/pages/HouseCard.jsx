@@ -10,10 +10,11 @@ import {
     Typography,
     Button,
 } from '@material-tailwind/react';
-
+import { useTranslation } from 'react-i18next';
 const HouseCard = ({ house }) => {
         const zoom = 16; // 15 is ideal
 
+    const { t } = useTranslation();
 
     
     return (
@@ -31,13 +32,13 @@ const HouseCard = ({ house }) => {
                     {house.address}
                 </Typography>
                 <Typography>
-                    Floor Level: {house.floorLevel}
+                {t('common.housecard.floor')}: {house.floorLevel}
                 </Typography>
                 <Typography>
-                    House Number: {house.houseNumber}
+                {t('common.housecard.House')}: {house.houseNumber}
                 </Typography>
                 <Typography>
-                    Rent Per Month: ${house.rentPerMonth}
+                {t('common.housecard.rent')}:  {t('common.housecard.ETB')}{house.rentPerMonth}
                 </Typography>
             </CardBody>
             <CardFooter className="pt-0">
@@ -45,7 +46,7 @@ const HouseCard = ({ house }) => {
                     color="blue" 
                     className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-green-700 bg-zinc-600"
                 >
-                    <Link to={`/booking/${house._id}`}>More Info</Link>
+                    <Link to={`/booking/${house._id}`}>{t('common.housecard.moreinfo')}</Link>
                 </Button>
             </CardFooter>
         </Card>

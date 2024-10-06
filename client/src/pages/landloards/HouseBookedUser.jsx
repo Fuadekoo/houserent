@@ -70,6 +70,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import BookedUserCard from '../guest/BookedUserCard';
+import Loading from '../../components/Loader';
 
 const HouseBookedUser = () => {
   const { houseId } = useParams();
@@ -127,7 +128,7 @@ const HouseBookedUser = () => {
 
 
   if (loading) {
-    return <div>Loading...</div>;
+    <Loading/>
   }
 
   if (error) {

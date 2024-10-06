@@ -1,52 +1,254 @@
 {
   "admin": {
-    "adminhome":{},
-    "adminpayment":{},
-    "adminuser":{},
-    "blockedhouse":{},
-    "dashboard":{},
-    "isroomblockedcard":{},
+    "adminuser":{
+      "all": "All",
+      "blocked":"Blocked",
+      "unblocked":"Unblocked",
+      "member":"Members List",
+      "phone":"Phone",
+      "role":"Role",
+      "status":"Status",
+      "seeall":"See information About All Members",
+      "prev":"prev",
+      "next":"next",
+      "total":"Total Users"
+    },
+    "cash":{
+      "withdrawal":"Withdrawal Requests",
+      "manage":"Manage Withdrawal Requests",
+      "transactionid":"Transaction ID",
+      "Amount":"Amount",
+      "UserInfo":"User Info",
+      "name":"Name",
+      "email":"Email",
+      "optiion":"Option",
+      "phone":"Phone",
+      "select":"Select Status",
+      "pending":"Pending",
+      "done":"Done",
+      "update":"Update",
+      "account":"Account Number",
+      "status":"Status",
+      "Actions":"Actions",
+      "prev":"prev",
+      "next":"next",
+      "of":"of"
+    },
+    "dashboard":{
+      "users":"Users",
+      "Houses":"Houses",
+      "Bookings":"Bookings",
+      "Transactions":"Transactions",
+      "deposit":"Deposit",
+      "withdrawal":"Withdrawal"
+    },
+    "isroomblockedcard":{
+      "floor":"Floor Level",
+      "House":"House Number",
+      "rent":"Rent per month",
+      "ETB":"ETB",
+      "Block":"Block",
+      "Unblock":"Unblock"
+    },
     "withdrewconfirm":{}
   },
 
   "guest": {
     "navbar": {
       "welcome": "Welcome",
-      "login": "Login"
+      "search": "Search...",
+      "Home": "Home",
+      "About": "About",
+      "signin": "Sign In"
     }
 
   },
 
   "landloard": {
-    "addroom":{},
-    "customers":{},
-    "edithouse":{},
-    "housebookeduser":{},
-    "myaddroom":{},
-    "withdrawal":{}
+    "addroom":{
+      "add":"Add Room",
+      "image":"Images",
+      "address":"Address",
+      "floor":"Floor Level",
+      "house":"House Number",
+      "housecatagory":"House Catagory",
+      "apartama":"Apartment",
+      "condo":"Condo",
+      "compound":"Compound House",
+      "single":"Single House",
+      "description":"Description",
+      "rent":"Rent per month"
+    },
+    "edithouse":{
+      "info":"House Information",
+      "rent":"Rent per month",
+      "update":"Update"
+    },
+    "housebookeduser":{
+      "noroom":"No Room",
+      "error":"Error",
+      "bookeduser":"Booked User",
+      "nouser":"No Users have booking",
+      "user":"User",
+      "email":"Email",
+      "phone":"Phone",
+      "booking":"Booking Duration",
+      "tpay":"Total Payment",
+      "tday":"Total Days"
+    },
+    "myaddroom":{
+      "error":"Error",
+      "noroom":"No Room",
+      "addroom":"Add Room",
+      "floor":"Floor Level",
+      "house":"House Number",
+      "rent":"Rent per month",
+      "roomstatus":"Room Status",
+      "active":"Active",
+      "pending":"Pending"
+    },
+    "withdrawal":{
+      "withdrawalfund":"Withdrawal Funds",
+      "amount":"Amount",
+      "option":"Select Withdrawal Option",
+      "cbe":"CBE Birr",
+      "tele":"Tele Birr",
+      "amole":"Amole",
+      "abysinia":"Abysinia Bank",
+      "acc":"Account Number",
+      "withdrawal":"Withdrawal"
+    }
   },
   "tenant": {
-    "balance":{},
-    "chapapayment":{},
-    "transactionhistory":{},
-    "userbooking":{},
-    "userhome":{},
-    "usernotification":{}
+    "balance":{
+      "mybalance":"My Balance",
+      "ETB":"ETB"
+    },
+    "chapapayment":{
+      "Deposit":"Deposit",
+      "showdeposit":"Show Deposit",
+      "withdrawal":"Withdrawal"
+    },
+    "transactionhistory":{
+      "transaction":"Transaction History",
+      "date":"Date",
+      "amount":"Amount",
+      "status":"Status",
+      "pending":"Pending",
+      "done":"Done",
+      "type":"Type",
+      "ETB":"ETB"
+      
+    },
+    "userbooking":{
+      "userbooking":"User Booking",
+      "address":"Address",
+      "floor":"Floor Level",
+      "house":"House Number",
+      "rent":"Rent per month",
+      "description":"Description",
+      "from":"From",
+      "to":"To",
+      "remaining":"Remaining Time"
+    }
+
   },
   "components": {
-    "defaultlayout":{}
+    "defaultlayout":{
+      "home":"Home",
+      "booked":"Booked",
+      "wallet":"Wallet",
+      "profile":"Profile",
+      "logout":"Logout",
+      "postHouse":"Post House",
+      "myroom":"My Room",
+      "wallet":"Wallet",
+      "cashorder":"Cash Order",
+      "dashboard":"Dashboard",
+      "alluser":"All User",
+      "blockedhouse":"Blocked House",
+      "withdrawalconfirm":"Withdrawal Confirm",
+      "admin":"Admin",
+      "landloard":"Landloard",
+      "tenant":"Tenant",
+      "houserentsys":"House Rent System",
+      "signin":"Sign In"
+    }
   },
 
   "common": {
-    "booknoow":{},
+    "booknow":{
+      "floor":"Floor Level",
+      "house":"House Number",
+      "rent":"Rent per month",
+      "description":"Description",
+      "iagree":"I agree to the terms and conditions",
+      "book":"Book Now"
+    },
     "depositdislay":{},
     "deposithistory":{},
     "home":{},
-    "housecard":{},
-    "login":{},
-    "profile":{},
-    "register":{},
-    "wallet":{}
+    "housecard":{
+      "floor":"Floor Level",
+      "House":"House Number",
+      "rent":"Rent per month",
+      "ETB":"ETB",
+      "moreinfo":"More Info"
+    },
+    "login":{
+      "login":"Login",
+      "email":"Email",
+      "password":"Password",
+      "forgot":"Forgot Password",
+      "register":"Register",
+      "signin":"Sign In",
+      "dont":"Don't have an account?",
+      "loginpage":"Login Page",
+      "enterphone":"Enter Phone Number",
+      "enterpassword":"Enter Password"
+    },
+    "profile":{
+      "title":"Profile page",
+      "confirmpasswordPlaceholder":"Confirm Your Password",
+      "profile":"Profile",
+      "usernamePlaceholder":"Enter Your Name",
+      "emailPlaceholder":"Enter Your Email",
+      "passwordPlaceholder":"Enter Your Password",
+      "confirmPasswordPlaceholder":"Confirm Your Password",
+      "name":"Name",
+      "email":"Email",
+      "phone":"Phone",
+      "address":"Address",
+      "update":"Update",
+      "uploadError":"Upload Error",
+      "uploadSuccess":"Upload Success",
+      "uploading":"Uploading",
+      "updateButton":"Update",
+      "passwordsDoNotMatch":"Passwords do not match",
+      "userUpdatedSuccessfully":"User updated successfully"
+    },
+    "register":{
+      "title":"Register page",
+      "register":"Register",
+      "namePlaceholder":"Enter Your Name",
+      "emailPlaceholder":"Enter Your Email",
+      "phonePlaceholder":"Enter Your Phone",
+      "addressPlaceholder":"Enter Your address",
+      "passwordPlaceholder":"Enter Your Password",
+      "confirmpasswordPlaceholder":"Confirm Your Password",
+      "rolePlaceholder":"Select Your Role",
+      "roleTenant":"Tenant",
+      "roleLandlord":"Landloard",
+      "email":"Email",
+      "phone":"Phone",
+      "address":"Address",
+      "password":"Password",
+      "confirmpassword":"Confirm Password",
+      "registerpage":"Register Page",
+      "signin":"Sign In",
+      "login":"Login",
+      "haveAccount":"Already have an account?"
+    }
   }
 
 }

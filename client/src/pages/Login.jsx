@@ -23,7 +23,7 @@ const Login = () => {
           localStorage.setItem("token",response.data.data);
           
           dispatch(HideLoading());
-          navigate("/");
+            navigate("/myhome");
         }else{
           message.error(response.data.message);
           dispatch(HideLoading());
@@ -38,36 +38,35 @@ const Login = () => {
 
   return (
     <div className='p-3 max-w-lg mx-auto'>
-      <h1 className='text-3xl text-center font-semibold my-7'>Login page</h1>
+      <h1 className='text-3xl text-center font-semibold my-7'>{t('common.login.loginpage')}</h1>
       <Form layout='vertical' onFinish={onFinish} className='flex flex-col gap-4'>
-        <Form.Item  name='phone'  className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'>
+        <Form.Item name='phone' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'>
           <input
             type='number'
             className='border-none p-3 rounded-lg focus:outline-none focus:border-blue-500 w-full'
-            placeholder='Enter your phone number'
+            placeholder={t('common.login.enterphone')}
           />
         </Form.Item>
-        <Form.Item  name='password'  className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'>
+        <Form.Item name='password' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'>
           <input
             type='password'
             className='border-none p-3 rounded-lg focus:outline-none focus:border-blue-500 w-full'
-            placeholder='Enter your password'
+            placeholder={t('common.login.enterpassword')}
           />
         </Form.Item>
         <button
           className='bg-slate-700 text-white p-3 rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           type='submit'
         >
-          {t('header.login')}
+          {t('common.login.login')}
         </button>
       </Form>
       <div className='flex gap-2 mt-5'>
-        <p>Don't have an account?</p>
+        <p>{t('common.login.dont')}</p>
         <Link to='/Register' className='text-blue-700'>
-          Register
+          {t('common.login.register')}
         </Link>
       </div>
-     
     </div>
   );
 };

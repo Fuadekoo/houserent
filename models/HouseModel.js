@@ -53,6 +53,18 @@ const houseSchema = new mongoose.Schema({
   },
 
 
+  bathrooms:{
+    type:Number,
+    required:true,
+},
+bedrooms :{
+    type:Number,
+    required:true,
+},
+parking:{
+    type:Boolean,
+    required:true,
+},
   active:{
     type:Boolean,
     default:false

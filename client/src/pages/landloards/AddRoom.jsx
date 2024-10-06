@@ -10,7 +10,10 @@ function AddRoom() {
     houseNumber: '',
     housecategory: '',
     description: '',
-    rentPerMonth: ''
+    rentPerMonth: '',
+    bedrooms:1,
+    bathrooms:1,
+    parking:false,
   });
 
   const [image, setImage] = useState([]);
@@ -208,6 +211,43 @@ function AddRoom() {
               required
             />
           </div>
+          <div className="mb-4">
+  <label className="block text-gray-700">Bedrooms</label>
+  <input
+    type="number"
+    name="bedrooms"
+    value={formData.bedrooms}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="1"
+    min="1"
+    required
+  />
+</div>
+<div className="mb-4">
+  <label className="block text-gray-700">Bathrooms</label>
+  <input
+    type="number"
+    name="bathrooms"
+    value={formData.bathrooms}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+    placeholder="1"
+    min="1"
+    required
+  />
+</div>
+<div className="mb-4">
+  <label className="block text-gray-700">Parking</label>
+  <input
+    type="checkbox"
+    name="parking"
+    checked={formData.parking}
+    onChange={(e) => setFormData({ ...formData, parking: e.target.checked })}
+    className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+  />
+</div>
+
           <button
             type="submit"
             className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"

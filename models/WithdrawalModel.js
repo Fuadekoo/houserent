@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const WithdrawalSchema = new Schema({
     ownerUser: {
         type: Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'users',
         required: true
     },
     withdrawalAmount: {

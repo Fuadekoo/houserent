@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Loading from '../../components/Loader';
+import { useTranslation } from 'react-i18next';
 
 function TransactionHistory() {
+  const { t } = useTranslation();
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -45,13 +48,13 @@ function TransactionHistory() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
-        <h2 className="text-2xl font-bold mb-6 text-center">Transaction History</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t('tenant.transactionhistory.transaction')}</h2>
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-gray-200">
-              <th className="py-3 px-4 border-b text-left text-gray-600">Date</th>
-              <th className="py-3 px-4 border-b text-left text-gray-600">Amount</th>
-              <th className="py-3 px-4 border-b text-left text-gray-600">Type</th>
+              <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.date')}</th>
+              <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.amount')}</th>
+              <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.type')}</th>
             </tr>
           </thead>
           <tbody>
