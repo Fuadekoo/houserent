@@ -110,7 +110,7 @@ export default function Search() {
              </div>
         {/* Display Results */}
         <div className="flex-1">
-          <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-2'>House Result:</h1>
+          <h1 className='text-3l font-semibold border-b p-3 text-slate-700 mt-2'>House Result:</h1>
           <div className="p-7 flex flex-wrap gap-4">
             {loading ? (
               <div className='flex justify-center items-center'>
