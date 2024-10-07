@@ -35,7 +35,7 @@ const HouseCard = ({ house }) => {
                     <div className="pt-1">
                         <button 
                             color="blue" 
-                            className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-green-700 bg-zinc-600"
+                            className="w-full transform transition-transform duration-300 hover:scale-105 bg-slate-600 text-white p-1 rounded-sm  hover:opacity-750"
                         >
                             More Info
                         </button>

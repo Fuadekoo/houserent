@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { HideLoading, ShowLoading } from '../redux/alertsSlice';
 import { useTranslation } from 'react-i18next';
+import Navbar from './guest/Navbar';
 
 const { Option } = Select;
 
@@ -31,7 +32,11 @@ const Register = () => {
   };
 
   return (
+    <div className="">
+      <Navbar/>
+   
     <div className='p-3 max-w-lg mx-auto'>
+      
       <h1 className='text-3xl text-center font-semibold my-7'>{t('common.register.title')}</h1>
       <Form layout='vertical' onFinish={onFinish} className='flex flex-col gap-4'>
         <Form.Item name='name' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.register.nameError') }]}>
@@ -91,6 +96,7 @@ const Register = () => {
           {t('common.register.login')}
         </Link>
       </div>
+    </div>
     </div>
   );
 };
