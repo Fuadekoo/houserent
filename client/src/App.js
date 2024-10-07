@@ -36,6 +36,8 @@ import Navbar from "./pages/guest/Navbar.jsx";
 import GuestHome from "./pages/guest/GuestHome.jsx";
 import Search from "./pages/guest/Search.jsx";
 import Mywithdraw from "./pages/landloards/MyWithdraw.jsx";
+import BookedRoomsCurrent from "./pages/BookedRoomsCurrent.jsx";
+import ShowMyCurrentBooked from "./pages/landloards/ShowMyCurrentBooked.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -56,8 +58,11 @@ function App() {
      
 
     <Route path="/roomsBookedUser/:houseId" element={<ProtectedRoute><HouseBookedUser/></ProtectedRoute>}/>
+    <Route path="/currentBooked" element={<ProtectedRoute><BookedRoomsCurrent/></ProtectedRoute>}/>
 
-
+    <Route path="/showMyBookedRoom" element={<ProtectedRoute><ShowMyCurrentBooked/></ProtectedRoute>}/>
+     
+     
 
     {/* route for tenants */}
     <Route path="/user/Bookings" element={<ProtectedRoute><UserBooking/></ProtectedRoute>}/>
@@ -90,7 +95,7 @@ function App() {
     {/* route for guests */}
   
     <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
-    <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/>
+    <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/> //  all active and none booked rooms
     <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
     <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/>
     <Route path="/search" element={<PublicRoute><Search/></PublicRoute>}/>

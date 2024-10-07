@@ -12,7 +12,6 @@ import {
 } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
 const HouseCard = ({ house }) => {
-        const zoom = 16; // 15 is ideal
 
     const { t } = useTranslation();
 

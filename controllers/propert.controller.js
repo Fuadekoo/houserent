@@ -7,6 +7,10 @@ const addRoom = async (req, res) => {
   const { userId: ownerUser } = req.user;
   const { parking, bathrooms, bedrooms ,image, RoomLocation, address, floorLevel, houseNumber, housecategory, description, rentPerMonth } = req.body;
 
+  // Access the user ID from the request object
+//   const { userId: ownerUser } = req.user;
+//   const { parking, bathrooms, bedrooms ,image, RoomLocation, address, floorLevel, houseNumber, housecategory, description, rentPerMonth } = req.body;
+
   try {
     // Check if the owner user exists
     const checkUser = await users.findOne({ _id: ownerUser, role: "landlord" });

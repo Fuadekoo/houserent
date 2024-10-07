@@ -25,6 +25,7 @@ function DefaultLayout({ children }) {
     { name: t('components.defaultlayout.myroom'), path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: t('components.defaultlayout.wallet'), path: "/balance", icon: "ri-wallet-line" },
     { name: t('components.defaultlayout.cashorder'), path: "/mywithdraw", icon: "ri-wallet-3-line" },
+     { name: t('components.defaultlayout.notification'), path: "/showMyBookedRoom", icon: "ri-user-line" },
     { name: t('components.defaultlayout.profile'), path: "/profile", icon: "ri-user-line" },
     { name: t('components.defaultlayout.logout'), path: "/logout", icon: "ri-logout-box-line" }
   ];
@@ -90,6 +91,7 @@ function DefaultLayout({ children }) {
           {/* Header */}
           <div className='flex justify-between items-center bg-white rounded p-4'>
             <h1 className='text-2xl font-bold'>{t('components.defaultlayout.houserentsys')}</h1>
+            <div className="flex items-center gap-4 ">
             <Link to='/profile'>
               {user ? (
                 <img className='rounded-full h-10 w-10 object-cover' src={user.avatar} alt={t('components.defaultlayout.profile')} />
@@ -99,6 +101,7 @@ function DefaultLayout({ children }) {
             </Link>
             <h2 className='text-xl'>{user?.name}</h2>
             <LanguageChange />
+            </div>
           </div>
           {/* Body */}
           <div>

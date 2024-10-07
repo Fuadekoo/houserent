@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
+import { useTranslation } from 'react-i18next';
 
 function AddRoom() {
+  const { t } = useTranslation();
   const [formData, setFormData] = useState({
     image: [],
     address: '',
@@ -119,12 +121,12 @@ function AddRoom() {
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <div className="bg-white mt-1 p-8 rounded-lg shadow-lg w-full max-w-md" style={{ width: '80%', height: 'fit-content', marginTop: '0' }}>
-        <h2 className="text-2xl font-bold mb-6 text-center">Add Room</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t('landloard.addroom.add')}</h2>
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <>
               <div className="mb-4">
-                <label className="block text-gray-700">Images</label>
+                <label className="block text-gray-700">{t('landloard.addroom.image')}</label>
                 <input
                   type="file"
                   multiple
@@ -140,7 +142,7 @@ function AddRoom() {
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Address</label>
+                <label className="block text-gray-700">{t('landloard.addroom.address')}</label>
                 <input
                   type="text"
                   name="address"
@@ -158,7 +160,7 @@ function AddRoom() {
                   onClick={nextStep}
                   className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  Next
+                  {t('landloard.addroom.next')}
                 </button>
               </div>
             </>
@@ -166,7 +168,7 @@ function AddRoom() {
           {step === 2 && (
             <>
               <div className="mb-4">
-                <label className="block text-gray-700">Floor Level</label>
+                <label className="block text-gray-700">{t('landloard.addroom.floor')}</label>
                 <input
                   type="text"
                   name="floorLevel"
@@ -179,7 +181,7 @@ function AddRoom() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">House Number</label>
+                <label className="block text-gray-700">{t('landloard.addroom.house')}</label>
                 <input
                   type="text"
                   name="houseNumber"
@@ -192,7 +194,7 @@ function AddRoom() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">House Category</label>
+                <label className="block text-gray-700">{t('landloard.addroom.housecatagory')}</label>
                 <select
                   name="housecategory"
                   value={formData.housecategory}
@@ -200,12 +202,12 @@ function AddRoom() {
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 >
-                  <option value="">Select a category</option>
-                  <option value="Apartama">Apartama</option>
-                  <option value="Villa">Villa</option>
-                  <option value="Condominium">Condominium</option>
-                  <option value="compound_house">Compound House</option>
-                  <option value="single_house">Single House</option>
+                  <option value="">{t('landloard.addroom.Select')}</option>
+                  <option value="Apartama">{t('landloard.addroom.apartama')}</option>
+                  <option value="Villa">{t('landloard.addroom.villa')}</option>
+                  <option value="Condominium">{t('landloard.addroom.condo')}</option>
+                  <option value="compound_house">{t('landloard.addroom.compound')}</option>
+                  <option value="single_house">{t('landloard.addroom.single')}</option>
                 </select>
               </div>
               <div className="flex justify-between">
@@ -214,14 +216,14 @@ function AddRoom() {
                   onClick={prevStep}
                   className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
-                  Previous
+                  {t('landloard.addroom.prev')}
                 </button>
                 <button
                   type="button"
                   onClick={nextStep}
                   className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  Next
+                  {t('landloard.addroom.next')}
                 </button>
               </div>
             </>
@@ -229,20 +231,20 @@ function AddRoom() {
           {step === 3 && (
             <>
               <div className="mb-4">
-                <label className="block text-gray-700">Description</label>
+                <label className="block text-gray-700">{t('landloard.addroom.Description')}</label>
                 <input
                   type="text"
                   name="description"
                   value={formData.description}
                   onChange={handleChange}
                   className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  placeholder="Description"
+                  placeholder={t('landloard.addroom.Description')}
                   maxLength="100"
                   required
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Rent Per Month</label>
+                <label className="block text-gray-700">{t('landloard.addroom.rent')}</label>
                 <input
                   type="number"
                   name="rentPerMonth"
@@ -254,7 +256,7 @@ function AddRoom() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Bedrooms</label>
+                <label className="block text-gray-700">{t('landloard.addroom.Bedrooms')}</label>
                 <input
                   type="number"
                   name="bedrooms"
@@ -267,7 +269,7 @@ function AddRoom() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Bathrooms</label>
+                <label className="block text-gray-700">{t('landloard.addroom.Bathrooms')}</label>
                 <input
                   type="number"
                   name="bathrooms"
@@ -280,7 +282,7 @@ function AddRoom() {
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700">Parking</label>
+                <label className="block text-gray-700">{t('landloard.addroom.Parking')}</label>
                 <input
                   type="checkbox"
                   name="parking"
@@ -295,13 +297,13 @@ function AddRoom() {
                   onClick={prevStep}
                   className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
-                  Previous
+                  {t('landloard.addroom.prev')}
                 </button>
                 <button
                   type="submit"
                   className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  Add Room
+                  {t('landloard.addroom.add')}
                 </button>
               </div>
             </>

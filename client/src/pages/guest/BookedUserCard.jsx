@@ -15,7 +15,7 @@ const BookedUserCard = ({ image , user, email, phone, fromTime, toTime, totalDay
             alt={`${user} profile`}
           />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-150">
           <p className="text-sm font-medium text-gray-900 truncate dark:text-white">{user}</p>
           <p className="text-sm text-gray-500 truncate dark:text-gray-400">{email}</p>
           <p className="text-sm text-gray-500 truncate dark:text-gray-400">{phone}</p>
@@ -26,8 +26,8 @@ const BookedUserCard = ({ image , user, email, phone, fromTime, toTime, totalDay
             Total Days: {totalDays}
           </p>
         </div>
-        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
-          Total Payment: ${totalPayment}
+        <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-green">
+          Total Payment: {totalPayment}ETB
         </div>
       </div>
     </div>

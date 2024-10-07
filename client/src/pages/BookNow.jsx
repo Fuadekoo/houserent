@@ -58,7 +58,9 @@ const toggleMapVisibility = (roomId) => {
   function selectedTimeSlot(values) {
     const from = values[0].format('MMM DD YYYY HH:mm');
     const to = values[1].format('MMM DD YYYY HH:mm');
-    const diffDays = values[1].diff(values[0], 'days');
+    const diffDays = values[1].diff(values[0], 'minute');
+    //const diffDays = values[1].diff(values[0], 'days');  // it iss for testing to wait for the minute not max like day and month
+
 
     setFromTime(from);
     setToTime(to);
@@ -207,11 +209,11 @@ const toggleMapVisibility = (roomId) => {
                 <FaMapMarkerAlt />{' '}
                 {showMap === houseDetails._id ? ' Hide Map' : ' View Map'}
               </span>
-            </button>
+            </button> 
 
 {/* Conditionally display the map with full screen coverage */}
 
-{showMap === houseDetails._id && houseDetails.RoomLocation && (
+ {showMap === houseDetails._id && houseDetails.RoomLocation && (
   <div className="fixed inset-0 flex items-center justify-center z-50">
     <div className="relative h-1/4 w-1/4 bg-white shadow-lg rounded">
       <DisplayLocation
@@ -227,7 +229,7 @@ const toggleMapVisibility = (roomId) => {
     </div>
   </div>
 )}
-
+                               
           </div>
         )
       )}

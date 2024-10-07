@@ -87,9 +87,10 @@ function Profile() {
   };
 
   return (
-    <div className='p-3 max-w-lg mx-auto'>
-      <h1 className="text-3xl font-semibold text-center my-7">{t('common.profile.title')}</h1>
-      <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+    <div className='p-1 max-w-sm my-2 mx-auto'>
+    <div className="border-solid border-2 border-slate-300 p-2 rounded-lg gap-2 shadow-sm">
+      <h1 className="text-3xl font-semibold font-weight: 100  text-center my-2">{t('common.profile.title')}</h1>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
         <input onChange={(e) => setFile(e.target.files[0])} type='file' ref={fileRef} hidden accept='image/*' />
         <img onClick={() => fileRef.current.click()} src={formData.avatar || user.avatar} alt={t('common.profile.altText')} className='rounded-full h-24 w-24 object-cover cursor-pointer self-center' />
         <p className='text-sm self-center'>
@@ -108,7 +109,7 @@ function Profile() {
           placeholder={t('common.profile.emailPlaceholder')}
           disabled
           value={formData.email}
-          className="border p-3 rounded-lg"
+          className="border p-1 rounded-lg"
           id="email"
           onChange={handleChange}
         />
@@ -116,7 +117,7 @@ function Profile() {
           type="text"
           placeholder={t('common.profile.usernamePlaceholder')}
           value={formData.name}
-          className="border p-3 rounded-lg"
+          className="border p-1 rounded-lg"
           id="name"
           onChange={handleChange}
         />
@@ -124,7 +125,7 @@ function Profile() {
           type="password"
           placeholder={t('common.profile.passwordPlaceholder')}
           value={formData.password}
-          className="border p-3 rounded-lg"
+          className="border p-1 rounded-lg"
           id="password"
           onChange={handleChange}
         />
@@ -132,17 +133,18 @@ function Profile() {
           type="password"
           placeholder={t('common.profile.confirmPasswordPlaceholder')}
           value={formData.confirmPassword}
-          className="border p-3 rounded-lg"
+          className="border p-1 rounded-lg"
           id="confirmPassword"
           onChange={handleChange}
         />
         <button
           disabled={loading}
-          className="bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80"
+          className="bg-slate-700 text-white rounded-lg p-1 uppercase hover:opacity-95 disabled:opacity-80"
         >
           {loading ? t('common.profile.loading') : t('common.profile.updateButton')}
         </button>
       </form>
+    </div>
     </div>
   );
 }

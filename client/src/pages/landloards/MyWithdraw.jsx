@@ -39,7 +39,14 @@ const MyWithdraw = () => {
     }
 
     if (withdrawals.length === 0) {
-        return <div>No withdrawals found.</div>;
+        return (
+            <div className="flex items-center justify-center h-full">
+            <div className="text-center">
+                <div className="animate-bounce text-4xl mb-4">😔</div>
+                <div className="text-lg font-semibold">No withdrawals found.</div>
+            </div>
+            </div>
+        );
     }
 
     return (
