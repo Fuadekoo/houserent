@@ -18,7 +18,11 @@ const HouseCard = ({ house }) => {
                     </div>
                     <p className="text-sm text-gray-600 line-clamp-2">{house.description}</p>
                     <p className="text-slate-500 mt-2 font-semibold">
-                        ${house.rentPerMonth.toLocaleString('en-US')}/month
+                    ETB-{house.rentPerMonth.toLocaleString('ETB')}/month
+
+   
+
+                        
                     </p>
                     <div className="text-slate-700 flex gap-2">
                         <div className="font-bold text-xs">
