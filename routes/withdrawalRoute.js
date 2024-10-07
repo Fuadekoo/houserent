@@ -1,7 +1,7 @@
 const express = require('express');
 
 const withdrawalRoute = express.Router();
-const {withdrew,withdrewConfirm,withdrewfetch,getWithdrawals,
+const {withdrew,withdrewConfirm,withdrewfetch,getWithdrawals,getSingleUserWithdrawals,
     withdrawalapprove} = require('../controllers/withdrawal.Controller');
 const authMiddleware = require('../middlewares/authMiddleware');
 
@@ -20,5 +20,7 @@ withdrawalRoute.get("/getWithdrawals", getWithdrawals);
 
     //  pending or done the payment
 withdrawalRoute.put("/toggleBlockWithdrawal/:withdrawalId/block", withdrawalapprove);
+// getSingleUserWithdrawals
+withdrawalRoute.get("/getSingleUserWithdrawals",authMiddleware, getSingleUserWithdrawals);
 
 module.exports = withdrawalRoute;

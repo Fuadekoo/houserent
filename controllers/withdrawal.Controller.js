@@ -109,6 +109,17 @@ const withdrewConfirm = async (req, res) => {
         
     }
 };
+// get singleuser withdrew data from withdrew table uwneruser is current login user if .it is not not fetch the data
+const getSingleUserWithdrawals = async (req, res) => {
+    try {
+        const { userId } = req.user;
+        const withdrawals = await Withdrawal.find({ ownerUser: userId });
+
+        res.status(200).json(withdrawals);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
 
 
 
@@ -160,5 +171,6 @@ module.exports = {
     withdrewConfirm,
     withdrewfetch,
     getWithdrawals,
-    withdrawalapprove
+    withdrawalapprove,
+    getSingleUserWithdrawals
 };
