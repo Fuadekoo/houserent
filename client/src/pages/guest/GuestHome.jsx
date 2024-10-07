@@ -4,6 +4,7 @@ import Home from '../Home'
 function GuestHome() {
   return <div>
     <Navbar />
+  
     <Home />
 
   </div>

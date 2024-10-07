@@ -40,6 +40,19 @@ const houseSchema = new mongoose.Schema({
     ref: 'users', // Reference to the User model
     required: true
   },
+
+   RoomLocation: {
+    latitudeValue: { 
+      type: String,
+      required: true
+    },
+    longitudeValue: { 
+      type: String,
+      required: true
+    }
+  },
+
+
   bathrooms:{
     type:Number,
     required:true,

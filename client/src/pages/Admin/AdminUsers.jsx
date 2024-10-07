@@ -48,6 +48,7 @@ export function AdminUsers() {
     ];
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
+    
     const usersPerPage = 5; // Adjust this value for the number of users per page
     const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 

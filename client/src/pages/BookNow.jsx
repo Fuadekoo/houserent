@@ -4,6 +4,9 @@ import { useParams } from 'react-router-dom';
 import { Spin, DatePicker, Button, Form, message, Checkbox } from 'antd';
 import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
+import DisplayLocation from '../components/DisplayLocation';
+import { FaMapMarkerAlt } from 'react-icons/fa';
+
 import { useTranslation } from 'react-i18next';
 
 const { RangePicker } = DatePicker;
@@ -18,6 +21,18 @@ function BookNow() {
   const [totalDays, setTotalDays] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
+  
+  
+  const [showMap, setShowMap] = useState(null); // State to track which map to show
+
+const toggleMapVisibility = (roomId) => {
+  if (roomId) {
+    setShowMap(showMap === roomId ? null : roomId);
+  } else {
+    console.error('Invalid room ID');
+  }
+};
+
 
   useEffect(() => {
     const fetchHouseDetails = async () => {
@@ -74,6 +89,7 @@ function BookNow() {
       totalDays,
     };
 
+
     try {
       const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${id}`, 
         bookingData, {
@@ -120,8 +136,11 @@ function BookNow() {
     }
   };
 
+  console.log("total day is :", totalDays)
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    
       {loading ? (
         <Spin size="large" />
       ) : (
@@ -140,6 +159,7 @@ function BookNow() {
                   ))}
                 </div>
               </div>
+
               <div className="md:w-1/2 p-4">
                 <h2 className="text-2xl font-bold mb-4">{houseDetails.address}</h2>
                 <p className="mb-2">{t('common.booknow.floor')}: {houseDetails.floorLevel}</p>
@@ -173,8 +193,41 @@ function BookNow() {
                     {t('common.booknow.book')}
                   </Button>
                 </Form>
+                 
               </div>
+              
             </div>
+                              
+              {/* Map Button */}
+            <button
+              className="text-blue-500 hover:text-blue-700 mt-2"
+              onClick={() => toggleMapVisibility(houseDetails._id)}
+            >
+              <span style={{ display: 'flex', flexDirection: 'row' }}>
+                <FaMapMarkerAlt />{' '}
+                {showMap === houseDetails._id ? ' Hide Map' : ' View Map'}
+              </span>
+            </button>
+
+{/* Conditionally display the map with full screen coverage */}
+
+{showMap === houseDetails._id && houseDetails.RoomLocation && (
+  <div className="fixed inset-0 flex items-center justify-center z-50">
+    <div className="relative h-1/4 w-1/4 bg-white shadow-lg rounded">
+      <DisplayLocation
+        latitude={houseDetails.RoomLocation.latitudeValue}
+        longitude={houseDetails.RoomLocation.longitudeValue}
+      />
+      <button
+        onClick={() => setShowMap(null)}
+        className="absolute bg-red-500 text-white p-2 rounded"
+      >
+        Close Map
+      </button>
+    </div>
+  </div>
+)}
+
           </div>
         )
       )}
@@ -183,3 +236,4 @@ function BookNow() {
 }
 
 export default BookNow;
+

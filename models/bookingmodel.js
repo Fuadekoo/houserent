@@ -23,6 +23,8 @@ const bookingSchema = new Schema({
       required: true
     }
   },
+
+
   TotalDays:{
     type: String ,
     required:true

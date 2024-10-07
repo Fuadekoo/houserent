@@ -3,10 +3,9 @@ const users = require("../models/usersModel");
 const classModel = require("../models/HouseModel");
 
 const addRoom = async (req, res) => {
-  // Access the user ID from the request object
-  const { userId: ownerUser } = req.user;
-  const { image, address, floorLevel, houseNumber, housecategory, description, rentPerMonth, bathrooms, bedrooms, parking } = req.body;
-
+    // Access the user ID from the request object
+    const { userId: ownerUser } = req.user;
+    const {image, RoomLocation, address, floorLevel, houseNumber,housecategory,description,rentPerMonth} = req.body;
   try {
       // Check if the owner user exists
       const checkUser = await users.findOne({ _id: ownerUser, role: "landlord" });
@@ -20,22 +19,20 @@ const addRoom = async (req, res) => {
 
       // Admin price calculation
       const AdminPrice = rentPerMonth * 0.02 * 6;
-      const data = {
-          image,
-          address,
-          floorLevel,
-          houseNumber,
-          rentPerMonth,
-          AdminPrice,
-          housecategory,
-          description,
-          ownerUser,
-          bathrooms,
-          bedrooms,
-          parking,
+       const data  = {
+           image:image,
+            address:address,
+             floorLevel:floorLevel, 
+             houseNumber:houseNumber, 
+             rentPerMonth:rentPerMonth,
+          AdminPrice: AdminPrice,
+          housecategory:housecategory,
+          description:description,
+          ownerUser: ownerUser,
+          RoomLocation:RoomLocation
       };
-
-      const check = await classModel.findOne({ image: image });
+          try {
+    const check = await classModel.findOne({ image: image });
 
       if (check) {
           return res.status(400).json({ message: "Room with this image already exists", success: false });
@@ -246,4 +243,4 @@ module.exports = { addRoom,
                     deleteRoom,
                     usergetHouses,
                     ownerEditRoom,
-                    searchHouses};
+                    searchHouses}
