@@ -3,45 +3,51 @@ const users = require("../models/usersModel");
 const classModel = require("../models/HouseModel");
 
 const addRoom = async (req, res) => {
-    // Access the user ID from the request object
-    const { userId: ownerUser } = req.user;
-    const {image, RoomLocation, address, floorLevel, houseNumber,housecategory,description,rentPerMonth} = req.body;
+  // Access the user ID from the request object
+  const { userId: ownerUser } = req.user;
+  const { parking, bathrooms, bedrooms ,image, RoomLocation, address, floorLevel, houseNumber, housecategory, description, rentPerMonth } = req.body;
+
   try {
-      // Check if the owner user exists
-      const checkUser = await users.findOne({ _id: ownerUser, role: "landlord" });
-      if (!checkUser) {
-          return res.status(400).json({ message: "You are not a landlord", success: false, data: null });
-      }
+    // Check if the owner user exists
+    const checkUser = await users.findOne({ _id: ownerUser, role: "landlord" });
+    if (!checkUser) {
+      return res.status(400).json({ message: "You are not a landlord", success: false, data: null });
+    }
 
-      if (description.length > 50) {
-          return res.status(400).json({ message: "Description is too long", success: false, data: null });
-      }
+    if (description.length > 50) {
+      return res.status(400).json({ message: "Description is too long", success: false, data: null });
+    }
 
-      // Admin price calculation
-      const AdminPrice = rentPerMonth * 0.02 * 6;
-       const data  = {
-           image:image,
-            address:address,
-             floorLevel:floorLevel, 
-             houseNumber:houseNumber, 
-             rentPerMonth:rentPerMonth,
-          AdminPrice: AdminPrice,
-          housecategory:housecategory,
-          description:description,
-          ownerUser: ownerUser,
-          RoomLocation:RoomLocation
-      };
-          try {
+    // Admin price calculation
+    const AdminPrice = rentPerMonth * 0.02 * 6;
+    const data = {
+      image: image,
+      address: address,
+      floorLevel: floorLevel,
+      houseNumber: houseNumber,
+      rentPerMonth: rentPerMonth,
+      AdminPrice: AdminPrice,
+      housecategory: housecategory,
+      description: description,
+      ownerUser: ownerUser,
+      RoomLocation: RoomLocation,
+      parking:parking,
+      bedrooms:bedrooms,
+      bathrooms:bathrooms
+    };
+
+    // Check if a room with the same image already exists
     const check = await classModel.findOne({ image: image });
+    if (check) {
+      return res.status(400).json({ message: "Room with this image already exists", success: false });
+    } else {
+      // Save the room data to the database
+      await classModel.insertMany([data]);
+      return res.status(200).json({ message: "Room created successfully", success: true, data: data });
+    }
 
-      if (check) {
-          return res.status(400).json({ message: "Room with this image already exists", success: false });
-      } else {
-          await classModel.insertMany([data]);  // Save to the database
-          return res.status(200).json({ message: "Room created successfully", success: true, data: data });
-      }
   } catch (error) {
-      return res.status(500).json({ message: error.message, success: false });
+    return res.status(500).json({ message: error.message, success: false });
   }
 };
 
@@ -244,3 +250,6 @@ module.exports = { addRoom,
                     usergetHouses,
                     ownerEditRoom,
                     searchHouses}
+
+
+

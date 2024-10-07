@@ -208,7 +208,7 @@
       "enterpassword":"Enter Password"
     },
     "profile":{
-      "title":"Profile page",
+      "title":"Profile",
       "confirmpasswordPlaceholder":"Confirm Your Password",
       "profile":"Profile",
       "usernamePlaceholder":"Enter Your Name",
