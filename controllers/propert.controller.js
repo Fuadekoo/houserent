@@ -183,8 +183,6 @@ const searchHouses = async (req, res) => {
     address,
     housecategory,
     parking,
-    minRent,
-    maxRent,
     searchTerm,
   } = req.query;
 
@@ -199,14 +197,9 @@ const searchHouses = async (req, res) => {
   if (housecategory && housecategory !== 'all') {
     query.housecategory = housecategory; // Exact match for house category
   }
+  
   if (parking) {
     query.parking = parking === 'true'; // Convert parking string to boolean
-  }
-  if (minRent) {
-    query.rentPerMonth = { ...(query.rentPerMonth || {}), $gte: parseInt(minRent) }; // Minimum rent filter
-  }
-  if (maxRent) {
-    query.rentPerMonth = { ...(query.rentPerMonth || {}), $lte: parseInt(maxRent) }; // Maximum rent filter
   }
 
   if (searchTerm) {
@@ -217,11 +210,9 @@ const searchHouses = async (req, res) => {
   }
 
   try {
-    const sort = req.query.sort || 'createdAt';
-    const order = req.query.order || 'desc';
+
 
     const houses = await classModel.find(query)
-      .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
 
