@@ -34,35 +34,42 @@ const Register = () => {
     <div className='p-3 max-w-lg mx-auto'>
       <h1 className='text-3xl text-center font-semibold my-7'>{t('common.register.title')}</h1>
       <Form layout='vertical' onFinish={onFinish} className='flex flex-col gap-4'>
-        <Form.Item name='name' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('register.nameError') }]}>
+        <Form.Item name='name' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.register.nameError') }]}>
           <input
             type='text'
             className='p-3 border-none rounded-lg focus:outline-none focus:border-blue-500 w-full'
             placeholder={t('common.register.namePlaceholder')}
           />
         </Form.Item>
-        <Form.Item name='email' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('register.emailError') }, { type: 'email', message: t('register.emailInvalid') }]}>
+        <Form.Item name='email' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.register.emailError') }, { type: 'email', message: t('common.register.emailInvalid') }]}>
           <input
             type='email'
             className='p-3 border-none rounded-lg focus:outline-none focus:border-blue-500 w-full'
             placeholder={t('common.register.emailPlaceholder')}
           />
         </Form.Item>
-        <Form.Item name='phone' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('register.phoneError') }]}>
-          <input
-            type='number'
-            className='border-none p-3 rounded-lg focus:outline-none focus:border-blue-500 w-full'
-            placeholder={t('common.register.phonePlaceholder')}
-          />
-        </Form.Item>
-        <Form.Item name='password' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('register.passwordError') }]}>
+        <Form.Item
+  name='phone'
+  className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'
+  rules={[{ required: true, message: t('common.register.phoneError') }]}
+>
+  <div className="flex items-center">
+    <span className="p-3 bg-gray-200 rounded-l-lg">+251</span>
+    <input
+      type='number'
+      className='border-none p-3 rounded-r-lg focus:outline-none focus:border-blue-500 w-full'
+      placeholder={t('common.register.phonePlaceholder')}
+    />
+  </div>
+</Form.Item>
+        <Form.Item name='password' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.register.passwordError') }]}>
           <input
             type='password'
             className='border-none p-3 rounded-lg focus:outline-none focus:border-blue-500 w-full'
             placeholder={t('common.register.passwordPlaceholder')}
           />
         </Form.Item>
-        <Form.Item name='role' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('register.roleError') }]}>
+        <Form.Item name='role' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.register.roleError') }]}>
           <Select
             className='w-full'
             placeholder={t('common.register.rolePlaceholder')}
