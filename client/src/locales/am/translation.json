@@ -5,6 +5,9 @@
             "blocked": "ታግሷል",
             "unblocked": "አልታገሰም",
             "member": "አባላት ዝርዝር",
+            "phone": "ስልክ",
+            "role": "ሚና",
+            "status": "ሁኔታ",
             "seeall": "ስለ ሁሉም አባላት መረጃ ይመልከቱ",
             "prev": "ቀዳሚ",
             "next": "ቀጣይ",
@@ -13,13 +16,20 @@
         "cash": {
             "withdrawal": "የማስወገድ ጥያቄዎች",
             "manage": "የማስወገድ ጥያቄዎችን ያቀናብሩ",
+            "transactionid": "የግብይት መለያ",
+            "Amount": "መጠን",
+            "UserInfo": "የተጠቃሚ መረጃ",
             "name": "ስም",
             "email": "ኢሜይል",
+            "optiion": "አማራጭ",
             "phone": "ስልክ",
             "select": "ሁኔታ ይምረጡ",
             "pending": "በመጠባበቅ ላይ",
             "done": "ተጠናቋል",
             "update": "አዘምን",
+            "account": "የመለያ ቁጥር",
+            "status": "ሁኔታ",
+            "Actions": "እርምጃዎች",
             "prev": "ቀዳሚ",
             "next": "ቀጣይ",
             "of": "ከ"
@@ -36,14 +46,19 @@
             "floor": "የወለል ደረጃ",
             "House": "የቤት ቁጥር",
             "rent": "ወርሃዊ ኪራይ",
-            "ETB": "ብር"
+            "ETB": "ብር",
+            "Block": "አግር",
+            "Unblock": "አልታገሰም"
         },
         "withdrewconfirm": {}
     },
     "guest": {
         "navbar": {
             "welcome": "እንኳን ደህና መጡ",
-            "login": "ግባ"
+            "search": "ፈልግ...",
+            "Home": "መነሻ",
+            "About": "ስለ",
+            "signin": "ግባ"
         }
     },
     "landloard": {
@@ -155,7 +170,7 @@
         }
     },
     "common": {
-        "booknoow": {
+        "booknow": {
             "floor": "የወለል ደረጃ",
             "house": "የቤት ቁጥር",
             "rent": "ወርሃዊ ኪራይ",

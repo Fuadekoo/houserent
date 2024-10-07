@@ -21,24 +21,34 @@ import {
 import { FaSearch } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 
-const TABS = [
-    { label: "All", value: "all" },
-    { label: "Blocked", value: "blocked" },
-    { label: "UnBlocked", value: "unblocked" },
-];
 
-const TABLE_HEAD = ["Member", "Role", "Status", "Phone Number", ""];
 
 export function AdminUsers() {
+    const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [blockStatus, setBlockStatus] = useState({});
     const [activeTab, setActiveTab] = useState('all');
 
+    const TABS = [
+        { label: t("admin.adminuser.all"), value: "all" },
+        { label: t("admin.adminuser.blocked"), value: "blocked" },
+        { label: t("admin.adminuser.unblocked"), value: "unblocked" },
+    ];
+    
+    const TABLE_HEAD = [
+        t("admin.adminuser.member"),
+        t("admin.adminuser.role"),
+        t("admin.adminuser.status"),
+        t("admin.adminuser.phone"),
+        ""
+    ];
     // Pagination states
     const [currentPage, setCurrentPage] = useState(1);
+    
     const usersPerPage = 5; // Adjust this value for the number of users per page
     const totalPages = Math.ceil(filteredUsers.length / usersPerPage);
 
@@ -135,10 +145,10 @@ export function AdminUsers() {
                 <div className="mb-8 flex items-center justify-between gap-8">
                     <div>
                         <Typography variant="h5" color="blue-gray">
-                            Members list
+                            {t('admin.adminuser.member')}
                         </Typography>
                         <Typography color="gray" className="mt-1 font-normal">
-                            See information about all members
+                        {t('admin.adminuser.seeall')}
                         </Typography>
                     </div>
                 </div>
@@ -292,15 +302,15 @@ export function AdminUsers() {
                     <Typography className="mx-2">{`Page ${currentPage} of ${totalPages}`}</Typography>
                     <div className="inline-flex">
                     <Button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l'  onClick={handlePreviousPage} disabled={currentPage === 1}>
-                      Prev
+                      {t('admin.adminuser.prev')}
                     </Button>
                     <Button className='bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l' onClick={handleNextPage} disabled={currentPage === totalPages}>
-                    Next
+                    {t('admin.adminuser.next')}
                     </Button>
                     </div>
                 </div>
                 <Typography variant="small" color="blue-gray" className="font-normal">
-                    Total users: {filteredUsers.length}
+                {t('admin.adminuser.total')}: {filteredUsers.length}
                 </Typography>
             </CardFooter>
         </Card>

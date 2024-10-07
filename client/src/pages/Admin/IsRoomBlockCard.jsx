@@ -8,9 +8,12 @@ import {
     Typography,
     Button,
 } from '@material-tailwind/react';
+import { useTranslation } from 'react-i18next';
+
 
 const IsRoomBlockCard = ({ house, onToggleBlock }) => {
     const navigate = useNavigate();
+    const { t } = useTranslation();
 
     const handleBlock = async () => {
         const response = await fetch(`/api/property/blockRoom/${house._id}`, {
@@ -45,16 +48,16 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 <Typography variant="h5" color="blue-gray" className="mb-2">
                     {house.address}
                 </Typography>
-                <Typography>Floor Level: {house.floorLevel}</Typography>
-                <Typography>House Number: {house.houseNumber}</Typography>
-                <Typography>Rent Per Month: {house.rentPerMonth} ETB</Typography>
+                <Typography>{t('admin.isroomblockedcard.floor')}: {house.floorLevel}</Typography>
+                <Typography>{t('admin.isroomblockedcard.House')}: {house.houseNumber}</Typography>
+                <Typography>{t('admin.isroomblockedcard.rent')}: {house.rentPerMonth} {t('admin.isroomblockedcard.ETB')}</Typography>
             </CardBody>
             <CardFooter className="pt-0">
                 <Button
                     color="blue"
                     className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-green-800 bg-zinc-600 mb-2"
                 >
-                    <Link to={`/booking/${house._id}`}>More Info</Link>
+                    <Link to={`/booking/${house._id}`}>{t('common.housecard.moreinfo')}</Link>
                 </Button>
 
                 <Button
@@ -62,7 +65,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                     color={house.active ? 'red' : 'green'} // Conditional color for Block/Unblock
                     className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-red-700 bg-red-400"
                 >
-                    {house.active ? 'Block' : 'Unblock'} {/* Conditional text based on "active" */}
+                    {house.active ? t('admin.isroomblockedcard.Block') : t('admin.isroomblockedcard.Unblock')} {/* Conditional text based on "active" */}
                 </Button>
             </CardFooter>
         </Card>

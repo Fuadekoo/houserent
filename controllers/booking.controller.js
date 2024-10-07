@@ -5,7 +5,7 @@ const Booking = require("../models/bookingmodel");
 
 const bookingRoom = async (req, res) => {
     // Access the user ID from the request object
-     const { totalPayment, totalDays, bookedTime } = req.body;
+     const { totalPayment, totalDays, bookedTime } = req.body;  
      console.log(" cont tot:", totalPayment);
 
     const { userId: user } = req.user;
@@ -29,7 +29,7 @@ const bookingRoom = async (req, res) => {
         if (!checkHouse) {
             return res.status(400).json({ message: "The house does not exist", success: false, data: null });
         }
-       const newBooking = new Booking({
+       const newBooking = new Booking({ 
             user:user,
             house: houseId,
             bookedTime: bookedTime,
@@ -53,7 +53,7 @@ const myBookings = async (req, res) => {
         res.status(200).json({ message: "Bookings retrieved successfully", success: true, data: bookings });
     } catch (error) {
         res.status(500).json({ message: "Internal server error", success: false, data: error.message });
-    }
+    } 
 };
 
 
@@ -77,12 +77,18 @@ const getBookedUsersForRoom = async (req, res) => {
   }
 };
 
+const getAllBookedRooms = async (req, res) => {
+  try {
+    const bookedClasses = await Booking.find().populate('house'); // Populate the house field
+    res.json(bookedClasses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error fetching booked classes' });
+  }
+};
 
 
 
-
-
-
-module.exports = { bookingRoom,myBookings ,getBookedUsersForRoom};
+module.exports = { bookingRoom,myBookings ,getBookedUsersForRoom ,getAllBookedRooms};
 
 

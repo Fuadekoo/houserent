@@ -5,6 +5,9 @@
       "blocked":"Blocked",
       "unblocked":"Unblocked",
       "member":"Members List",
+      "phone":"Phone",
+      "role":"Role",
+      "status":"Status",
       "seeall":"See information About All Members",
       "prev":"prev",
       "next":"next",
@@ -13,13 +16,20 @@
     "cash":{
       "withdrawal":"Withdrawal Requests",
       "manage":"Manage Withdrawal Requests",
+      "transactionid":"Transaction ID",
+      "Amount":"Amount",
+      "UserInfo":"User Info",
       "name":"Name",
       "email":"Email",
+      "optiion":"Option",
       "phone":"Phone",
       "select":"Select Status",
       "pending":"Pending",
       "done":"Done",
       "update":"Update",
+      "account":"Account Number",
+      "status":"Status",
+      "Actions":"Actions",
       "prev":"prev",
       "next":"next",
       "of":"of"
@@ -36,7 +46,9 @@
       "floor":"Floor Level",
       "House":"House Number",
       "rent":"Rent per month",
-      "ETB":"ETB"
+      "ETB":"ETB",
+      "Block":"Block",
+      "Unblock":"Unblock"
     },
     "withdrewconfirm":{}
   },
@@ -44,7 +56,10 @@
   "guest": {
     "navbar": {
       "welcome": "Welcome",
-      "login": "Login"
+      "search": "Search...",
+      "Home": "Home",
+      "About": "About",
+      "signin": "Sign In"
     }
 
   },
@@ -162,12 +177,12 @@
   },
 
   "common": {
-    "booknoow":{
+    "booknow":{
       "floor":"Floor Level",
       "house":"House Number",
       "rent":"Rent per month",
       "description":"Description",
-      "iagree":"I Agree",
+      "iagree":"I agree to the terms and conditions",
       "book":"Book Now"
     },
     "depositdislay":{},

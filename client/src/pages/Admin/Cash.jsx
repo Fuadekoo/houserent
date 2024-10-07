@@ -12,8 +12,11 @@ import {
   IconButton,
   Tooltip,
 } from "@material-tailwind/react";
+import { useTranslation } from 'react-i18next';
+
 
 const Cash = () => {
+  const { t } = useTranslation();
   const [withdrawals, setWithdrawals] = useState([]);
   const [filteredWithdrawals, setFilteredWithdrawals] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -92,10 +95,10 @@ const Cash = () => {
         <div className="mb-8 flex items-center justify-between gap-8">
           <div>
             <Typography variant="h5" color="blue-gray">
-              Withdrawal Requests
+              {(t('admin.cash.withdrawal'))}
             </Typography>
             <Typography color="gray" className="mt-1 font-normal">
-              Manage withdrawal approvals
+              {(t('admin.cash.manage'))}
             </Typography>
           </div>
         </div>
@@ -120,13 +123,13 @@ const Cash = () => {
         <table className="mt-4 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
-              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">Transaction ID</th>
-                <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">User Info</th>
-              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">Amount</th>
-              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">Option</th>
-              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">Account</th>
-              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">Status</th>
-              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">Actions</th>
+              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.transactionid')}</th>
+                <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.UserInfo')}</th>
+              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.Amount')}</th>
+              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.optiion')}</th>
+              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.account')}</th>
+              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.status')}</th>
+              <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.Actions')}</th>
             </tr>
           </thead>
           <tbody>
@@ -135,9 +138,9 @@ const Cash = () => {
                 <td className="p-4 border-b border-blue-gray-50">{withdrawal._id}</td>
                 <td className="p-4 border-b border-blue-gray-50">
                   <div>
-                    <p>Name: {withdrawal.ownerUser.name}</p>
-                    <p>Email: {withdrawal.ownerUser.email}</p>
-                    <p>Phone: {withdrawal.ownerUser.phone}</p>
+                    <p>{t('admin.cash.name')}: {withdrawal.ownerUser.name}</p>
+                    <p>{t('admin.cash.email')}: {withdrawal.ownerUser.email}</p>
+                    <p>{t('admin.cash.phone')}: {withdrawal.ownerUser.phone}</p>
                   </div>
                 </td>
                 <td className="p-4 border-b border-blue-gray-50">{withdrawal.withdrawalAmount}</td>
@@ -152,15 +155,15 @@ const Cash = () => {
                       setNewStatus(e.target.value);
                     }}
                   >
-                    <option value="">Select Status</option>
-                    <option value="pending">Pending</option>
-                    <option value="done">Done</option>
+                    <option value="">{t('admin.cash.select')}</option>
+                    <option value="pending">{t('admin.cash.pending')}</option>
+                    <option value="done">{t('admin.cash.done')}</option>
                   </select>
                   <button
                     onClick={() => updateWithdrawalStatus(withdrawal._id)}
                     className="ml-2 bg-blue-500 text-white px-2 py-1 rounded"
                   >
-                    Update
+                    {t('admin.cash.update')}
                   </button>
                 </td>
               </tr>
@@ -176,7 +179,7 @@ const Cash = () => {
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
         >
-          Prev
+          {t('admin.cash.prev')}
         </Button>
         <div className="flex items-center gap-2">
           <Typography variant="small" color="blue-gray" className="font-normal">
@@ -190,7 +193,7 @@ const Cash = () => {
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
         >
-          Next
+          {t('admin.cash.next')}
         </Button>
       </CardFooter>
     </Card>
