@@ -87,7 +87,7 @@ const getUserBalance = async (req, res) => {
           return res.status(404).json({ success: false, message: 'User not found' });
         }
     
-        res.json({ success: true, data: { balance: user.balance } });
+        res.json({ success: true, data: { balance: user.balance.toFixed(2) } });
       } catch (error) {
         console.error('Error fetching user balance:', error); // Add logging
         res.status(500).json({ success: false, message: error.message });

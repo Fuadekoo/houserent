@@ -73,11 +73,20 @@
       "house":"House Number",
       "housecatagory":"House Catagory",
       "apartama":"Apartment",
-      "condo":"Condo",
+      "villa":"Villa",
+      "condo":"Condominium",
       "compound":"Compound House",
       "single":"Single House",
       "description":"Description",
-      "rent":"Rent per month"
+      "rent":"Rent per month",
+      "next":"Next",
+      "prev":"prev",
+      "Select":"Select a category",
+      "Description":"Description",
+      "rent":"Rent Per Month",
+      "Bedrooms":"Bedrooms",
+      "Bathrooms":"Bathrooms",
+      "Parking":"Parking"
     },
     "edithouse":{
       "info":"House Information",
@@ -205,7 +214,9 @@
       "dont":"Don't have an account?",
       "loginpage":"Login Page",
       "enterphone":"Enter Phone Number",
-      "enterpassword":"Enter Password"
+      "enterpassword":"Enter Password",
+      "phoneError":"Phone is required",
+      "passwordError":"Password is required"
     },
     "profile":{
       "title":"Profile",
@@ -247,7 +258,13 @@
       "registerpage":"Register Page",
       "signin":"Sign In",
       "login":"Login",
-      "haveAccount":"Already have an account?"
+      "haveAccount":"Already have an account?",
+      "emailInvalid":"Email is invalid",
+      "nameError":"Name is required",
+      "emailError":"Email is required",
+      "passwordError":"Password is required",
+      "phoneError":"Phone is required",
+      "roleError":"Role is required"
     }
   }
 

@@ -18,7 +18,11 @@ const HouseCard = ({ house }) => {
                     </div>
                     <p className="text-sm text-gray-600 line-clamp-2">{house.description}</p>
                     <p className="text-slate-500 mt-2 font-semibold">
-                        ${house.rentPerMonth.toLocaleString('en-US')}/month
+                    ETB-{house.rentPerMonth.toLocaleString('ETB')}/month
+
+   
+
+                        
                     </p>
                     <div className="text-slate-700 flex gap-2">
                         <div className="font-bold text-xs">
@@ -31,7 +35,7 @@ const HouseCard = ({ house }) => {
                     <div className="pt-1">
                         <button 
                             color="blue" 
-                            className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-green-700 bg-zinc-600"
+                            className="w-full transform transition-transform duration-300 hover:scale-105 bg-slate-600 text-white p-1 rounded-sm  hover:opacity-750"
                         >
                             More Info
                         </button>

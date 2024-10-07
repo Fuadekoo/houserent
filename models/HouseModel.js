@@ -28,7 +28,7 @@ const houseSchema = new mongoose.Schema({
     required:true
   },
   rentPerMonth: {
-    type: String,
+    type: Number, // Change from String to Number
     required: true
   },
   adminPrice: {
