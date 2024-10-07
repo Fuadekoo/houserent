@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import { HideLoading, ShowLoading } from '../redux/alertsSlice';
 import LanguageChange from '../components/LanguageChange';
 import { useTranslation } from 'react-i18next';
+import Navbar from './guest/Navbar';
 const Login = () => {
   // const { Loading } = useSelector(state => state.alerts);
   const { t } = useTranslation();
@@ -37,7 +38,11 @@ const Login = () => {
   };
 
   return (
+    <div className="">
+      <Navbar/>
+    
     <div className='p-3 max-w-lg mx-auto'>
+      
       <h1 className='text-3xl text-center font-semibold my-7'>{t('common.login.loginpage')}</h1>
       <Form layout='vertical' onFinish={onFinish} className='flex flex-col gap-4'>
         <Form.Item name='phone' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'>
@@ -67,6 +72,7 @@ const Login = () => {
           {t('common.login.register')}
         </Link>
       </div>
+    </div>
     </div>
   );
 };
