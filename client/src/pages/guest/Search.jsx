@@ -78,13 +78,13 @@ export default function Search() {
             {/* Search Term Input */}
             <div className="flex items-center gap-2">
               <label className='whitespace-nowrap font-semibold'>Search Term</label>
-              <input type="text" id='searchTerm' placeholder='Search ...' className='border rounded-lg p-3 w-full' value={sidebardata.searchTerm} onChange={handleChange} />
+              <input type="text" id='searchTerm' placeholder='Search ...' className='border rounded-lg p-2 w-full' value={sidebardata.searchTerm} onChange={handleChange} />
             </div>
 
             {/* Category Selection */}
             <div className="flex gap-2 items-center whitespace-nowrap">
               <label className="font-semibold">Category:</label>
-              <select id="housecategory" value={sidebardata.housecategory} onChange={handleChange} className="border rounded-lg p-3 w-full">
+              <select id="housecategory" value={sidebardata.housecategory} onChange={handleChange} className="border rounded-lg p-2 w-full">
                 <option value="all">All Categories</option>
                 <option value="Apartama">Apartment</option>
                 <option value="Villa">Villa</option>
@@ -104,13 +104,13 @@ export default function Search() {
             </div>
 
             {/* Submit Button */}
-            <button className='bg-slate-600 text-white p-3 rounded-lg uppercase hover:opacity-95'>Search</button>
+            <button className='bg-slate-600 text-white p-2 rounded-lg uppercase hover:opacity-95'>Search</button>
           </form>
         </div>
              </div>
         {/* Display Results */}
         <div className="flex-1">
-          <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>House Result:</h1>
+          <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-2'>House Result:</h1>
           <div className="p-7 flex flex-wrap gap-4">
             {loading ? (
               <div className='flex justify-center items-center'>
