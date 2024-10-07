@@ -20,7 +20,7 @@ const houseSchema = new mongoose.Schema({
   },
   housecategory:{
     type:String,
-    enum: ['Apartama', 'Villa', 'Condominium','compound house','single house'],
+    enum: ['Apartama', 'Villa', 'Condominium','compound_house','single_house'],
     required:true
   },
   description:{
@@ -28,7 +28,7 @@ const houseSchema = new mongoose.Schema({
     required:true
   },
   rentPerMonth: {
-    type: String,
+    type: Number, // Change from String to Number
     required: true
   },
   adminPrice: {
@@ -40,6 +40,31 @@ const houseSchema = new mongoose.Schema({
     ref: 'users', // Reference to the User model
     required: true
   },
+
+   RoomLocation: {
+    latitudeValue: { 
+      type: String,
+      required: true
+    },
+    longitudeValue: { 
+      type: String,
+      required: true
+    }
+  },
+
+
+  bathrooms:{
+    type:Number,
+    required:true,
+},
+bedrooms :{
+    type:Number,
+    required:true,
+},
+parking:{
+    type:Boolean,
+    required:true,
+},
   active:{
     type:Boolean,
     default:false

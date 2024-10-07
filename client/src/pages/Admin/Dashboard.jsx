@@ -1,134 +1,66 @@
 import React, { useEffect, useState } from 'react';
-import { Bar, Pie } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement } from 'chart.js';
+import axios from 'axios';
+import { motion } from 'framer-motion';
+import Loading from '../../components/Loader';
+import { HideLoading, ShowLoading } from '../../redux/alertsSlice';
+import { useDispatch} from 'react-redux';
+import { json } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
 const Dashboard = () => {
-  const [countusers, setCountUsers] = useState(0);
-  const [countproducts, setCountProducts] = useState(0);
-  const [countdeposit, setCountDeposit] = useState(0);
-  const [countwithdraw, setCountWithdraw] = useState(0);
-  const [countboking, setCountBoking] = useState(0);
-  const [depositData, setDepositData] = useState([]);
+  const { t } = useTranslation();
+  const [data, setData] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('http://localhost:5000/api/users');
-      const data = await response.json();
-      setCountUsers(data);
-      // setCountUsers(data.length);
-
-      const houseResponse = await fetch('http://localhost:5000/api/property');
-      const houseData = await houseResponse.json();
-      setCountProducts(houseData.length);
-
-      const depositResponse = await fetch('http://localhost:5000/api/deposit');
-      const depositData = await depositResponse.json();
-      setCountDeposit(depositData.length);
-      setDepositData(depositData);
-
-      const withdrawResponse = await fetch('http://localhost:5000/api/withdraw');
-      const withdrawData = await withdrawResponse.json();
-      setCountWithdraw(withdrawData.length);
-
-      const bookingResponse = await fetch('http://localhost:5000/api/booking');
-      const bookingData = await bookingResponse.json();
-      setCountBoking(bookingData.length);
+      try {
+        dispatch(ShowLoading());
+        const token = localStorage.getItem('token'); // Adjust the token retrieval method as necessary
+        const response = await axios.get('http://localhost:5000/api/dashboard/counts', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data);
+        dispatch(HideLoading());
+      } catch (error) {
+        dispatch(HideLoading());
+        return json({ message: error.message });
+      }
     };
+
     fetchData();
   }, []);
 
-  const barData = {
-    labels: ['Users', 'Products', 'Deposits', 'Withdraws', 'Bookings'],
-    datasets: [
-      {
-        label: '# of Items',
-        data: [countusers, countproducts, countdeposit, countwithdraw, countboking],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
+  if (!data) {
+    return <Loading />;
+  }
 
-  const pieData = {
-    labels: depositData.map((item, index) => `Deposit ${index + 1}`),
-    datasets: [
-      {
-        data: depositData.map(item => item.amount), // Assuming each deposit item has an 'amount' field
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
-        ],
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    animation: {
-      duration: 2000,
-      easing: 'easeInOutBounce',
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
+  const cards = [
+    { title: t('admin.dashboard.users'), count: data.userCount },
+    { title: t('admin.dashboard.Houses'), count: data.houseCount },
+    { title: t('admin.dashboard.Bookings'), count: data.bookingCount },
+    { title: t('admin.dashboard.Transactions'), count: data.transactionCount },
+    { title: t('admin.dashboard.deposit'), count: data.depositCount },
+    { title: t('admin.dashboard.withdrawal'), count: data.withdrawalCount },
+  ];
 
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-      <div style={{ width: '50%', height: '300px' }}>
-        <Bar data={barData} options={options} />
-      </div>
-      <div style={{ width: '25%', height: '300px' }}>
-        <Pie data={pieData} />
-      </div>
-      <div style={{ width: '25%', height: '300px', overflowY: 'auto' }}>
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            {depositData.map((item, index) => (
-              <tr key={index}>
-                <td>{item.id}</td>
-                <td>{item.amount}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
+      {cards.map((card, index) => (
+        <motion.div
+          key={index}
+          className="bg-white shadow-lg rounded-lg p-6"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.1 }}
+        >
+          <h2 className="text-xl font-bold mb-2">{card.title}</h2>
+          <p className="text-3xl">{card.count}</p>
+        </motion.div>
+      ))}
     </div>
   );
 };

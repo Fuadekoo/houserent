@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Loading from '../../components/Loader';
+import { useTranslation } from 'react-i18next';
 
 function TransactionHistory() {
+  const { t } = useTranslation();
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -43,27 +46,29 @@ function TransactionHistory() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+    <div className="bg-gray-100 flex items-center justify-center mt-0">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
-        <h2 className="text-2xl font-bold mb-6 text-center">Transaction History</h2>
-        <table className="min-w-full bg-white border border-gray-200">
-          <thead>
-            <tr className="bg-gray-200">
-              <th className="py-3 px-4 border-b text-left text-gray-600">Date</th>
-              <th className="py-3 px-4 border-b text-left text-gray-600">Amount</th>
-              <th className="py-3 px-4 border-b text-left text-gray-600">Type</th>
-            </tr>
-          </thead>
-          <tbody>
-            {transactions.map((transaction) => (
-              <tr key={transaction._id} className="hover:bg-gray-100">
-                <td className="py-3 px-4 border-b">{new Date(transaction.date).toLocaleString()}</td>
-                <td className="py-3 px-4 border-b">{transaction.amount} ETB</td>
-                <td className="py-3 px-4 border-b">{transaction.type}</td>
+        <h2 className="text-2xl font-bold mb-6 text-center">{t('tenant.transactionhistory.transaction')}</h2>
+        <div className="overflow-auto max-h-96">
+          <table className="min-w-full bg-white border border-gray-200">
+            <thead>
+              <tr className="bg-gray-200">
+                <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.date')}</th>
+                <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.amount')}</th>
+                <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.type')}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {transactions.map((transaction) => (
+                <tr key={transaction._id} className="hover:bg-gray-100">
+                  <td className="py-3 px-4 border-b">{new Date(transaction.date).toLocaleString()}</td>
+                  <td className="py-3 px-4 border-b">{transaction.amount} {t('tenant.transactionhistory.ETB')}</td>
+                  <td className="py-3 px-4 border-b">{transaction.type}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

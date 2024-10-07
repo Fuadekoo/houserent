@@ -47,12 +47,16 @@ const bookingRoute = require("./routes/bookingroute");
 // this is used for withdraw Model
 const withdrawalRoute = require("./routes/withdrawalRoute");
 
+// this is used for dashboard Model
+const dashboardRoute = require("./routes/dashboardRoute");
+
 // this is used for api
 app.use("/api/users", usersRoute);
 app.use("/api/property", houseRoute);
 app.use("/api/transaction", transactionRoute);
 app.use("/api/bookRoom", bookingRoute);
 app.use("/api/withdrawal", withdrawalRoute);
+app.use("/api/dashboard", dashboardRoute);
 
 // this is used fo run server
 app.listen(port, () => { console.log(`listen on port ${port}`) });
