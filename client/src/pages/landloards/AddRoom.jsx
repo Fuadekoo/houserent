@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
 
