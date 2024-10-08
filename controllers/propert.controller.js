@@ -109,7 +109,7 @@ const blockRoom = async (req, res) => {
 };
 
 const getSingleHouse = async (req, res) => {
-    const {   } = req.params;
+    const {id} = req.params;
     try {
         const house = await classModel.findById(id);
         if (!house) {
