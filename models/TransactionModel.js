@@ -13,7 +13,9 @@ const TransactionSchema = new mongoose.Schema({
   },
   amount: {
     type: Number,
-    required: true
+    required: true,
+    get: value => (value / 100).toFixed(2),
+    set: value => Math.round(value * 100)
   },
   type: {
     type: String,

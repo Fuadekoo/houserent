@@ -11,8 +11,8 @@ const LanguageChange = () => {
   return (
     <nav>
       <select onChange={changeLanguage} defaultValue={i18n.language}>
-        <option value="en">English</option>
-        <option value="am">Amharic</option>
+        <option value="en">english</option>
+        <option value="am">አማርኛ</option>
       </select>
     </nav>
   );
