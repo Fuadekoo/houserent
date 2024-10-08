@@ -49,16 +49,18 @@ function TransactionHistory() {
     <div className="bg-gray-100 flex items-center justify-center mt-0">
       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl">
         <h2 className="text-2xl font-bold mb-6 text-center">{t('tenant.transactionhistory.transaction')}</h2>
-        <div className="overflow-auto max-h-96">
+        <div className="overflow-auto mb-1" style={{height:"500px"}}>
           <table className="min-w-full bg-white border border-gray-200">
-            <thead>
+            {/* <thead className='overflow-none' > */}
+              <thead className="bg-gray-200 sticky top-0 z-10">
               <tr className="bg-gray-200">
                 <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.date')}</th>
                 <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.amount')}</th>
                 <th className="py-3 px-4 border-b text-left text-gray-600">{t('tenant.transactionhistory.type')}</th>
               </tr>
             </thead>
-            <tbody>
+            {/* <tbody className=''> */}
+             <tbody className="overflow-y-scroll"> 
               {transactions.map((transaction) => (
                 <tr key={transaction._id} className="hover:bg-gray-100">
                   <td className="py-3 px-4 border-b">{new Date(transaction.date).toLocaleString()}</td>

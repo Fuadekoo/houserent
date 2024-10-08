@@ -155,13 +155,13 @@ function BookNow() {
   console.log("total day is :", totalDays)
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-200 flex items-center justify-center bg-gray-100" >
       {loading ? (
         <Spin size="large" />
       ) : (
         houseDetails && (
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl animate__animated animate__fadeIn">
-            <div className="flex flex-col md:flex-row">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-4xl animate__animated animate__fadeIn " style={{backgroundColor:"red" ,marginTop:"2px"}}>
+            <div className="flex flex-col md:flex-row ">
               <div className="md:w-1/2">
                 <div className="flex flex-wrap">
                   {houseDetails.image.map((image, index) => (

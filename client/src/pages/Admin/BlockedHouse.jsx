@@ -36,7 +36,8 @@ const BlockedHouse = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    // <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96" style={{height:"700px"}}>
       {houses.map((house) => (
         <IsRoomBlockCard key={house._id} house={house} />
       ))}
