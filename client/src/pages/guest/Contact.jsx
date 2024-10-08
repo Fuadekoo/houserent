@@ -89,7 +89,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="text"
-                  name="name"
+                  name="from_name"
                   id="name"
                   className={`mt-1 block w-full p-2 border rounded-md ${errors.name ? 'border-red-500' : 'border-gray-300'}`}
                   placeholder="Insert your Name"
@@ -102,7 +102,7 @@ const Contact = () => {
                 </label>
                 <input
                   type="email"
-                  name="email"
+                  name="from_email"
                   id="email"
                   className={`mt-1 block w-full p-2 border rounded-md ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
                   placeholder="Insert your email"
@@ -114,7 +114,7 @@ const Contact = () => {
                   Project
                 </label>
                 <textarea
-                  name="project"
+                   name="message" 
                   id="project"
                   className={`mt-1 block w-full p-2 border rounded-md ${errors.project ? 'border-red-500' : 'border-gray-300'}`}
                   placeholder="Write your project"
