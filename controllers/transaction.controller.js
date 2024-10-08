@@ -53,7 +53,7 @@ const getTransactions = async (req, res) => {
     try {
         const transactions = await Transaction.find({
             $or: [{ sender: req.body.userId }, { receiver: req.body.userId }],
-        });
+        }).sort({ createdAt: -1 });
 
         res.send({
             message: "Transactions retrieved successfully",
