@@ -10,7 +10,7 @@ const {getApartamaFilter ,
                  getCompoundHouseFilter,
                  getSingleHouseFilter} =require("../controllers/property.filtter")
 // add house route
-houseRouter.post('/addroom',authMiddleware,roomPostFeeMiddleware, addRoom);
+houseRouter.post('/addroom',authMiddleware, addRoom);
 
 // delete the post house route
 houseRouter.delete('/deleteroom/:id',authMiddleware,deleteRoom);

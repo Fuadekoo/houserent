@@ -2,11 +2,16 @@ const mongoose = require('mongoose');
 const users = require("../models/usersModel");
 const classModel = require("../models/HouseModel");
 const booking = require('../models/bookingmodel');
+const roomPostFeeMiddleware = require('../middlewares/roomPostFeeMiddleware');
 
 const addRoom = async (req, res) => {
   // Access the user ID from the request object
   const { userId: ownerUser } = req.user;
   const { parking, bathrooms, bedrooms ,image, RoomLocation, address, floorLevel, houseNumber, housecategory, description, rentPerMonth } = req.body;
+
+  // Access the user ID from the request object
+//   const { userId: ownerUser } = req.user;
+//   const { parking, bathrooms, bedrooms ,image, RoomLocation, address, floorLevel, houseNumber, housecategory, description, rentPerMonth } = req.body;
 
   try {
     // Check if the owner user exists
@@ -43,8 +48,12 @@ const addRoom = async (req, res) => {
       return res.status(400).json({ message: "Room with this image already exists", success: false });
     } else {
       // Save the room data to the database
-      await classModel.insertMany([data]);
-      return res.status(200).json({ message: "Room created successfully", success: true, data: data });
+      const newRoom = await classModel.insertMany([data]);
+
+            // Call the roomPostFeeMiddleware after the room is successfully added
+            await roomPostFeeMiddleware(req, res, () => {
+                return res.status(200).json({ message: "Room created successfully", success: true, data: newRoom });
+            });
     }
 
   } catch (error) {
@@ -143,7 +152,7 @@ const deleteRoom = async (req, res) => {
     }
 };
 
-const ownerEditRoom = async (req, res) => {
+const ownerEditRoomSS = async (req, res) => {
     const { id } = req.params;
     const { rentPerMonth } = req.body;
 
@@ -161,6 +170,30 @@ const ownerEditRoom = async (req, res) => {
         return res.status(500).json({ message: 'Error updating room information' });
     }
 };
+
+const ownerEditRoom = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const updatedHouse = await classModel.findOneAndUpdate(
+      { _id: id }, 
+      { $set: { rentPerMonth: req.body.rentPerMonth } }, 
+      { new: true, runValidators: true } // `runValidators` ensures the validation for updated fields
+    );
+
+    if (!updatedHouse) {
+      return res.status(404).json({ message: 'Class not found' });
+    }
+
+    res.json({ message: 'Class information updated successfully', data: updatedHouse });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error updating class information' });
+  }
+};
+
+
+
 
 const searchHouses = async (req, res) => {
     const {

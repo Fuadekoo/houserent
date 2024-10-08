@@ -216,10 +216,13 @@
       "enterphone":"Enter Phone Number",
       "enterpassword":"Enter Password",
       "phoneError":"Phone is required",
-      "passwordError":"Password is required"
+      "passwordError":"Password is required",
+      "phoneInvalid":"Phone is invalid",
+      "phonePlaceholder":"Enter Your Phone",
+      "passwordMinLength":"Password must be at least 6 characters"
     },
     "profile":{
-      "title":"Profile page",
+      "title":"Profile",
       "confirmpasswordPlaceholder":"Confirm Your Password",
       "profile":"Profile",
       "usernamePlaceholder":"Enter Your Name",
