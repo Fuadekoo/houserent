@@ -49,7 +49,7 @@ useEffect(() => {
     { name: t('components.defaultlayout.myroom'), path: "/myroomPosted", icon: "ri-home-4-line" },
     { name: t('components.defaultlayout.wallet'), path: "/balance", icon: "ri-wallet-line" },
     { name: t('components.defaultlayout.cashorder'), path: "/mywithdraw", icon: "ri-wallet-3-line" },
-     { name: t('components.defaultlayout.notification'), path: "/showMyBookedRoom", icon: "ri-user-line" },
+    { name: t('components.defaultlayout.notification'), path: "/showMyBookedRoom", icon: "ri-notification-line" },
     { name: t('components.defaultlayout.profile'), path: "/profile", icon: "ri-user-line" },
     { name: t('components.defaultlayout.logout'), path: "/logout", icon: "ri-logout-box-line" }
   ];
