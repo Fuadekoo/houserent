@@ -43,7 +43,7 @@ function HousesList() {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96" style={{height:"700px"}}>
       {activeHouses.map((house) => {
         const isBooked = isHouseBooked(house._id);
         return !isBooked ? (

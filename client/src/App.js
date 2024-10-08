@@ -96,7 +96,7 @@ function App() {
     {/* route for guests */}
   
     <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
-    <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/> //  all active and none booked rooms
+    <Route path="/" element={<PublicRoute><GuestHome/></PublicRoute>}/> 
     <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
     <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/>
     <Route path="/search" element={<PublicRoute><Search/></PublicRoute>}/>

@@ -1,12 +1,15 @@
 import React from 'react';
+import {useSelector } from 'react-redux';
 
 function Pay({ fname, email, amount, tx_ref, public_key }) {
+  const { user } = useSelector(state => state.users);
+  //min-h-screen
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 className="text-2xl font-bold mb-4">Deposit</h2>
-        <p className="text-lg mb-4">Amount: <span className="font-semibold">{amount}</span></p>
-        <p className="text-lg mb-4">Current Balance: <span className="font-semibold">150</span></p>
+    <div className="flex flex-col items-center justify-center bg-gray-100" style={{height:"300px", width:"80%"}}>
+      <div className="bg-white p-3 rounded-lg shadow-md w-full max-w-md Z-50" style={{height:"300px", width:"80%", padding:"10px"}}>
+        <h2 className="text-2xl font-bold mb-1">Deposit</h2>
+        <p className="text-lg mb-1">New Amount: <span className="font-semibold">{amount}</span></p>
+        <p className="text-lg mb-1">Current Balance: <span className="font-semibold">{user.balance}ETB</span></p>
         <form method="POST" action="https://api.chapa.co/v1/hosted/pay">
           <input type="hidden" name="public_key" value={public_key} />
           <input type="hidden" name="tx_ref" value={tx_ref} />
