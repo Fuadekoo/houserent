@@ -96,7 +96,9 @@
     "edithouse":{
       "info":"House Information",
       "rent":"Rent per month",
-      "update":"Update"
+      "rentrequired":"Rent per month is required",
+      "update":"Update",
+      "number":"the money is in a number form"
     },
     "housebookeduser":{
       "noroom":"No Room",
@@ -182,7 +184,7 @@
       "dashboard":"Dashboard",
       "alluser":"All User",
       "blockedhouse":"Blocked House",
-      "withdrawalconfirm":"Withdrawal Confirm",
+      "withdrawalconfirm":"cashout",
       "admin":"Admin",
       "landloard":"Landloard",
       "tenant":"Tenant",

@@ -107,7 +107,7 @@ const Cash = () => {
             </Typography>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
+        {/* <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="w-full md:w-72">
             <form className='bg-slate-100 p-3 rounded-lg flex items-center'>
               <input 
@@ -122,10 +122,10 @@ const Cash = () => {
               </button>
             </form>
           </div>
-        </div>
+        </div> */}
       </CardHeader>
       <CardBody className="overflow-scroll px-0">
-        <table className="mt-4 w-full min-w-max table-auto text-left">
+        <table className="mt-0 w-full min-w-max table-auto text-left">
           <thead>
             <tr>
               <th className="border-y border-blue-gray-100 bg-blue-gray-50/50 p-4">{t('admin.cash.transactionid')}</th>

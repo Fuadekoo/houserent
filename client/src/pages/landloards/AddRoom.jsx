@@ -124,8 +124,8 @@ function AddRoom() {
   };
 
   return (
-    <div className="min-h-screen mb-2 bg-gray-100 flex items-center justify-center">
-      <div className="bg-white mt-1 p-3 rounded-lg shadow-lg w-full max-w-md" style={{ width: '80%', height: 'fit-content', marginTop: '0' }}>
+    <div className=" bg-gray-100 flex items-center justify-center">
+      <div className="bg-white mt-4 p-3 rounded-lg shadow-lg w-full max-w-md" style={{ width: '80%', height: 'fit-content', marginTop: '0' }}>
         <h2 className="text-2xl font-bold mb-2 text-center">{t('landloard.addroom.add')}</h2>
         <form onSubmit={handleSubmit}>
           {step === 1 && (
