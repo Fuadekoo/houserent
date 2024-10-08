@@ -8,6 +8,7 @@ const bookfeeMiddleware = require("../middlewares/bookfeeMiddleware");
 
 
 
+
 // add booking route
 bookingRouter.post('/booking/:houseId',authMiddleware,bookfeeMiddleware,bookingRoom);
 
