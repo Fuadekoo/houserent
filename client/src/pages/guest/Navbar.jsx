@@ -47,6 +47,10 @@ export default function Navbar() {
           <Link to='/'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>{t('guest.navbar.Home')}</li>
           </Link>
+
+          <Link to='/contact'>
+            <li className='hidden sm:inline text-slate-700 hover:underline'>{t('guest.navbar.contact')}</li>
+          </Link>
           
           <Link to='/about'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>{t('guest.navbar.About')}</li>
