@@ -95,7 +95,7 @@ useEffect(() => {
         {menuToBeRendered.map((item, index) => {
           const isActive = activePath === item.path;
           return (
-            <div key={index} className={`mb-3 flex items-center space-x-2 cursor-pointer p-2 rounded text-white w-full transition duration-200 ease-in-out transform hover:scale-105 ${isActive ? 'bg-green-600' : 'bg-stone-500 hover:bg-blue-600'}`} onClick={() => {
+            <div key={index} className={`mb-2 flex items-center space-x-2 cursor-pointer p-1 rounded text-white w-full transition duration-200 ease-in-out transform hover:scale-105 ${isActive ? 'bg-green-600' : 'bg-stone-500 hover:bg-blue-600'}`} onClick={() => {
               if (item.path === "/logout") {
                 console.log(t('components.defaultlayout.logoutSuccess'));
                 localStorage.removeItem("token");
