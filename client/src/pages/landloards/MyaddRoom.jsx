@@ -138,26 +138,56 @@ function MyaddRoom() {
                                     ) : (
                                         <FaClock style={{ color: 'orange' }} /> // Display pending icon if not active
                                     )}
+                                   {/* /////////////////////////////////////////////////////// */}
+                                      {/* Map Button */}
+            <button
+              className="text-blue-500 hover:text-blue-700 mt-2"
+              onClick={() => toggleMapVisibility(room._id)}
+            >
+              <span style={{ display: 'flex', flexDirection: 'row' }}>
+                <FaMapMarkerAlt />{' '}
+                {showMap === room._id ? ' Hide Map' : ' View Map'}
+              </span>
+            </button> 
+
+{/* Conditionally display the map with full screen coverage */}
+
+ {showMap === room._id && room.RoomLocation && (
+  <div className="fixed inset-0  l-100 flex items-center justify-center z-100" style={{ left: '-250px', top:'-170px' }}>
+    <div className="relative h-1/4 w-1/4 bg-white shadow-lg rounded">
+      <DisplayLocation
+        latitude={room.RoomLocation.latitudeValue}
+        longitude={room.RoomLocation.longitudeValue}
+      />
+      <button
+        onClick={() => setShowMap(null)}
+        className="absolute bg-red-500 text-white p-2 rounded"
+      >
+        Close Map
+      </button>
+    </div>
+  </div>
+)}
+                                    
     
-                                 {/* Map toggle button */}
-                                <button
-                                    className="text-blue-500 hover:text-blue-700 mt-2"
-                                    onClick={() => toggleMapVisibility(room._id)}
-                                >
-                                <span style={{display:"flex", flexDirection:"row"}}>
-                                     <FaMapMarkerAlt /> {/* Map icon */}
-                                    {showMap === room._id ? ' Hide Map' : ' View Map'}
-                                </span>
+                                 {/* //Map toggle button */}
+                                {/* <button */}
+                                    {/* className="text-blue-500 hover:text-blue-700 mt-2" */}
+                                    {/* onClick={() => toggleMapVisibility(room._id)}> */}
+                                {/* <span style={{display:"flex", flexDirection:"row"}}> */}
+                                     {/* <FaMapMarkerAlt /> Map icon */}
+                                    {/* {showMap === room._id ? ' Hide Map' : ' View Map'} */}
+                                {/* </span> */}
                                    
-                                </button>
+                                {/* </button> */}
 
                                 {/* Conditionally display the map */}
-                                {showMap === room._id && room.RoomLocation && (
+                                {/* {showMap === room._id && room.RoomLocation && (
                                     <DisplayLocation
                                         latitude={room.RoomLocation.latitudeValue}
                                         longitude={room.RoomLocation.longitudeValue}
                                     />
-                                )}
+                                )} */}
 
                                
                             </div>

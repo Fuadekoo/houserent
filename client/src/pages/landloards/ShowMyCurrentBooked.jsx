@@ -36,7 +36,7 @@ function ShowMyCurrentBooked() {
   if (bookedHouses.length === 0) return <div>No currently booked rooms found.</div>;
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96" style={{height:"690px"}}>
       {bookedHouses.map((booking) => {
         const { house } = booking;
 

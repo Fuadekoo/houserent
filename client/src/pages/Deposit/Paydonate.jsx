@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux'; // Ensure you import useSelector from react-redux
 import Pay from './Pay';
 import {jwtDecode} from 'jwt-decode'; // Remove destructuring
-
+import chapa from "../../../src/images/chapa.png"
 function Paydonate() {
     const [fname, setFname] = useState("");
     const [email, setEmail] = useState("");
@@ -50,20 +50,14 @@ function Paydonate() {
     const public_key = "CHAPUBK_TEST-MpebGxPZFUjHLlRuyxzZxF7QQtW1Vy6p";
 
     return (
-        <div style={{ alignItems: 'center', backgroundColor: 'whitesmoke' }}>
-            <center style={{ display: 'flex', marginLeft: '30%', flexDirection: 'column', width: '50%', alignContent: 'center', textAlign: 'center' }}>
-                {/* <label>Fname</label>
-                <input type='text' value={fname} onChange={(e) => setFname(e.target.value)} />
-                
-                <label>Email</label>
-                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} /> */}
-                
-                <label>Amount</label>
-                <input type='number' value={amount} onChange={(e) => setAmount(e.target.value)} />
-            </center>
-
+        <div className='p-1 my-2 mx-auto' style={{width:"50%"}}>
+          <div className=' flex items-center justify-center flex-col border-solid border-2 border-slate-300 p-2 rounded-lg gap-1 shadow-sm'>
+                <img src={chapa} style={{width:"100%" , height:"150px" ,borderRadius:"15px"}}/>
+                 <h1> <label>Inset New Amount </label></h1>
+                <input type='number' value={amount} onChange={(e) => setAmount(e.target.value)} style={{width:"80%", padding:"10px"}}/>
+            {/* </center> */}
             <Pay fname={fname} email={email} amount={amount} tx_ref={tx_ref} public_key={public_key} />
-            <p>Current Balance:</p>
+            </div>
         </div>
     );
 }

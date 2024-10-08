@@ -40,6 +40,7 @@ const HousesList = () => {
       {houses.map((house) => (
         <HouseCard key={house._id} house={house} />
       ))}
+      
     </div>
   );
 };
