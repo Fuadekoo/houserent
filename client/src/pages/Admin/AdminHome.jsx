@@ -5,7 +5,6 @@ import IsRoomBlockCard from './IsRoomBlockCard';
 import Loading from "../../components/Loader";
 import { HideLoading, ShowLoading } from '../../redux/alertsSlice';
 import { useDispatch} from 'react-redux';
-import Swal from 'sweetalert2';
 
 const AdminHome = () => {
   const [houses, setHouses] = useState([]);
@@ -46,12 +45,11 @@ const AdminHome = () => {
   }
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    <div className="flex flex-wrap justify-center gap-6 overflow-y-auto h-96" style={{height:"700px"}}>
       {houses.map((house) => (
         <IsRoomBlockCard key={house._id} house={house} />
       ))}
     </div>
   );
 };
-
 export default AdminHome;
