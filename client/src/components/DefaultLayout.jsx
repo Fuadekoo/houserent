@@ -1,15 +1,39 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation  } from "react-router-dom";
 import { useSelector } from "react-redux";
 import LanguageChange from "./LanguageChange";
 import { HideLoading, ShowLoading } from '../redux/alertsSlice';
 import { useTranslation } from 'react-i18next';
+// for searching input field in the navbar
+import { FaSearch } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+
+
+
 
 function DefaultLayout({ children }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = React.useState(false);
   const user = useSelector((state) => state.users.user);
+// for searching input field in the navbar
+const location = useLocation();
+const [searchTerm, setSearchTerm] = useState('');
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const urlParams = new URLSearchParams(window.location.search);
+  urlParams.set('searchTerm', searchTerm);
+  const searchQuery = urlParams.toString();
+  navigate(`/searchauth?${searchQuery}`);
+}
+useEffect(() => {
+  const urlParams = new URLSearchParams(location.search);
+  const searchTermFromUrl = urlParams.get('searchTerm');
+  if (searchTermFromUrl) {
+    setSearchTerm(searchTermFromUrl);
+  }
+
+}, [location.search])
 
   const userMenu = [
     { name: t('components.defaultlayout.home'), path: "/myhome", icon: "ri-home-line" },
@@ -92,6 +116,12 @@ function DefaultLayout({ children }) {
           <div className='flex justify-between items-center bg-white rounded p-4'>
             <h1 className='text-2xl font-bold'>{t('components.defaultlayout.houserentsys')}</h1>
             <div className="flex items-center gap-4 ">
+            <form onSubmit={handleSubmit} className='bg-slate-100 p-3 rounded-lg flex items-center' >
+          <input value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} type='text' placeholder={t('guest.navbar.search')} className='bg-transparent focus:outline-none w-24 sm:w-64' />
+          <button>
+            <FaSearch className='text-slate-600' />
+          </button>
+        </form>
             <Link to='/profile'>
               {user ? (
                 <img className='rounded-full h-10 w-10 object-cover' src={user.avatar} alt={t('components.defaultlayout.profile')} />
