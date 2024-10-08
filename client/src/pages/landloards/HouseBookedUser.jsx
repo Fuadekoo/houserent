@@ -90,7 +90,7 @@ const HouseBookedUser = () => {
             fromTime={booking.bookedTime.fromTime}
             toTime={booking.bookedTime.toTime}
             totalDays={booking.TotalDays}
-            totalPayment={booking.totalPayment}
+            totalPayment={booking.totalPayment.toFixed(2)}
         />
       ))}
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '../guest/Navbar';
 import keyhouse from "../../images/keyhouse.jpg";
+import Footer from '../guest/Footer';
 
 function About() {
     return (
@@ -20,6 +21,7 @@ function About() {
                     </p>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }

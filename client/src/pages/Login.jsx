@@ -8,6 +8,7 @@ import { HideLoading, ShowLoading } from '../redux/alertsSlice';
 import LanguageChange from '../components/LanguageChange';
 import { useTranslation } from 'react-i18next';
 import Navbar from './guest/Navbar';
+import Footer from './guest/Footer';
 import keyhouse from '../images/keyhouse.jpg';
 const Login = () => {
   const { t } = useTranslation();
@@ -93,6 +94,7 @@ const Login = () => {
       </div>
     </div>
     </div>
+    {/* <Footer /> */}
     </div>
   );
 };

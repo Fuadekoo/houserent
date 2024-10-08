@@ -36,10 +36,11 @@ const HousesList = () => {
   }
 
   return (
-    <div className="flex p-2 flex-wrap justify-center gap-6 overflow-y-auto h-96">
+    <div className="flex p-2 flex-wrap justify-center gap-6 overflow-y-auto h-70">
       {houses.map((house) => (
         <HouseCard key={house._id} house={house} />
       ))}
+      
     </div>
   );
 };
