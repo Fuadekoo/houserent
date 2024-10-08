@@ -36,7 +36,9 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
     };
 
     return (
+        
         <Card className="mt-6 w-64 transform transition-transform duration-300 hover:scale-105">
+            <Link to={`/booking/${house._id}`}>
             <CardHeader color="blue-gray" className="relative h-32">
                 <img
                     src={house.image[0]}
@@ -52,6 +54,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 <Typography>{t('admin.isroomblockedcard.House')}: {house.houseNumber}</Typography>
                 <Typography>{t('admin.isroomblockedcard.rent')}: {house.rentPerMonth} {t('admin.isroomblockedcard.ETB')}</Typography>
             </CardBody>
+            </Link>
             <CardFooter className="pt-0">
                 <Button
                     color="blue"
@@ -59,7 +62,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 >
                     <Link to={`/booking/${house._id}`}>{t('common.housecard.moreinfo')}</Link>
                 </Button>
-
+ 
                 <Button
                     onClick={handleBlock}
                     color={house.active ? 'red' : 'green'} // Conditional color for Block/Unblock
@@ -69,6 +72,7 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 </Button>
             </CardFooter>
         </Card>
+       
     );
 };
 
