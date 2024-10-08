@@ -84,8 +84,8 @@ const UserBooking = () => {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4">User Bookings</h1>
+    // <div className="container mx-auto p-4">
+    <div className='flex flex-wrap  justify-center gap-2 overflow-y-auto mt-1' style={{height:"675px"}}> 
       {bookings.length === 0 ? (
         <p>No bookings found.</p>
       ) : (
@@ -98,10 +98,11 @@ const UserBooking = () => {
               <p>Rent Per Month: {booking.house.rentPerMonth}</p>
               <p>From: {new Date(booking.bookedTime.fromTime).toLocaleString()}</p>
               <p>To: {new Date(booking.bookedTime.toTime).toLocaleString()}</p>
+
               <button className="flex items-center text-lg font-bold bg-gradient-to-r from-purple-500 to-pink-500 text-white py-2 px-4 rounded-md hover:from-purple-600 hover:to-pink-600 transition duration-300 ease-in-out shadow-md">
-  <FaClock className="mr-2" /> {/* Add the clock icon with some margin to the right */}
-  Remaining Time: {remainingTimes[booking._id]}
-</button>
+                 <FaClock className="mr-2" /> {/* Add the clock icon with some margin to the right */}
+                    Remaining Time: {remainingTimes[booking._id]}
+               </button>
             </div>
           ))}
         </div>
