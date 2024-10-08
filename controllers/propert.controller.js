@@ -146,7 +146,7 @@ const deleteRoom = async (req, res) => {
     }
 };
 
-const ownerEditRoom = async (req, res) => {
+const ownerEditRoomSS = async (req, res) => {
     const { id } = req.params;
     const { rentPerMonth } = req.body;
 
@@ -164,6 +164,30 @@ const ownerEditRoom = async (req, res) => {
         return res.status(500).json({ message: 'Error updating room information' });
     }
 };
+
+const ownerEditRoom = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const updatedHouse = await classModel.findOneAndUpdate(
+      { _id: id }, 
+      { $set: { rentPerMonth: req.body.rentPerMonth } }, 
+      { new: true, runValidators: true } // `runValidators` ensures the validation for updated fields
+    );
+
+    if (!updatedHouse) {
+      return res.status(404).json({ message: 'Class not found' });
+    }
+
+    res.json({ message: 'Class information updated successfully', data: updatedHouse });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Error updating class information' });
+  }
+};
+
+
+
 
 const searchHouses = async (req, res) => {
     const {

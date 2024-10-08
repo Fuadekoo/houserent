@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert2';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 function AddRoom() {
   const { t } = useTranslation();
@@ -22,6 +23,8 @@ function AddRoom() {
 
    const [position, setPosition] = useState({ latitude: null, longitude: null });
   const zoom = 16; // 15 is ideal
+  const history = useNavigate();
+
 
 // useEffect for the location of the current user to add the room
   useEffect(() => {
@@ -97,7 +100,9 @@ function AddRoom() {
         icon: 'success',
         title: 'Room added successfully!',
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
+      }).then(()=>{
+        history('/myroomPosted', { state: { id: image } });
       });
 
     } catch (error) {

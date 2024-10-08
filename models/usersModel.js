@@ -14,8 +14,18 @@ const userSchema = new mongoose.Schema({
     },
     phone:{
         type:Number,
-        required:true
+        required:true,
+        validate: {
+            validator: function(v) {
+                // Check if the length of the phone number is exactly 9 digits
+                return v.toString().length === 9;
+            },
+            message: props => `${props.value} is not a valid phone number! Phone number must be 9 digits.`
+        }
     },
+
+   
+
     role: {
         type: String,
         enum: ['landlord', 'tenant'],
