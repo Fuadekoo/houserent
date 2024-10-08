@@ -7,6 +7,7 @@ import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 import DisplayLocation from '../components/DisplayLocation';
 import { useTranslation } from 'react-i18next';
+import Stamp from "../images/stamp.png";
 import jsPDF from 'jspdf'; // Import jsPDF for PDF generation
 import 'jspdf-autotable'; // Import jspdf-autotable for table generation
 
@@ -138,17 +139,33 @@ const generatePDF = (bookingData) => {
 
   // Title
   doc.setFontSize(20);
-  doc.text('Booking Confirmation', 10, 10);
+  doc.setTextColor(0, 0, 255); // Blue color for title
+  doc.text('Booking Confirmation', 105, 20, null, null, 'center');
 
   // House and User Info
   doc.setFontSize(12);
-  doc.text(`House Address: ${houseDetails?.address}`, 10, 30);
-  doc.text(`Rent Per Month: ${houseDetails?.rentPerMonth} birr`, 10, 40);
-  doc.text(`Total Days Booked: ${bookingData.totalDays}`, 10, 50);
-  doc.text(`commision Price: ${houseDetails?.adminPrice} birr`, 10, 60);
-  doc.text(`booking Payment: ${bookingData.totalPayment} birr`, 10, 70);
-  doc.text(`Booking From: ${bookingData.bookedTime.fromTime}`, 10, 80);
-  doc.text(`Booking To: ${bookingData.bookedTime.toTime}`, 10, 90);
+  doc.setTextColor(0, 0, 0); // Black color for text
+  doc.text(`House Address: ${houseDetails?.address}`, 10, 40);
+  doc.text(`Rent Per Month: ${houseDetails?.rentPerMonth} birr`, 10, 50);
+  doc.text(`Total Days Booked: ${bookingData.totalDays}`, 10, 60);
+  doc.text(`Commission Price: ${houseDetails?.adminPrice} birr`, 10, 70);
+  doc.text(`Booking Payment: ${bookingData.totalPayment} birr`, 10, 80);
+  doc.text(`Booking From: ${bookingData.bookedTime.fromTime}`, 10, 90);
+  doc.text(`Booking To: ${bookingData.bookedTime.toTime}`, 10, 100);
+
+  // Static Data
+  doc.setFontSize(14);
+  doc.setTextColor(255, 0, 0); // Red color for static data
+  doc.text('Company Name: HouseRent', 10, 120);
+  doc.text('Contact: +123456789', 10, 130);
+  doc.text('Email: info@houserent.com', 10, 140);
+
+  // Center the stamp
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const stampWidth = 50;
+  const stampHeight = 50;
+  const stampX = (pageWidth - stampWidth) / 2;
+  doc.addImage(Stamp, 'PNG', stampX, 150, stampWidth, stampHeight);
 
   // Save the PDF
   doc.save('booking-confirmation.pdf');
