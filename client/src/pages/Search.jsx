@@ -68,9 +68,9 @@ export default function SearchAuth() {
 
   return (
     <div>
-      <div className='flex flex-col md:flex-row'>
-        <div className='p-7 border-b-2 md:border-r-2 md:min-h-screen '>
-            <div className="border-solid border-2 border-slate-300 p-2 rounded-lg gap-2 shadow-sm">
+      <div className='flex flex-col md:flex-row '>
+        <div className='p-2 border-b-2 md:border-r-2 '>
+            <div className="border-solid border-2 border-slate-300 p-2 rounded-lg  shadow-sm">
           <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
             {/* Search Term Input */}
             <div className="flex items-center gap-2">
@@ -108,7 +108,7 @@ export default function SearchAuth() {
         {/* Display Results */}
         <div className="flex-1">
           <h1 className='text-3l font-semibold border-b p-3 text-slate-700 mt-2'>House Result:</h1>
-          <div className="p-7 flex flex-wrap gap-4">
+          <div className="p-7 flex flex-wrap  justify-center gap-2 overflow-y-auto h-96" >
             {loading ? (
               <div className='flex justify-center items-center'>
                 <p className='font-semibold text-lg'>Loading...</p>
