@@ -119,36 +119,36 @@ function AddRoom() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white mt-1 p-8 rounded-lg shadow-lg w-full max-w-md" style={{ width: '80%', height: 'fit-content', marginTop: '0' }}>
-        <h2 className="text-2xl font-bold mb-6 text-center">{t('landloard.addroom.add')}</h2>
+    <div className="min-h-screen mb-2 bg-gray-100 flex items-center justify-center">
+      <div className="bg-white mt-1 p-3 rounded-lg shadow-lg w-full max-w-md" style={{ width: '80%', height: 'fit-content', marginTop: '0' }}>
+        <h2 className="text-2xl font-bold mb-2 text-center">{t('landloard.addroom.add')}</h2>
         <form onSubmit={handleSubmit}>
           {step === 1 && (
             <>
-              <div className="mb-4">
+              <div className="mb-2">
                 <label className="block text-gray-700">{t('landloard.addroom.image')}</label>
                 <input
                   type="file"
                   multiple
                   accept="image/*"
                   onChange={convertToBase64}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   required
                 />
-                <div className="mt-2">
+                <div className="mt-1">
                   {image.map((img, index) => (
                     <img key={index} src={img} alt={`preview-${index}`} width={100} />
                   ))}
                 </div>
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.address')}</label>
                 <input
                   type="text"
                   name="address"
                   value={formData.address}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="123 Main St, Cityville"
                   maxLength="50"
                   required
@@ -158,7 +158,7 @@ function AddRoom() {
                 <button
                   type="button"
                   onClick={nextStep}
-                  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-blue-500 text-white py-1 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {t('landloard.addroom.next')}
                 </button>
@@ -167,33 +167,33 @@ function AddRoom() {
           )}
           {step === 2 && (
             <>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.floor')}</label>
                 <input
                   type="text"
                   name="floorLevel"
                   value={formData.floorLevel}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="2nd Floor"
                   maxLength="50"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.house')}</label>
                 <input
                   type="text"
                   name="houseNumber"
                   value={formData.houseNumber}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="A-101"
                   maxLength="50"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.housecatagory')}</label>
                 <select
                   name="housecategory"
@@ -230,7 +230,7 @@ function AddRoom() {
           )}
           {step === 3 && (
             <>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.Description')}</label>
                 <input
                   type="text"
@@ -243,65 +243,65 @@ function AddRoom() {
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.rent')}</label>
                 <input
                   type="number"
                   name="rentPerMonth"
                   value={formData.rentPerMonth}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="1500"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.Bedrooms')}</label>
                 <input
                   type="number"
                   name="bedrooms"
                   value={formData.bedrooms}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="1"
                   min="1"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.Bathrooms')}</label>
                 <input
                   type="number"
                   name="bathrooms"
                   value={formData.bathrooms}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="1"
                   min="1"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-1">
                 <label className="block text-gray-700">{t('landloard.addroom.Parking')}</label>
                 <input
                   type="checkbox"
                   name="parking"
                   checked={formData.parking}
                   onChange={(e) => setFormData({ ...formData, parking: e.target.checked })}
-                  className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-1 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
               <div className="flex justify-between">
                 <button
                   type="button"
                   onClick={prevStep}
-                  className="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                  className="bg-gray-500 text-white py-1 px-4 rounded-lg hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500"
                 >
                   {t('landloard.addroom.prev')}
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="bg-blue-500 text-white py-1 px-4 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   {t('landloard.addroom.add')}
                 </button>
