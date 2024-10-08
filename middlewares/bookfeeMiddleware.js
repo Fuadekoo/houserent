@@ -26,6 +26,7 @@ const bookfeeMiddleware = async (req, res, next) => {
 
         // Find the room by ID
         const room = await HouseModel.findOne({ _id: houseId });
+        
 
         // Log the room object for debugging
         console.log(`Room: ${JSON.stringify(room)}`);
@@ -38,6 +39,27 @@ const bookfeeMiddleware = async (req, res, next) => {
                 data: null
             });
         }
+
+        const commission = room.adminPrice;
+        const totalpay =totalPayment + commission;
+
+        // Find the user balance
+        const user = await Allusers.findById(userId);
+        if (!user) {
+            return res.status(400).json({
+                message: "The user does not exist",
+                success: false,
+                data: null
+            });
+        }
+        const userBalance = parseFloat(user.balance);
+        
+        // Check if the user has enough balance by check the sum of commission and total payment is less than user balance
+        if (userBalance < totalpay) {
+            return res.status(400).json({ message: "Insufficient balance aditional commison is : "+commission + "total : "+ totalpay, success: false, data: null });
+        }
+
+        
 
         const owner = room.ownerUser.toString();
 
