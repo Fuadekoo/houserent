@@ -30,7 +30,7 @@ import withdrawConfirm from "./pages/Admin/WithdrewConfirm.jsx";
 import Cash from "./pages/Admin/Cash.jsx"
 import Dashboard from "./pages/Admin/Dashboard";
 import About from "./pages/guest/About.jsx";
-import Contact from "./pages/guest/Contact.jsx";
+import Contact  from './pages/guest/Contact.jsx';
 import Service from "./pages/guest/Service.jsx";
 import Navbar from "./pages/guest/Navbar.jsx";
 import GuestHome from "./pages/guest/GuestHome.jsx";
