@@ -8,7 +8,7 @@ import { HideLoading, ShowLoading } from '../redux/alertsSlice';
 import LanguageChange from '../components/LanguageChange';
 import { useTranslation } from 'react-i18next';
 import Navbar from './guest/Navbar';
-
+import keyhouse from '../images/keyhouse.jpg';
 const Login = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -37,11 +37,15 @@ const Login = () => {
   return (
     <div className="">
       <Navbar/>
-    
-    <div className='p-3 max-w-lg mx-auto'>
-      
+    <div className='py-16'>
+    <div className=' flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl'>
+    <div 
+      className="hidden lg:block lg:w-1/2 bg-cover bg-center object-contain" 
+      style={{ backgroundImage: `url(${keyhouse})` }}
+    ></div>
+    <div className="w-full p-8 lg:w-1/2">
       <h1 className='text-3xl text-center font-semibold my-7'>{t('common.login.loginpage')}</h1>
-      <Form layout='vertical' onFinish={onFinish} className='flex flex-col gap-4'>
+      <Form layout='vertical' onFinish={onFinish} className='flex flex-col gap-2'>
         <Form.Item
           name='phone'
           className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'
@@ -54,7 +58,7 @@ const Login = () => {
             <span className="p-3 bg-gray-200 rounded-l-lg">+251</span>
             <input
               type='number'
-              className='border-none p-3 rounded-r-lg focus:outline-none focus:border-blue-500 w-full'
+              className='border-none p-2 rounded-r-lg focus:outline-none focus:border-blue-500 w-full'
               placeholder={t('common.login.enterphone')}
             />
           </div>
@@ -69,7 +73,7 @@ const Login = () => {
         >
           <input
             type='password'
-            className='border-none p-3 rounded-lg focus:outline-none focus:border-blue-500 w-full'
+            className='border-none p-2 rounded-lg focus:outline-none focus:border-blue-500 w-full'
             placeholder={t('common.login.enterpassword')}
           />
         </Form.Item>
@@ -86,9 +90,10 @@ const Login = () => {
           {t('common.login.register')}
         </Link>
       </div>
+      </div>
+    </div>
     </div>
     </div>
   );
 };
-
 export default Login;
