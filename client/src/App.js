@@ -39,7 +39,7 @@ import Mywithdraw from "./pages/landloards/MyWithdraw.jsx";
 import BookedRoomsCurrent from "./pages/BookedRoomsCurrent.jsx";
 import ShowMyCurrentBooked from "./pages/landloards/ShowMyCurrentBooked.jsx";
 import SearchAuth from "./pages/Search.jsx";
-import Footer from "../src/pages/guest/Footer.jsx"
+
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -101,7 +101,7 @@ function App() {
     <Route path="/service" element={<PublicRoute><Service/></PublicRoute>}/>
     <Route path="/navbar" element={<PublicRoute><Navbar/></PublicRoute>}/>
     <Route path="/search" element={<PublicRoute><Search/></PublicRoute>}/>
-    {/* <Route path="/footer" element={<PublicRoute><Footer/></PublicRoute>}/>  */}
+    <Route path="/contact" element={<PublicRoute><Contact/></PublicRoute>}/> 
     
     </Routes>
     </BrowserRouter>
