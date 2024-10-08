@@ -7,6 +7,8 @@ import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 import DisplayLocation from '../components/DisplayLocation';
 import { useTranslation } from 'react-i18next';
+import jsPDF from 'jspdf'; // Import jsPDF for PDF generation
+import 'jspdf-autotable'; // Import jspdf-autotable for table generation
 
 const { RangePicker } = DatePicker;
 
@@ -71,7 +73,6 @@ function BookNow() {
 
   const handleBooking = async () => {
     if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
-      // alert('Please select valid booking details');
       swal.fire({
         icon: 'error',
         title: 'Please select valid booking details',
@@ -95,15 +96,16 @@ function BookNow() {
       });
 
       if (response.data.success) {
-        // message.success('House booked successfully');
         swal.fire({
           icon: 'success',
           title: response.data.message || 'House booked successfully',
           showConfirmButton: false,
           timer: 1500
         });
+
+        // Generate the PDF after successful booking
+        generatePDF(response.data.data);  // Pass the booking details for PDF generation
       } else {
-        // message.error(response.data.message);
         swal.fire({
           icon: 'error',
           title: response.data.message || 'Failed to book house',
@@ -113,7 +115,6 @@ function BookNow() {
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
-        // message.error(error.response.data.message);
         swal.fire({
           icon: 'error',
           title: error.response.data.message,
@@ -121,7 +122,6 @@ function BookNow() {
           timer: 1500
         });
       } else {
-        // message.error('Failed to book house');
         swal.fire({
           icon: 'error',
           title: 'Failed to book house',
@@ -130,7 +130,29 @@ function BookNow() {
         });
       }
     }
-  };
+};
+
+// PDF generation function
+const generatePDF = (bookingData) => {
+  const doc = new jsPDF();
+
+  // Title
+  doc.setFontSize(20);
+  doc.text('Booking Confirmation', 10, 10);
+
+  // House and User Info
+  doc.setFontSize(12);
+  doc.text(`House Address: ${houseDetails?.address}`, 10, 30);
+  doc.text(`Rent Per Month: ${houseDetails?.rentPerMonth} birr`, 10, 40);
+  doc.text(`Total Days Booked: ${bookingData.totalDays}`, 10, 50);
+  doc.text(`commision Price: ${houseDetails?.adminPrice} birr`, 10, 60);
+  doc.text(`booking Payment: ${bookingData.totalPayment} birr`, 10, 70);
+  doc.text(`Booking From: ${bookingData.bookedTime.fromTime}`, 10, 80);
+  doc.text(`Booking To: ${bookingData.bookedTime.toTime}`, 10, 90);
+
+  // Save the PDF
+  doc.save('booking-confirmation.pdf');
+};
 
   const handleShareClick = () => {
     const shareValue = `http://localhost:3000/booking/${id}`;
