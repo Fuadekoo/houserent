@@ -4,13 +4,14 @@ const {bookingRoom,myBookings ,getBookedUsersForRoom, getAllBookedRooms ,getOwne
 const authMiddleware = require("../middlewares/authMiddleware");
 const bookingfeeMiddleware = require("../middlewares/bookfeeMiddleware");
 const commisionfeeMIddleware = require("../middlewares/commisionfeeMIddleware");
-const bookfeeMiddleware = require("../middlewares/bookfeeMiddleware");
+
+
 
 
 
 
 // add booking route
-bookingRouter.post('/booking/:houseId',authMiddleware,bookfeeMiddleware,bookingRoom);
+bookingRouter.post('/booking/:houseId',authMiddleware,bookingfeeMiddleware,commisionfeeMIddleware,bookingRoom);
 
 // get my bookings route
 bookingRouter.get('/mybookings',authMiddleware,myBookings);

@@ -24,14 +24,14 @@ const addRoom = async (req, res) => {
     }
 
     // Admin price calculation
-    const AdminPrice = rentPerMonth * 0.02 * 6;
+    const AdminPrice = parseInt(rentPerMonth)* 0.02 * 6;
     const data = {
       image: image,
       address: address,
       floorLevel: floorLevel,
       houseNumber: houseNumber,
       rentPerMonth: rentPerMonth,
-      AdminPrice: AdminPrice,
+      adminPrice: AdminPrice,
       housecategory: housecategory,
       description: description,
       ownerUser: ownerUser,
@@ -109,7 +109,7 @@ const blockRoom = async (req, res) => {
 };
 
 const getSingleHouse = async (req, res) => {
-    const { id } = req.params;
+    const {   } = req.params;
     try {
         const house = await classModel.findById(id);
         if (!house) {

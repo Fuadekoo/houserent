@@ -22,6 +22,8 @@ const bookingRoom = async (req, res) => {
             return res.status(400).json({ message: "The user does not exist or you are not 'tenant'", success: false, data: null });
         }
 
+
+
       // Check if the user has enough balance
        const userBalance = parseFloat(checkUser.balance);
        const totalPaymentAmount = parseFloat(totalPayment);
@@ -32,6 +34,17 @@ const bookingRoom = async (req, res) => {
         if (!checkHouse) {
             return res.status(400).json({ message: "The house does not exist", success: false, data: null });
         }
+
+        const commission = checkHouse.adminPrice;
+        const totalpay =totalPaymentAmount + commission;
+        
+        // Check if the user has enough balance by check the sum of commission and total payment is less than user balance
+        if (userBalance < (totalPaymentAmount + commission)) {
+            return res.status(400).json({ message: "Insufficient balance aditional commison is : "+commission + "total : "+ totalpay, success: false, data: null });
+        }
+        
+
+
        const newBooking = new Booking({ 
             user:user,
             house: houseId,
