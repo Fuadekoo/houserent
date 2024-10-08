@@ -5,6 +5,7 @@ import IsRoomBlockCard from './IsRoomBlockCard';
 import Loading from "../../components/Loader";
 import { HideLoading, ShowLoading } from '../../redux/alertsSlice';
 import { useDispatch} from 'react-redux';
+import Swal from 'sweetalert2';
 
 const AdminHome = () => {
   const [houses, setHouses] = useState([]);

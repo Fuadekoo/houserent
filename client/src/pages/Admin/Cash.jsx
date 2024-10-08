@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaSearch } from 'react-icons/fa';
+import swal from 'sweetalert2';
 import {
   Card,
   CardHeader,
@@ -47,7 +48,11 @@ const Cash = () => {
       },
     })
     .then(response => {
-      alert(response.data.message);
+      swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: response.data.message,
+      });
       setWithdrawals(prev => prev.map(w => 
         w._id === id ? { ...w, withdrewStatus: newStatus } : w
       ));

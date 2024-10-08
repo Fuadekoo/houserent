@@ -5,7 +5,7 @@
       "blocked":"Blocked",
       "unblocked":"Unblocked",
       "member":"Members List",
-      "phone":"Phone",
+      "date":"Date",
       "role":"Role",
       "status":"Status",
       "seeall":"See information About All Members",
@@ -48,7 +48,12 @@
       "rent":"Rent per month",
       "ETB":"ETB",
       "Block":"Block",
-      "Unblock":"Unblock"
+      "Unblock":"Unblock",
+      "confirmTitle": "Are you sure?",
+      "confirmText": "Do you really want to block/unblock this house?",
+      "confirmButton": "Yes, block it!",
+      "cancelButton": "Cancel"
+      
     },
     "withdrewconfirm":{}
   },

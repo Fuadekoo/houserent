@@ -192,15 +192,11 @@ const ownerEditRoom = async (req, res) => {
 };
 
 
-
-
 const searchHouses = async (req, res) => {
     const {
         address,
         housecategory,
         parking,
-        minRent,
-        maxRent,
         searchTerm,
     } = req.query;
 
@@ -209,33 +205,30 @@ const searchHouses = async (req, res) => {
     const startIndex = parseInt(req.query.startIndex) || 0;
 
     if (address) {
-        query.address = { $regex: address, $options: 'i' };
+        // Escape any special regex characters in the address input
+        const escapedAddress = address.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        query.address = { $regex: `^${escapedAddress}`, $options: 'i' }; // Only match addresses starting with the given address string
     }
+
     if (housecategory && housecategory !== 'all') {
         query.housecategory = housecategory;
     }
+
     if (parking) {
         query.parking = parking === 'true';
     }
-    if (minRent) {
-        query.rentPerMonth = { ...(query.rentPerMonth || {}), $gte: parseInt(minRent) };
-    }
-    if (maxRent) {
-        query.rentPerMonth = { ...(query.rentPerMonth || {}), $lte: parseInt(maxRent) };
-    }
+
     if (searchTerm) {
+        // Apply search to fields where they start with searchTerm
+        const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         query.$or = [
-            { housecategory: { $regex: searchTerm, $options: 'i' } },
-            { address: { $regex: searchTerm, $options: 'i' } },
+            { housecategory: { $regex: `^${escapedSearchTerm}`, $options: 'i' } },
+            { address: { $regex: `^${escapedSearchTerm}`, $options: 'i' } },
         ];
     }
 
     try {
-        const sort = req.query.sort || 'createdAt';
-        const order = req.query.order || 'desc';
-
         const houses = await classModel.find(query)
-            .sort({ [sort]: order })
             .limit(limit)
             .skip(startIndex);
 
@@ -249,6 +242,51 @@ const searchHouses = async (req, res) => {
         res.status(500).json({ message: error.message, success: false, data: null });
     }
 };
+
+
+// const searchHouses = async (req, res) => {
+//     const {
+//         address,
+//         housecategory,
+//         parking,
+//         searchTerm,
+//     } = req.query;
+
+//     let query = { active: true };
+//     const limit = parseInt(req.query.limit) || 9;
+//     const startIndex = parseInt(req.query.startIndex) || 0;
+
+//     if (address) {
+//         query.address = { $regex: `^${address}`, $options: 'i' };
+//     }
+//     if (housecategory && housecategory !== 'all') {
+//         query.housecategory = housecategory;
+//     }
+//     if (parking) {
+//         query.parking = parking === 'true';
+//     }
+//     if (searchTerm) {
+//         query.$or = [
+//             { housecategory: { $regex: searchTerm, $options: 'i' } },
+//             { address: { $regex: searchTerm, $options: 'i' } },
+//         ];
+//     }
+
+//     try {
+//         const houses = await classModel.find(query)
+//             .limit(limit)
+//             .skip(startIndex);
+
+//         if (!houses || houses.length === 0) {
+//             return res.status(404).json({ message: "No houses found with the provided filters", success: false, data: null });
+//         }
+
+//         res.status(200).json({ message: "Houses retrieved successfully", success: true, data: houses });
+//     } catch (error) {
+//         console.error(error);
+//         res.status(500).json({ message: error.message, success: false, data: null });
+//     }
+// };
 
 module.exports = {
     addRoom,

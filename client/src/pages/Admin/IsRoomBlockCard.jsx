@@ -9,7 +9,7 @@ import {
     Button,
 } from '@material-tailwind/react';
 import { useTranslation } from 'react-i18next';
-
+import Swal from 'sweetalert2';
 
 const IsRoomBlockCard = ({ house, onToggleBlock }) => {
     const navigate = useNavigate();
@@ -35,23 +35,42 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
         }
     };
 
+    const confirmBlock = () => {
+        Swal.fire({
+            title: t('admin.isroomblockedcard.confirmTitle'),
+            text: t('admin.isroomblockedcard.confirmText'),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: t('admin.isroomblockedcard.confirmButton'),
+            cancelButtonText: t('admin.isroomblockedcard.cancelButton')
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleBlock();
+            }
+        });
+    };
+
     return (
         <Card className="mt-6 w-64 transform transition-transform duration-300 hover:scale-105">
-            <CardHeader color="blue-gray" className="relative h-32">
-                <img
-                    src={house.image[0]}
-                    alt="house-image"
-                    className="w-full h-full object-cover"
-                />
-            </CardHeader>
-            <CardBody>
-                <Typography variant="h5" color="blue-gray" className="mb-2">
-                    {house.address}
-                </Typography>
-                <Typography>{t('admin.isroomblockedcard.floor')}: {house.floorLevel}</Typography>
-                <Typography>{t('admin.isroomblockedcard.House')}: {house.houseNumber}</Typography>
-                <Typography>{t('admin.isroomblockedcard.rent')}: {house.rentPerMonth} {t('admin.isroomblockedcard.ETB')}</Typography>
-            </CardBody>
+            <Link to={`/booking/${house._id}`}>
+                <CardHeader color="blue-gray" className="relative h-32">
+                    <img
+                        src={house.image[0]}
+                        alt="house-image"
+                        className="w-full h-full object-cover"
+                    />
+                </CardHeader>
+                <CardBody>
+                    <Typography variant="h5" color="blue-gray" className="mb-2">
+                        {house.address}
+                    </Typography>
+                    <Typography>{t('admin.isroomblockedcard.floor')}: {house.floorLevel}</Typography>
+                    <Typography>{t('admin.isroomblockedcard.House')}: {house.houseNumber}</Typography>
+                    <Typography>{t('admin.isroomblockedcard.rent')}: {house.rentPerMonth} {t('admin.isroomblockedcard.ETB')}</Typography>
+                </CardBody>
+            </Link>
             <CardFooter className="pt-0">
                 <Button
                     color="blue"
@@ -59,9 +78,8 @@ const IsRoomBlockCard = ({ house, onToggleBlock }) => {
                 >
                     <Link to={`/booking/${house._id}`}>{t('common.housecard.moreinfo')}</Link>
                 </Button>
-
                 <Button
-                    onClick={handleBlock}
+                    onClick={confirmBlock}
                     color={house.active ? 'red' : 'green'} // Conditional color for Block/Unblock
                     className="w-full transform transition-transform duration-300 hover:scale-105 hover:bg-red-700 bg-red-400"
                 >

@@ -23,6 +23,7 @@ const HouseCard = ({ house }) => {
                         <FaMapMarkerAlt className="h-4 w-4 text-green-700" />
                         <p className="text-sm text-gray-600 truncate w-full">{house.address}</p>
                     </div>
+                    
                     <p className="text-sm text-gray-600 line-clamp-2">{house.description}</p>
                     <p className="text-slate-500 mt-2 font-semibold">
                     ETB-{house.rentPerMonth.toLocaleString('ETB')}/month    

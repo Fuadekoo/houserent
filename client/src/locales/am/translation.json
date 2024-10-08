@@ -5,7 +5,7 @@
             "blocked": "ታግሷል",
             "unblocked": "አልታገሰም",
             "member": "አባላት ዝርዝር",
-            "phone": "ስልክ",
+            "date": "ቀን",
             "role": "ሚና",
             "status": "ሁኔታ",
             "seeall": "ስለ ሁሉም አባላት መረጃ ይመልከቱ",
@@ -47,8 +47,10 @@
             "House": "የቤት ቁጥር",
             "rent": "ወርሃዊ ኪራይ",
             "ETB": "ብር",
-            "Block": "አግር",
-            "Unblock": "አልታገሰም"
+            "confirmTitle": "እርግጠኛ ነህ?",
+            "confirmText": "እንደተከለከለ/እንደማይከለከል ይህን ቤት መከልከል ትፈልጋለህ?",
+            "confirmButton": "አዎ, እንደተከለከለ አድርገው!",
+            "cancelButton": "ሰርዝ"
         },
         "withdrewconfirm": {}
     },
@@ -163,6 +165,7 @@
             "blockedhouse": "ታግሷል ቤት",
             "withdrawalconfirm": "የማስወገድ ማረጋገጫ",
             "admin": "አስተዳዳሪ",
+            "notification":"ማስታወቂያ",
             "landloard": "አከራይ",
             "tenant": "ተከራይ",
             "houserentsys": "የቤት ኪራይ ስርዓት",

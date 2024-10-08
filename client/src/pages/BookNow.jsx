@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FaShareAlt, FaMapMarkerAlt } from 'react-icons/fa'; // Import the share icon and map marker icon from react-icons
 import { useParams } from 'react-router-dom';
-import { Spin, DatePicker, Button, Form, message, Checkbox } from 'antd';
+import { Spin, DatePicker, Button, Form, Checkbox } from 'antd';
 import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 import DisplayLocation from '../components/DisplayLocation';
-import { FaMapMarkerAlt } from 'react-icons/fa';
-
 import { useTranslation } from 'react-i18next';
 
 const { RangePicker } = DatePicker;
@@ -21,18 +20,15 @@ function BookNow() {
   const [totalDays, setTotalDays] = useState(0);
   const [totalPayment, setTotalPayment] = useState(0);
   const [isChecked, setIsChecked] = useState(false); // State for checkbox
-  
-  
   const [showMap, setShowMap] = useState(null); // State to track which map to show
 
-const toggleMapVisibility = (roomId) => {
-  if (roomId) {
-    setShowMap(showMap === roomId ? null : roomId);
-  } else {
-    console.error('Invalid room ID');
-  }
-};
-
+  const toggleMapVisibility = (roomId) => {
+    if (roomId) {
+      setShowMap(showMap === roomId ? null : roomId);
+    } else {
+      console.error('Invalid room ID');
+    }
+  };
 
   useEffect(() => {
     const fetchHouseDetails = async () => {
@@ -60,7 +56,6 @@ const toggleMapVisibility = (roomId) => {
     const to = values[1].format('MMM DD YYYY HH:mm');
     const diffDays = values[1].diff(values[0], 'minute');
     //const diffDays = values[1].diff(values[0], 'days');  // it iss for testing to wait for the minute not max like day and month
-
 
     setFromTime(from);
     setToTime(to);
@@ -90,7 +85,6 @@ const toggleMapVisibility = (roomId) => {
       bookedTime: { fromTime, toTime },
       totalDays,
     };
-
 
     try {
       const response = await axios.post(`http://localhost:5000/api/bookRoom/booking/${id}`, 
@@ -138,8 +132,27 @@ const toggleMapVisibility = (roomId) => {
     }
   };
 
-  console.log("total day is :", totalDays)
+  const handleShareClick = () => {
+    const shareValue = `http://localhost:3000/booking/${id}`;
+    navigator.clipboard.writeText(shareValue).then(() => {
+      swal.fire({
+        icon: 'success',
+        title: 'Copied to clipboard!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }).catch(err => {
+      console.error('Failed to copy: ', err);
+      swal.fire({
+        icon: 'error',
+        title: 'Failed to copy!',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    });
+  };
 
+  console.log("total day is :", totalDays)
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -163,7 +176,11 @@ const toggleMapVisibility = (roomId) => {
               </div>
 
               <div className="md:w-1/2 p-4">
-                <h2 className="text-2xl font-bold mb-4">{houseDetails.address}</h2>
+                <h2 className="text-2xl font-bold mb-4 flex items-center">
+                 
+                  {houseDetails.address}
+                  <FaShareAlt className="ml-9  mr-2 cursor-pointer" onClick={handleShareClick}  /><h6 className='text-sm'>share link</h6>
+                </h2>
                 <p className="mb-2">{t('common.booknow.floor')}: {houseDetails.floorLevel}</p>
                 <p className="mb-2">{t('common.booknow.house')}: {houseDetails.houseNumber}</p>
                 <p className="mb-2">{t('common.booknow.rent')}: {houseDetails.rentPerMonth} birr</p>
@@ -184,9 +201,7 @@ const toggleMapVisibility = (roomId) => {
                       onChange={(e) => setIsChecked(e.target.checked)}
                     >
                       {t('common.booknow.iagree')}
-                      
                     </Checkbox>
-                    
                   </Form.Item>
                   <Button
                     type="primary"
@@ -197,12 +212,10 @@ const toggleMapVisibility = (roomId) => {
                     {t('common.booknow.book')}
                   </Button>
                 </Form>
-                 
               </div>
-              
             </div>
-                              
-              {/* Map Button */}
+
+            {/* Map Button */}
             <button
               className="text-blue-500 hover:text-blue-700 mt-2"
               onClick={() => toggleMapVisibility(houseDetails._id)}
@@ -211,27 +224,25 @@ const toggleMapVisibility = (roomId) => {
                 <FaMapMarkerAlt />{' '}
                 {showMap === houseDetails._id ? ' Hide Map' : ' View Map'}
               </span>
-            </button> 
+            </button>
 
-{/* Conditionally display the map with full screen coverage */}
-
- {showMap === houseDetails._id && houseDetails.RoomLocation && (
-  <div className="fixed inset-0 flex items-center justify-center z-50">
-    <div className="relative h-1/4 w-1/4 bg-white shadow-lg rounded">
-      <DisplayLocation
-        latitude={houseDetails.RoomLocation.latitudeValue}
-        longitude={houseDetails.RoomLocation.longitudeValue}
-      />
-      <button
-        onClick={() => setShowMap(null)}
-        className="absolute bg-red-500 text-white p-2 rounded"
-      >
-        Close Map
-      </button>
-    </div>
-  </div>
-)}
-                               
+            {/* Conditionally display the map with full screen coverage */}
+            {showMap === houseDetails._id && houseDetails.RoomLocation && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="relative h-1/4 w-1/4 bg-white shadow-lg rounded">
+                  <DisplayLocation
+                    latitude={houseDetails.RoomLocation.latitudeValue}
+                    longitude={houseDetails.RoomLocation.longitudeValue}
+                  />
+                  <button
+                    onClick={() => setShowMap(null)}
+                    className="absolute bg-red-500 text-white p-2 rounded"
+                  >
+                    Close Map
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         )
       )}
@@ -240,4 +251,3 @@ const toggleMapVisibility = (roomId) => {
 }
 
 export default BookNow;
-
