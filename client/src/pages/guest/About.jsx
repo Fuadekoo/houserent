@@ -1,11 +1,14 @@
 import React from 'react';
+import Navbar from '../guest/Navbar';
+import keyhouse from "../../images/keyhouse.jpg";
 
 function About() {
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-            <div className="max-w-4xl bg-white shadow-md rounded-lg overflow-hidden">
+        <div>
+            <Navbar />
+            <div className="max-w-4xl bg-white shadow-md rounded-lg overflow-hidden mt-4">
                 <img 
-                    src="https://via.placeholder.com/800x400" 
+                    src={keyhouse}
                     alt="System Overview" 
                     className="w-full h-64 object-cover"
                 />

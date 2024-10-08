@@ -47,8 +47,10 @@
             "House": "የቤት ቁጥር",
             "rent": "ወርሃዊ ኪራይ",
             "ETB": "ብር",
-            "Block": "አግር",
-            "Unblock": "አልታገሰም"
+            "confirmTitle": "እርግጠኛ ነህ?",
+            "confirmText": "እንደተከለከለ/እንደማይከለከል ይህን ቤት መከልከል ትፈልጋለህ?",
+            "confirmButton": "አዎ, እንደተከለከለ አድርገው!",
+            "cancelButton": "ሰርዝ"
         },
         "withdrewconfirm": {}
     },
