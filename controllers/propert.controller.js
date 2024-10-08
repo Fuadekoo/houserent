@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const users = require("../models/usersModel");
 const classModel = require("../models/HouseModel");
+const roomPostFeeMiddleware = require('../middlewares/roomPostFeeMiddleware');
 
 const addRoom = async (req, res) => {
   // Access the user ID from the request object
@@ -42,8 +43,12 @@ const addRoom = async (req, res) => {
       return res.status(400).json({ message: "Room with this image already exists", success: false });
     } else {
       // Save the room data to the database
-      await classModel.insertMany([data]);
-      return res.status(200).json({ message: "Room created successfully", success: true, data: data });
+      const newRoom = await classModel.insertMany([data]);
+
+            // Call the roomPostFeeMiddleware after the room is successfully added
+            await roomPostFeeMiddleware(req, res, () => {
+                return res.status(200).json({ message: "Room created successfully", success: true, data: newRoom });
+            });
     }
 
   } catch (error) {

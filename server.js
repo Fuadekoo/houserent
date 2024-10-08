@@ -58,5 +58,16 @@ app.use("/api/bookRoom", bookingRoute);
 app.use("/api/withdrawal", withdrawalRoute);
 app.use("/api/dashboard", dashboardRoute);
 
+// Global error handling middleware
+app.use((err, req, res, next) => {
+  if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+    return res.status(400).json({ success: false, message: 'Invalid JSON payload' });
+  }
+  if (err.type === 'entity.too.large') {
+    return res.status(413).json({ success: false, message: 'Payload too large. change the image in GFIF file' });
+  }
+  next(err);
+});
+
 // this is used fo run server
 app.listen(port, () => { console.log(`listen on port ${port}`) });

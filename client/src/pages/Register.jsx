@@ -56,18 +56,21 @@ const Register = () => {
         <Form.Item
   name='phone'
   className='border p-1 rounded-lg focus:outline-none focus:border-blue-500'
-  rules={[{ required: true, message: t('common.register.phoneError') }]}
+  rules={[
+    { required: true, message: t('common.register.phoneError') },
+    { pattern: /^[97]\d{8}$/, message: t('common.login.phoneInvalid') }
+  ]}
 >
   <div className="flex items-center">
     <span className="p-3 bg-gray-200 rounded-l-lg">+251</span>
     <input
       type='number'
       className='border-none p-3 rounded-r-lg focus:outline-none focus:border-blue-500 w-full'
-      placeholder={t('common.register.phonePlaceholder')}
+      placeholder={t('common.login.phonePlaceholder')}
     />
   </div>
 </Form.Item>
-        <Form.Item name='password' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.register.passwordError') }]}>
+        <Form.Item name='password' className='border p-1 rounded-lg focus:outline-none focus:border-blue-500' rules={[{ required: true, message: t('common.login.passwordError') }, { min: 6, message: t('common.login.passwordMinLength') }]}>
           <input
             type='password'
             className='border-none p-3 rounded-lg focus:outline-none focus:border-blue-500 w-full'
