@@ -140,6 +140,7 @@ const toggleMapVisibility = (roomId) => {
 
   console.log("total day is :", totalDays)
 
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
     
@@ -177,6 +178,7 @@ const toggleMapVisibility = (roomId) => {
                       className="w-full"
                     />
                   </Form.Item>
+                  <p>total days :{totalDays}</p>
                   <Form.Item>
                     <Checkbox
                       checked={isChecked}
@@ -185,6 +187,7 @@ const toggleMapVisibility = (roomId) => {
                       {t('common.booknow.iagree')}
                       
                     </Checkbox>
+                    
                   </Form.Item>
                   <Button
                     type="primary"
