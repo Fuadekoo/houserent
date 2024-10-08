@@ -126,6 +126,10 @@ export default function Navbar() {
             <li className='text-slate-700 hover:underline p-2 sm:p-0'>{t('guest.navbar.Home')}</li>
           </Link>
 
+           <Link to='/contact'>
+            <li className='text-slate-700 hover:underline p-2 sm:p-0'>{t('guest.navbar.contact')}</li>
+          </Link>
+
           <Link to='/about'>
             <li className='text-slate-700 hover:underline p-2 sm:p-0'>{t('guest.navbar.About')}</li>
           </Link>
