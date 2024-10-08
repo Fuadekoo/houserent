@@ -38,6 +38,7 @@ import Search from "./pages/guest/Search.jsx";
 import Mywithdraw from "./pages/landloards/MyWithdraw.jsx";
 import BookedRoomsCurrent from "./pages/BookedRoomsCurrent.jsx";
 import ShowMyCurrentBooked from "./pages/landloards/ShowMyCurrentBooked.jsx";
+import SearchAuth from "./pages/Search.jsx";
 
 function App() {
   const {Loading} = useSelector(state=>state.alerts)
@@ -91,7 +92,7 @@ function App() {
     <Route path="/Login" element={<PublicRoute><Login/></PublicRoute>}/>
     <Route path="/balance" element={<ProtectedRoute><Wallet/></ProtectedRoute>}/>
     <Route path="/Profile" element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
-
+    <Route path="/searchauth" element={<ProtectedRoute><SearchAuth/></ProtectedRoute>}/>
     {/* route for guests */}
   
     <Route path="/about" element={<PublicRoute><About/></PublicRoute>}/>
