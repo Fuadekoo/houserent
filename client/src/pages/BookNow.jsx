@@ -14,6 +14,7 @@ import 'jspdf-autotable'; // Import jspdf-autotable for table generation
 const { RangePicker } = DatePicker;
 
 function BookNow() {
+  const [showPopup, setShowPopup] = useState(false);
   const { t } = useTranslation();
   const { id } = useParams();
   const [houseDetails, setHouseDetails] = useState(null);
@@ -171,6 +172,7 @@ const generatePDF = (bookingData) => {
   doc.save('booking-confirmation.pdf');
 };
 
+
   const handleShareClick = () => {
     const shareValue = `http://localhost:3000/booking/${id}`;
     navigator.clipboard.writeText(shareValue).then(() => {
@@ -192,6 +194,15 @@ const generatePDF = (bookingData) => {
   };
 
   console.log("total day is :", totalDays)
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+    setShowPopup(true);
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
 
   return (
     <div className="min-h-200 flex items-center justify-center bg-gray-100" >
@@ -237,7 +248,8 @@ const generatePDF = (bookingData) => {
                   <Form.Item>
                     <Checkbox
                       checked={isChecked}
-                      onChange={(e) => setIsChecked(e.target.checked)}
+                      onChange={handleCheckboxChange}
+                      // onChange={(e) => setIsChecked(e.target.checked)}
                     >
                       {t('common.booknow.iagree')}
                     </Checkbox>
@@ -279,6 +291,17 @@ const generatePDF = (bookingData) => {
                   >
                     Close Map
                   </button>
+                </div>
+              </div>
+            )}
+
+{showPopup && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="bg-black opacity-50 w-full h-full absolute"></div>
+                <div className="bg-white p-6 rounded shadow-lg z-50 m-4">
+                  <h2 className="text-xl font-bold mb-4">Rules and Regulations</h2>
+                  <p className="mb-4">Here are the rules and regulations for the booking system.</p>
+                  <button onClick={handlePopupClose} className='btn btn-primary'>OK</button>
                 </div>
               </div>
             )}
