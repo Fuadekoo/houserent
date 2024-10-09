@@ -102,8 +102,8 @@ export default function Navbar() {
       <div className='flex justify-between items-center max-w-16xl mx-auto p-3'>
         <Link to='/'>
           <h1 className='font-bold text-sm sm:text-xl flex'>
-            <span className='text-slate-500'>House</span>
-            <span className='text-slate-700'>Rent</span>
+            <span className='text-slate-500'>{t('guest.contact.House')}</span>
+            <span className='text-slate-700'>{t('guest.contact.Rent')}</span>
           </h1>
         </Link>
 
