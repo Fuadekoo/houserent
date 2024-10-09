@@ -59,9 +59,45 @@
             "welcome": "እንኳን ደህና መጡ",
             "search": "ፈልግ...",
             "Home": "መነሻ",
+            "contact":"ግንኙነት",
             "About": "ስለ",
             "signin": "ግባ"
-        }
+        },
+         "contact":{
+      "GetInTouch":"ወደ ዳሰሳ ሂድ",
+      "ContactMe":"አነጋግረኝ",
+      "WriteMeYouridea":"ሀሳብዎን ጻፉልኝ",
+      "Name":"ስም",
+      "InsertyourName":"ስምዎን ያስገቡ",
+      "Email":"ኢሜይል",
+      "Insertyouremail":"የእርስዎ ኢሜይል ያስገቡ",
+      "Project":"ፕሮጀክት",
+      "Writeyourproject":"ፕሮጀክትዎን ይፃፉ",
+      "SendMessage":"መልዕክት ላክ",
+      "TalkToMe":"አናግረኝ",
+      "PhoneNumber":"ስልክ ቁጥር",
+      "CallToOrganization":"ለድርጅት የቀረበ ጥሪ",
+      "Nameisrequired":"ስም ያስፈልጋል",
+      "Emailisrequired":"ኢሜይል ያስፈልጋል",
+      "Projectdescriptionisrequired":"የፕሮጀክት መግለጫ ያስፈልጋል",
+      "House":"የቤት",
+      "Rent":"ኪራይ"
+    },
+    "about":{
+        "AboutOurSystem":"ስለ ስርዓታችን",
+        "Welcome":"እንኳን ደህና መጡ የቤት ኪራይ ስርዓት. የእኛ መድረክ ቤቶችን ለማግኘት እና ለመከራየት ያለምንም ስስ ልምድ ይሰጣል. ለተጠቃሚዎች ተስማሚ የሆነ ኢንተርፌክት እና የተለያዩ አማራጮች ጋር, እርስዎ ፍላጎት የሚያሟላ ፍጹም ቤት በቀላሉ ማግኘት ይችላሉ.",
+        "MeetOurTeam":"ከእኛ ቡድን ጋር ተገናኙ",
+        "FuadAbdurahaman":"ፉድ አብዱራሃማን",
+        "WegeneArgow":"ዋገን አርጎ",
+        "EbisaTebalu":"አቢሳ ተባሉ",
+        "Erole":"ሙሉ-ክታብ ሜርን ታዳጊ",
+        "Wrole":"ሙሉ-ክታብ ሜርን ታዳጊ",
+        "Frole":"ሙሉ-ክታብ ሜርን ታዳጊ",
+        "Fdescription":"ፉድ በ REACT እና በ Tailwind CSS ውስጥ ልምድ ያለው MERN ውስጥ ከፍተኛ ፍላጎት ያለው fullstack developer ነው.",
+        "Edescription":"አቢሳ በ REACT እና በ Tailwind CSS ውስጥ ልምድ ያለው MERN ውስጥ ከፍተኛ ፍላጎት ያለው fullstack developer ነው.",
+        "Wdescription":"ዋገን በ REACT እና በ Tailwind CSS ውስጥ ልምድ ያለው MERN ውስጥ ከፍተኛ ፍላጎት ያለው fullstack developer ነው."
+         
+    }
     },
     "landloard": {
         "addroom": {

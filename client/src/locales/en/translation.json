@@ -66,6 +66,40 @@
       "contact": "Contact",
       "About": "About",
       "signin": "Sign In"
+    },
+    "contact":{
+      "GetInTouch":"Get In Touch",
+      "ContactMe":"Contact Me",
+      "WriteMeYouridea":"Write Me Your idea",
+      "Name":"Name",
+      "InsertyourName":"Insert your Name",
+      "Email":"Email",
+      "Insertyouremail":"Insert your email",
+      "Project":"Project",
+      "Writeyourproject":"Write your project",
+      "SendMessage":"Send Message",
+      "TalkToMe":"Talk To Me",
+      "PhoneNumber":"Phone Number",
+      "CallToOrganization":"Call To Organization",
+      "Nameisrequired":"Name is required",
+      "Emailisrequired":"Email is required",
+      "Projectdescriptionisrequired":"Project description is required",
+      "House":"House",
+      "Rent":"Rent"
+    },
+    "about":{
+      "AboutOurSystem":"About Our System",
+      "Welcome":"Welcome to our house rental system. Our platform provides a seamless experience for finding and renting houses. With a user-friendly interface and a wide range of options, you can easily find the perfect home that meets your needs.",
+       "MeetOurTeam":"Meet Our Team",
+       "FuadAbdurahaman":"Fuad Abdurahaman",
+       "WegeneArgow":"Wegene Argow",
+       "EbisaTebalu":"Ebisa Tebalu",
+       "Erole":"Fullstack MERN Developer",
+       "Wrole":"Fullstack MERN Developer",
+       "Frole":"Fullstack MERN Developer",
+       "Wdescription":"Wegene is a passionate fullstack developer in MERN with expertise in React and Tailwind CSS.",
+       "Edescription":"Ebisa is a passionate fullstack developer in MERN with expertise in React and Tailwind CSS.",
+       "Fdescription":"Fuad is a passionate fullstack developer in MERN with expertise in React and Tailwind CSS."
     }
 
   },
