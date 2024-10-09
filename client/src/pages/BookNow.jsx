@@ -7,10 +7,14 @@ import swal from 'sweetalert2';
 import 'tailwindcss/tailwind.css';
 import DisplayLocation from '../components/DisplayLocation';
 import { useTranslation } from 'react-i18next';
+import Stamp from "../images/stamp.png";
+import jsPDF from 'jspdf'; // Import jsPDF for PDF generation
+import 'jspdf-autotable'; // Import jspdf-autotable for table generation
 
 const { RangePicker } = DatePicker;
 
 function BookNow() {
+  const [showPopup, setShowPopup] = useState(false);
   const { t } = useTranslation();
   const { id } = useParams();
   const [houseDetails, setHouseDetails] = useState(null);
@@ -71,7 +75,6 @@ function BookNow() {
 
   const handleBooking = async () => {
     if (!fromTime || !toTime || totalDays <= 0 || totalPayment <= 0) {
-      // alert('Please select valid booking details');
       swal.fire({
         icon: 'error',
         title: 'Please select valid booking details',
@@ -95,15 +98,16 @@ function BookNow() {
       });
 
       if (response.data.success) {
-        // message.success('House booked successfully');
         swal.fire({
           icon: 'success',
           title: response.data.message || 'House booked successfully',
           showConfirmButton: false,
           timer: 1500
         });
+
+        // Generate the PDF after successful booking
+        generatePDF(response.data.data);  // Pass the booking details for PDF generation
       } else {
-        // message.error(response.data.message);
         swal.fire({
           icon: 'error',
           title: response.data.message || 'Failed to book house',
@@ -113,7 +117,6 @@ function BookNow() {
       }
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
-        // message.error(error.response.data.message);
         swal.fire({
           icon: 'error',
           title: error.response.data.message,
@@ -121,7 +124,6 @@ function BookNow() {
           timer: 1500
         });
       } else {
-        // message.error('Failed to book house');
         swal.fire({
           icon: 'error',
           title: 'Failed to book house',
@@ -130,7 +132,46 @@ function BookNow() {
         });
       }
     }
-  };
+};
+
+// PDF generation function
+const generatePDF = (bookingData) => {
+  const doc = new jsPDF();
+
+  // Title
+  doc.setFontSize(20);
+  doc.setTextColor(0, 0, 255); // Blue color for title
+  doc.text('Booking Confirmation', 105, 20, null, null, 'center');
+
+  // House and User Info
+  doc.setFontSize(12);
+  doc.setTextColor(0, 0, 0); // Black color for text
+  doc.text(`House Address: ${houseDetails?.address}`, 10, 40);
+  doc.text(`Rent Per Month: ${houseDetails?.rentPerMonth} birr`, 10, 50);
+  doc.text(`Total Days Booked: ${bookingData.totalDays}`, 10, 60);
+  doc.text(`Commission Price: ${houseDetails?.adminPrice} birr`, 10, 70);
+  doc.text(`Booking Payment: ${bookingData.totalPayment} birr`, 10, 80);
+  doc.text(`Booking From: ${bookingData.bookedTime.fromTime}`, 10, 90);
+  doc.text(`Booking To: ${bookingData.bookedTime.toTime}`, 10, 100);
+
+  // Static Data
+  doc.setFontSize(14);
+  doc.setTextColor(255, 0, 0); // Red color for static data
+  doc.text('Company Name: HouseRent', 10, 120);
+  doc.text('Contact: +123456789', 10, 130);
+  doc.text('Email: info@houserent.com', 10, 140);
+
+  // Center the stamp
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const stampWidth = 50;
+  const stampHeight = 50;
+  const stampX = (pageWidth - stampWidth) / 2;
+  doc.addImage(Stamp, 'PNG', stampX, 150, stampWidth, stampHeight);
+
+  // Save the PDF
+  doc.save('booking-confirmation.pdf');
+};
+
 
   const handleShareClick = () => {
     const shareValue = `http://localhost:3000/booking/${id}`;
@@ -153,6 +194,15 @@ function BookNow() {
   };
 
   console.log("total day is :", totalDays)
+
+  const handleCheckboxChange = (e) => {
+    setIsChecked(e.target.checked);
+    setShowPopup(true);
+  };
+
+  const handlePopupClose = () => {
+    setShowPopup(false);
+  };
 
   return (
     <div className="min-h-200 flex items-center justify-center bg-gray-100" >
@@ -198,7 +248,8 @@ function BookNow() {
                   <Form.Item>
                     <Checkbox
                       checked={isChecked}
-                      onChange={(e) => setIsChecked(e.target.checked)}
+                      onChange={handleCheckboxChange}
+                      // onChange={(e) => setIsChecked(e.target.checked)}
                     >
                       {t('common.booknow.iagree')}
                     </Checkbox>
@@ -240,6 +291,17 @@ function BookNow() {
                   >
                     Close Map
                   </button>
+                </div>
+              </div>
+            )}
+
+{showPopup && (
+              <div className="fixed inset-0 flex items-center justify-center z-50">
+                <div className="bg-black opacity-50 w-full h-full absolute"></div>
+                <div className="bg-white p-6 rounded shadow-lg z-50 m-4">
+                  <h2 className="text-xl font-bold mb-4">Rules and Regulations</h2>
+                  <p className="mb-4">Here are the rules and regulations for the booking system.</p>
+                  <button onClick={handlePopupClose} className='btn btn-primary'>OK</button>
                 </div>
               </div>
             )}
